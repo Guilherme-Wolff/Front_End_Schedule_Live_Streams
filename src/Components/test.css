@@ -1,0 +1,10 @@
+.container {
+    /*padding: 40px;*/
+    width: 100%;
+    background: #419be0;
+}
+
+.slick-slide img {
+    margin: auto;
+    width: 100%;
+}

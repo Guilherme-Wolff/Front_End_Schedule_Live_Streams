@@ -1,0 +1,17 @@
+[
+    {"storie_id":1,"name":"gulherme1", "hasStory" : true ,"user_image": "/avatar.jpg"},
+    {"storie_id":2,"name":"gulherme2", "hasStory" : false,"user_image": "/avatar.jpg"},
+    {"storie_id":3,"name":"gulherme3", "hasStory" : true ,"user_image": "/avatar.jpg"},
+    {"storie_id":4,"name":"gulherme4", "hasStory" : false,"user_image": "/avatar.jpg"},
+    {"storie_id":5,"name":"gulherme5", "hasStory" : true ,"user_image": "/avatar.jpg"},
+    {"storie_id":6,"name":"gulherme6", "hasStory" : true ,"user_image": "/avatar.jpg"},
+    {"storie_id":7,"name":"gulherme7", "hasStory" : true ,"user_image": "/avatar.jpg"},
+    {"storie_id":8,"name":"gulherme8", "hasStory" : true ,"user_image": "/avatar.jpg"},
+    {"storie_id":9,"name":"gulherme9", "hasStory" : true ,"user_image": "/avatar.jpg"},
+    {"storie_id":10,"name":"gulherme10","hasStory" : true ,"user_image": "/avatar.jpg"},
+    {"storie_id":11,"name":"gulherme11","hasStory" : true ,"user_image": "/avatar.jpg"},
+    {"storie_id":12,"name":"gulherme12","hasStory" : true ,"user_image": "/avatar.jpg"},
+    {"storie_id":13,"name":"gulherme13","hasStory" : true ,"user_image": "/avatar.jpg"},
+    {"storie_id":14,"name":"gulherme14","hasStory" : true ,"user_image": "/avatar.jpg"},
+    {"storie_id":15,"name":"gulherme15","hasStory" : true ,"user_image": "/avatar.jpg"}
+]
