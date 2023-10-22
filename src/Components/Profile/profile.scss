@@ -1,0 +1,671 @@
+@import '../settings.scss';
+
+@media (min-width: 900px) {
+    .profile__name_mobile {
+        
+        display: none;
+    }
+    .transparent_div {
+        background-color: transparent;
+        height: 30px;
+
+    }
+
+    .icon_save {
+        z-index: 100;
+        height: 100%;
+        width: 100%;
+
+    }
+
+    .profile__wrap {
+        width: 100%;
+        height: 100vh !important;
+        background-color: rgba(0, 0, 0, 0);
+        color: #fff;
+
+        .profile__content {
+
+            margin-left: 20%;
+            width: 80%;
+
+            max-width: 100%;
+
+
+            .profile__info {
+                padding-top: 50px;
+                display: flex;
+                margin-bottom: 44px;
+                margin-left: 26px;
+                
+
+                .profile__image {
+                    //width: calc(100% - 40px);
+                    width: 150px;
+                    height: 150px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+
+                .profile__setting__and__follows {
+                    margin-left: 10%;
+
+                    .profile__usernames {
+                        display: flex;
+                        align-items: center;
+                        margin-bottom: 20px;
+
+                        h3 {
+                            font-weight: 300;
+                            font-size: 28px;
+                        }
+
+                        button {
+                            margin-left: 20px;
+                            border-radius: 4px;
+                            border: 0;
+                            padding: 7px 16px;
+                            font-weight: 600;
+                        }
+
+                        img {
+                            padding: 8px;
+                        }
+                    }
+
+                    .profile__followings {
+                        display: flex;
+                        margin-bottom: 20px;
+
+                        .profile__pubs {
+                            display: flex;
+                            margin-right: 40px;
+
+                            span {
+                                font-weight: 600;
+                            }
+                        }
+                    }
+
+                    .profile__name {
+                        font-weight: 600;
+                    }
+                }
+            }
+
+            .addactual__wrap {
+                width: fit-content;
+                text-align: center;
+                margin-bottom: 44px;
+                cursor: pointer;
+
+                .profile__add__actual {
+                    border-radius: 50%;
+                    padding: 23px 24px;
+                    padding-bottom: 20px;
+                    border: 1px solid #737373;
+                }
+
+                p {
+                    padding-top: 15px;
+                }
+            }
+
+            .pubs {
+                border-top: 1px solid rgb(38, 38, 38);
+
+                .pubs__navbar {
+                    ul {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        li {
+                            list-style: none;
+                            margin-right: 60px;
+                            display: flex;
+                            align-items: center;
+                            height: 52px;
+                            justify-content: center;
+                            color: rgb(168, 168, 168);
+
+                            p {
+                                margin-left: 6px;
+                            }
+                        }
+
+                        .activenav {
+                            border-top: 1px solid rgb(250, 250, 250);
+                            color: #fff;
+                        }
+                    }
+                }
+
+                .pubs__posts {
+                    display: grid;
+                    grid-auto-flow: row;
+                    /* it's the default value (can be omitted) */
+                    grid-gap: 20px;
+                    // max-width: 600px;
+                    margin: 20px auto;
+                    grid-template-columns: 1fr 1fr 1fr;
+                    .gelleryitem_anchor {
+                        position: relative;
+                        flex: 1 0 22rem;
+                        color: #fff;
+                        cursor: pointer;
+                        width: 90%;
+                        height: 90%;
+                        object-fit: cover;
+                    }
+
+                    .gellery__item {
+                        position: relative;
+                        flex: 1 0 22rem;
+                        color: #fff;
+                        cursor: pointer;
+                        width: 100%;
+                        height: 100%;
+
+                        .post {
+                            z-index: 50;
+                            width: 100%;
+                            height: auto;
+                        }
+
+                        &:hover .gallery-item-info {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            position: absolute;
+                            top: 0;
+                            width: 100%;
+                            height: 100%;
+                            background-color: rgba(0, 0, 0, 0.3);
+                        }
+
+                        .gallery-item-info {
+                            display: none;
+
+                            ul {
+                                display: flex;
+                                align-items: center;
+                            }
+
+                            .gallery-item-likes {
+                                display: flex;
+                                align-items: center;
+                                margin-right: 15px;
+
+                                img {
+                                    width: 19px;
+                                    margin-right: 10px;
+                                }
+                            }
+
+                            .gallery-item-comments {
+                                display: flex;
+                                align-items: center;
+
+                                img {
+                                    width: 19px;
+                                    margin-right: 10px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+//TABLET
+@media (min-width: 899px) and (max-width:999px) {
+    .transparent_div {
+        background-color: transparent;
+        height: 30px;
+
+    }
+
+    .icon_save {
+        z-index: 100;
+        height: 100%;
+        width: 100%;
+
+    }
+
+    .profile__wrap {
+        width: 100%;
+        height: 100vh !important;
+        background-color: rgba(0, 0, 0, 0);
+        color: #fff;
+
+        .profile__content {
+
+            margin-left: 10%;
+            width: 80%;
+
+            max-width: 100%;
+
+
+            .profile__info {
+                padding-top: 50px;
+                display: flex;
+                margin-bottom: 44px;
+                margin-left: 26px;
+
+                .profile__image {
+                    //width: calc(100% - 40px);
+                    width: 150px;
+                    height: 150px;
+                    border-radius: 50%;
+                }
+
+                .profile__setting__and__follows {
+                    margin-left: 104px;
+
+                    .profile__usernames {
+                        display: flex;
+                        align-items: center;
+                        margin-bottom: 20px;
+
+                        h3 {
+                            font-weight: 300;
+                            font-size: 28px;
+                        }
+
+                        button {
+                            margin-left: 20px;
+                            border-radius: 4px;
+                            border: 0;
+                            padding: 7px 16px;
+                            font-weight: 600;
+                        }
+
+                        img {
+                            padding: 8px;
+                        }
+                    }
+
+                    .profile__followings {
+                        display: flex;
+                        margin-bottom: 20px;
+
+                        .profile__pubs {
+                            display: none;
+                            margin-right: 40px;
+
+                            span {
+                                font-weight: 600;
+                            }
+                        }
+                    }
+
+                    .profile__name {
+                        font-weight: 600;
+                    }
+                }
+            }
+
+            .addactual__wrap {
+                width: fit-content;
+                text-align: center;
+                margin-bottom: 44px;
+                cursor: pointer;
+
+                .profile__add__actual {
+                    border-radius: 50%;
+                    padding: 23px 24px;
+                    padding-bottom: 20px;
+                    border: 1px solid #737373;
+                }
+
+                p {
+                    padding-top: 15px;
+                }
+            }
+
+            .pubs {
+                border-top: 1px solid rgb(38, 38, 38);
+                width: 90%;
+                .pubs__navbar {
+                    ul {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        li {
+                            list-style: none;
+                            margin-right: 60px;
+                            display: flex;
+                            align-items: center;
+                            height: 52px;
+                            justify-content: center;
+                            color: rgb(168, 168, 168);
+
+                            p {
+                                margin-left: 6px;
+                            }
+                        }
+
+                        .activenav {
+                            border-top: 1px solid rgb(250, 250, 250);
+                            color: #fff;
+                        }
+                    }
+                }
+
+                .pubs__posts {
+                    display: grid;
+                    grid-auto-flow: row;
+                    /* it's the default value (can be omitted) */
+                    grid-gap: 20px;
+                    // max-width: 600px;
+                    margin: 20px auto;
+                    grid-template-columns: 1fr 1fr 1fr;
+                    .gelleryitem_anchor {
+                        position: relative;
+                        flex: 1 0 22rem;
+                        color: #fff;
+                        cursor: pointer;
+                        width: 90%;
+                        height: 90%;
+                        object-fit: cover;
+                    }
+
+                    .gellery__item {
+                        position: relative;
+                        flex: 1 0 22rem;
+                        color: #fff;
+                        cursor: pointer;
+                        width: 100%;
+                        height: 100%;
+
+                        .post {
+                            z-index: 50;
+                            width: 100%;
+                            height: auto;
+                        }
+
+                        &:hover .gallery-item-info {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            position: absolute;
+                            top: 0;
+                            width: 100%;
+                            height: 100%;
+                            background-color: rgba(0, 0, 0, 0.3);
+                        }
+
+                        .gallery-item-info {
+                            display: none;
+
+                            ul {
+                                display: flex;
+                                align-items: center;
+                            }
+
+                            .gallery-item-likes {
+                                display: flex;
+                                align-items: center;
+                                margin-right: 15px;
+
+                                img {
+                                    width: 19px;
+                                    margin-right: 10px;
+                                }
+                            }
+
+                            .gallery-item-comments {
+                                display: flex;
+                                align-items: center;
+
+                                img {
+                                    width: 19px;
+                                    margin-right: 10px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//SMARTPHONE
+@media (min-width: 320px) and (max-width:899px) {
+    .transparent_div {
+        background-color: transparent;
+        height: 30px;
+
+    }
+
+    .icon_save {
+        z-index: 100;
+        height: 100%;
+        width: 100%;
+
+    }
+
+    .profile__wrap {
+        display: block;
+        //flex-direction: column;
+        width: 100%;
+        height: 100% !important;
+        background-color: #121212;
+        color: #fff;
+
+        .profile__content {
+            display: block;
+            //margin: 0 auto;
+            width: 100%;
+            //margin: 0 auto 30px;
+            max-width: 100%;
+
+            .profile__info {
+                display: block;
+                width: 100%;
+                padding-top: 50px;
+                display: flex;
+                margin-bottom: 44px;
+
+                //margin-left: 26px;
+
+                .profile__image {
+                    //width: calc(100% - 40px);
+                    width: 100px;
+                    height: 100px;
+                    border-radius: 50%;
+                }
+
+                .profile__setting__and__follows {
+                    //margin-left: 104px;
+
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+
+                    .profile__usernames {
+                        display: flex;
+                        align-items: center;
+                        margin-bottom: 20px;
+
+                        h3 {
+                            font-weight: 300;
+                            font-size: 20px;
+                        }
+
+                        button {
+                            //margin-left: 20px;
+                            border-radius: 4px;
+                            border: 0;
+                            //padding: 7px 16px;
+                            font-weight: 600;
+                        }
+
+                        img {
+                            // padding: 8px;
+                        }
+                    }
+
+                    .profile__followings {
+                        gap: 10px;
+                        display: flex;
+                        flex-direction: column;
+                        margin-bottom: 20px;
+
+                        .profile__pubs {
+                            //margin-right: 40px;
+
+                            span {
+                                font-weight: 600;
+                            }
+                        }
+                    }
+
+                    .profile__name {
+                        font-weight: 600;
+                        display: none;
+                        
+                    }
+                    .profile__name_mobile {
+                        font-weight: 600;
+                        display: flex;
+                    }
+                }
+            }
+
+            .addactual__wrap {
+                display: none;
+                width: fit-content;
+                text-align: center;
+                margin-bottom: 44px;
+                cursor: pointer;
+
+                .profile__add__actual {
+                    border-radius: 50%;
+                    padding: 23px 24px;
+                    padding-bottom: 20px;
+                    border: 1px solid #737373;
+                }
+
+                p {
+                    padding-top: 15px;
+                }
+            }
+
+
+            .pubs {
+                width: 100%;
+                border-top: 1px solid rgb(38, 38, 38);
+
+                .pubs__navbar {
+                    ul {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        li {
+                            list-style: none;
+                            margin-right: 60px;
+                            display: flex;
+                            align-items: center;
+                            height: 52px;
+                            justify-content: center;
+                            color: rgb(168, 168, 168);
+
+                            p {
+                                margin-left: 6px;
+                            }
+                        }
+
+                        .activenav {
+                            border-top: 1px solid rgb(250, 250, 250);
+                            color: #fff;
+                        }
+                    }
+                }
+
+                .pubs__posts {
+                    width: 100%;
+                    display: grid;
+                    grid-auto-flow: row;
+                    /* it's the default value (can be omitted) */
+                    //grid-gap: 2px;
+                    // max-width: 600px;
+                    margin: 20px 5%;
+                    gap:10px 0px;
+                    grid-template-columns: 1fr 1fr 1fr;
+                    .gelleryitem_anchor {
+                        position: relative;
+                        flex: 1 0 22rem;
+                        color: #fff;
+                        cursor: pointer;
+                        width: 90%;
+                        height: 90%;
+                        object-fit: cover;
+                    }
+                    .gellery__item {
+                        position: relative;
+                        flex: 1 0 22rem;
+                        color: #fff;
+                        cursor: pointer;
+                        width: 100%;
+                        height: 100%;
+
+                        .post {
+                            z-index: 50;
+                            width: 100%;
+                            height: auto;
+                        }
+
+                        &:hover .gallery-item-info {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            position: absolute;
+                            top: 0;
+                            width: 100%;
+                            height: 100%;
+                            background-color: rgba(0, 0, 0, 0.3);
+                        }
+
+                        .gallery-item-info {
+                            display: none;
+
+                            ul {
+                                display: flex;
+                                align-items: center;
+                            }
+
+                            .gallery-item-likes {
+                                display: flex;
+                                align-items: center;
+                                margin-right: 15px;
+
+                                img {
+                                    width: 19px;
+                                    margin-right: 10px;
+                                }
+                            }
+
+                            .gallery-item-comments {
+                                display: flex;
+                                align-items: center;
+
+                                img {
+                                    width: 19px;
+                                    margin-right: 10px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

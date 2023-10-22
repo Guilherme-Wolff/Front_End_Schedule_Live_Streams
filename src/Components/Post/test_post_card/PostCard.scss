@@ -1,0 +1,21 @@
+.post-card-main {
+    padding-bottom: 1.25rem; 
+    border-bottom-width: 1px; 
+}
+.post-card-sub-main {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+
+}
+.div-post-img {
+    display: flex; 
+    align-items: center; 
+    gap: 0.5rem; 
+}
+.post-img {
+    border-radius: 9999px; 
+    border-width: 2px; 
+    border-color: #ffffff; 
+    cursor: pointer; 
+}

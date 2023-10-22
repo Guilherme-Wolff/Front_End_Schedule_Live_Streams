@@ -1,0 +1,122 @@
+.other__accaunt__and__followers {
+    @media (max-width: 1145px){
+        //max-width: 765px;
+        display: none;
+    }
+    width: 100%;
+    padding-top: 2%;
+    padding-right: 100px;
+            
+    .own__accaunt {
+        margin-bottom: 10px;
+        margin-top: 32px;
+        display: flex;
+        align-items: center;
+
+        p {
+            color: rgb(168, 168, 168);
+        }
+        .user-img {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            margin-right: calc(4px * 3);
+        }
+        img {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            margin-right: calc(4px * 3);
+        }
+
+        span {
+            margin-left: 20px;
+            padding-left: 60%;
+            color: rgb(0, 149, 246);
+        }
+    }
+
+    .recomentded__info {
+        font-size: 11px;
+        width: 100%;
+        padding-bottom: calc(4px * 2);
+        padding-top: calc(4px * 2);
+        display: flex;
+        justify-content: space-between;
+
+        a {
+            padding-left: 78%;
+            color: #fff;
+
+            &:hover {
+                opacity: .5;
+            }
+        }
+
+        p {
+            color: rgb(168, 168, 168);
+        }
+    }
+
+    .recomended__accaunts {
+        .recomended__account__wrap {
+            padding-bottom: calc(4px * 2);
+            padding-top: calc(4px * 2);
+            
+
+            .recomended__accaunt {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .recomended__user__main__info {
+                    display: flex;
+                    align-items: center;
+
+                    img {
+                        width: 42px;
+                        height: 42px;
+                        border-radius: 50%;
+                        margin-right: 12px;
+                    }
+
+                    .who__is__this__user {
+                        span {
+                            color: rgb(168, 168, 168);
+                        }
+                    }
+                }
+
+                button {
+                    border: 0;
+                    cursor: pointer;
+                    background: transparent;
+                    color: rgb(0, 149, 246);
+                }
+
+            }
+        }
+
+
+    }
+}
+.cursorpointer {
+    padding-top: 2%;
+    padding-left: 50%;
+    cursor: pointer;
+}
+.cursorpointer-switch {
+    padding-top: 8%;
+    padding-left: 29%;
+    //padding-left: 40%;
+    cursor: pointer;
+}
+
+.all_Recommendations {
+    margin-left: 12%;
+}
+
+.tiny-text {
+    font-size: 11px;
+    display: flex;
+}

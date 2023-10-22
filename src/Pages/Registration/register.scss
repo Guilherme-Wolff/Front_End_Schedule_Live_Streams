@@ -1,0 +1,36 @@
+@import "login";
+
+.main-register {
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+
+    * {
+        background-color: rgb(255, 255, 255);
+    }
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.registration__system {
+    .registration__system__login {
+        .signsubtitle {
+            color: rgb(142, 142, 142);
+            font-size: 17px;
+            font-weight: 600;
+            line-height: 20px;
+            margin: 0 40px 10px;
+            text-align: center;
+        }
+
+        .registration__human {
+            .p {
+                color: rgb(142, 142, 142);
+            }
+
+            font-size: 12px;
+            margin: 0 40px 10px;
+        }
+    }
+}

@@ -1,0 +1,51 @@
+.modal-overlay {
+    z-index: 9999;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top:0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    margin:auto;
+    justify-content: center;
+    align-items: center;
+    position:fixed;
+        top:30%;
+        left:50%;
+        transform:translate(-50%,-50%);
+        box-sizing:border-box;
+  }
+  
+  .modal-box {
+    
+    position: relative;
+    display: block;
+    
+    width: 70%;
+    height: 70%;
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+.post__image__div {
+    
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: 60%;
+    object-fit: cover;
+}
+.post_content_modal {
+    background-color: white;
+    display: flex;
+    width: 70%;
+    height: 90%;
+
+}
+.post_image_img {
+    width: 60%;
+    height: auto;
+}
+
+.slickwrapcontainer {
+    width: 100%;
+}
