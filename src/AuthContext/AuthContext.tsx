@@ -1,46 +1,61 @@
 
-import React, { useEffect, useRef, useState,createContext } from "react";
+import React, { useEffect, useRef, useState,createContext,useContext } from "react";
 
 import {Navigation, RouterProvider, Routes } from "react-router-dom";
 import {router} from "../index"
 
 import { userReducer, setJwt, setUser } from "../redux/user/reducer"
-import { RootState, useAppSelector, useAppDispatch } from "../redux/store"
+import { RootState, useAppSelector, useAppDispatch, } from "../redux/store"
 
-export const AuthContext = createContext(null);
+interface IAuth{
+  name?: string ;
+  tokenJWT: string;
+}
+
+
+let AuthInitial = {
+  name: '',
+  tokenJWT:''
+}
+
+
+export const AuthContext = createContext<IAuth>(AuthInitial);
+
+
 
 const App = () => {
-  const [token, setToken] = useState<any>();
+  const [auth, setAuth] = useState<IAuth>(AuthInitial);
+  let user:IAuth = useAppSelector((state: RootState) => state.persistedReducer).user.user
 
-  let user = useAppSelector((state: RootState) => state.persistedReducer).user
-  console.log("USER AUTHCONTEXT",user)
+ // console.log("USER AUTHCONTEXT",user)
 
-  const fakeAuth = () :any =>
-  new Promise((resolve) => {
-    setTimeout(() => resolve('2342f2f1d131rf12'), 250);
-  });
-  
+  setAuth(user)
+
   const handleLogin = async () => {
-    const token = await fakeAuth();
 
-    setToken(token);
+    setAuth(user);
   };
 
   const handleLogout = () => {
-    setToken('');
+    setAuth(user);
   };
 
   const value = {
-    token,
+    auth,
     onLogin: handleLogin,
     onLogout: handleLogout,
   };
 
 
   return (
-    <AuthContext.Provider value={token}>
+    <AuthContext.Provider value={user}>
       <h1>React Router</h1>
       <RouterProvider router={ router}/>
     </AuthContext.Provider>
   );
 };
+
+export function useAuth() {
+  const context = useContext(AuthContext);
+  return context;
+}

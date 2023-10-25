@@ -1,36 +1,40 @@
 import React, { useEffect, useRef, useState, createContext, useContext } from "react";
 import {
-  Routes,
-  Route,
-  NavLink,
+  //Routes,
+  //Route,
+  //NavLink,
   Navigate,
-  useNavigate,
+  //useNavigate,
 } from 'react-router-dom';
-import { apiSlice } from '../redux/api/apiSlice'
+//import { apiSlice } from '../redux/api/apiSlice'
 
-import { AuthContext } from "./AuthContext"
-const useGetUsersQuery = apiSlice.endpoints.getAuthToken.useQuery
+//import { RootState, useAppSelector, useAppDispatch, } from "../redux/store"
 
+import { useAuth } from "./AuthContext"
 
+interface ProtectedRouteProps {
+  authNecessary: boolean;
+  children: any;
+}
 
-const useAuth = () => {
-  return useContext(AuthContext);
-};
+export const ProtectedRoute = ({ authNecessary, children }: ProtectedRouteProps) => {
+  //let user = useAppSelector((state: RootState) => state.persistedReducer).user.user
+  const {tokenJWT} = useAuth()
 
-export const ProtectedRoute = ({ children }: any) => {
-  const {data} = useGetUsersQuery('/gettoken')
-  
-  let user = useAuth()
-  console.log("USER AUTHCONTEXT",user)
-
-  //const token = data.token
-  console.log("TOKEN", data)
-
-  if (!user) {
-    return <Navigate to="/login" replace />;
+  if (authNecessary === false && !tokenJWT.length) {
+    return children;
   }
+  //const {data} = useGetUsersQuery('/gettoken')
+  else if (authNecessary === true && tokenJWT.length) {
+    return children;
+    /*if (!tokenJWT.length || tokenJWT.length === 0) {
+      return <Navigate to="/login" replace />;
+    }*/
 
-  return children;
+  }
+  /*else if (authNecessary === true && tokenJWT.length === 0) {
+    return <Navigate to="/login" replace />;
+  }*/
 };
 
 

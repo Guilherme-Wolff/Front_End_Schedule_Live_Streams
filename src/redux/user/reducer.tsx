@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-interface userState {
+interface IAuth {
     user: {
         name: string | null;
         tokenJWT?: string | null;
     } | null
 }
-const initialState: userState = {
+const initialState: IAuth = {
     user: {
         name: '',
         tokenJWT: ''
@@ -16,8 +16,8 @@ export const userReducerSlice = createSlice({
     name: 'users',
     initialState: initialState,
     reducers: {
-        setJwt: (state: userState,
-            action: PayloadAction<userState>) => {
+        setJwt: (state: IAuth,
+            action: PayloadAction<IAuth>) => {
             try {
                 return action.payload
             }
@@ -26,7 +26,7 @@ export const userReducerSlice = createSlice({
                 console.log("ERRO : include_chat_message")
             }
         },
-        setUser: (state: userState = initialState, action: PayloadAction<userState>) => {
+        setUser: (state: IAuth = initialState, action: PayloadAction<IAuth>) => {
             try {
                 return action.payload
             }
@@ -38,7 +38,7 @@ export const userReducerSlice = createSlice({
         /*register: (state: userState = initialState, action: PayloadAction<userState>) => {
             state.user = action.payload;
         },*/
-        logout: (state: userState = initialState) => {
+        logout: (state: IAuth = initialState) => {
             state.user = null;
         }
     }

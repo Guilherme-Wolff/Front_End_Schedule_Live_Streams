@@ -20,48 +20,48 @@ import { apiSlice } from "./redux/api/apiSlice"
 import Home from './Pages/Home/Home'
 //import Home from './Pages/Home/Home'
 import Profile from './Components/Profile/Profile'
-import Explore from './Components/Explore/Explore'
-import Inbox from './Components/Chat/Inbox'
-import Chat from './Components/Chat/Chat'
+//import Explore from './Components/Explore/Explore'
+//import Inbox from './Components/Chat/Inbox'
+//import Chat from './Components/Chat/Chat'
 import Login from "./Pages/Registration/Login";
-import Slick from "./Components/Slick";
-import {Register} from "./Pages/Registration/Register";
-import {ProtectedRoute} from "./AuthContext/ProtectedRoute"
+//import Slick from "./Components/Slick";
+import { Register } from "./Pages/Registration/Register";
+import { ProtectedRoute } from "./AuthContext/ProtectedRoute"
 //REACT ROUTER 6
 
-import { createBrowserRouter,RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 export const router = createBrowserRouter([
   {
-    path:"/",
+    path: "/",
     //element: <Home />,      
-    element:<ProtectedRoute children={<Home />}/>,
-    
-    children:[
-      
+    element: <ProtectedRoute authNecessary={true} children={<Home />} />,
+
+    children: [
+
     ],
   },
   {
-    path:"/login",
-    element:<Login />
+    path: "/login",
+    element: <ProtectedRoute authNecessary={false} children={<Login />} />,
   },
   {
-    path:"/signup",
-    element:<Register />
+    path: "/signup",
+    element: <ProtectedRoute authNecessary={false} children={<Register />} />,
   },
   {
-    path:"/profile",
-    element:<Profile />
+    path: "/profile",
+    element: <ProtectedRoute authNecessary={true} children={<Profile />} />,
   },
   /*{
     path:"/explore",
     element:<Explore />
   },*/
-  {
-    path:"/inbox",
-    element:<Inbox />
+  /*{
+    path: "/inbox",
+    element: <Inbox />
     //<ProtectedRoute children={<Inbox />}/>
-    
+
   },
   {
     path: "/inbox/14564",
@@ -69,8 +69,8 @@ export const router = createBrowserRouter([
   },
   {
     path: "/reels/videos/",
-    element: <a style={{color:'red'}} >pending</a>,
-  },
+    element: <a style={{ color: 'red' }} >pending</a>,
+  },*/
   /*{
     path: "/stories/:user/:id",
     element: <ProtectedRoute children={<p>stories</p>} />,
@@ -87,11 +87,11 @@ root.render(
 
   <QueryClientProvider client={queryClient}>
     <ApiProvider api={apiSlice} >
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <RouterProvider router={ router}/>
-      </PersistGate >
-    </Provider>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <RouterProvider router={router} />
+        </PersistGate >
+      </Provider>
     </ApiProvider>
   </QueryClientProvider>
 );

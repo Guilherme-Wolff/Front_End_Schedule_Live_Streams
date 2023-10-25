@@ -19,6 +19,9 @@ function App() {
   console.log("CURRENT_USER_LOGIN ", currentUser);*/
   let dispatch = useAppDispatch()
 
+  /*let user = useAppSelector((state: RootState) => state.persistedReducer).user.user
+  console.log("USER AUTHCONTEXT",user)*/
+
 
   const [passwordValid,
     SetPasswordValid] = useState(false)
