@@ -47,7 +47,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/signup",
-    element: <ProtectedRoute authNecessary={false} children={<Register />} />,
+    element: <ProtectedRoute authNecessary={false} children={<Register />}  />,
   },
   {
     path: "/profile",

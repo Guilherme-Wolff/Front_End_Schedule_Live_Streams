@@ -4,7 +4,7 @@ import Sidebar from '../../Components/Sidebar/Sidebar'
 //import { Link } from 'react-router-dom'
 //import axios from "axios";
 //import StoriesBar from '../StoriesBar/StoriesBar';
-import Recommendation from '../../Components/Recommendation/Recommendation';
+import ADS from '../../Components/Recommendation/Recommendation';
 import Posts from "../../Components/Post/Posts"
 //import { useSelector, useDispatch } from "react-redux"
 //import rootReducer from '../../redux/root-reducer';
@@ -15,8 +15,13 @@ import Story from "../../Components/StoriesBar/Story"
 import HeaderMobile from "../../Components/Header/Header"
 import BottomTab from "../../Components/BottomTab/BottomTab"
 
+import { RootState, useAppSelector, useAppDispatch, } from "../../redux/store"
+
 function Home() {
-  const {name} = useAuth()
+  let user = useAppSelector((state: RootState) => state.persistedReducer).user.user
+  console.log("TESTE AUTH",user.name)
+
+  const { name } = useAuth()
   return (
     <>
       <div className='home__wrap wrapper'>
@@ -26,13 +31,7 @@ function Home() {
         <main className="home__content">
           <HeaderMobile />
           <section className='section-main'>
-           {/*
-            <div>
-              <p>
-                {name}
-              </p>
-            </div>
-           */}
+           
             <div className='stories_and_posts'>
               <div className="main-stories">
                 <Story />
@@ -40,7 +39,7 @@ function Home() {
               <Posts />
             </div>
             <div className='section-recommendation'>
-              <Recommendation />
+              <ADS />
             </div>
           </section>
           <BottomTab />

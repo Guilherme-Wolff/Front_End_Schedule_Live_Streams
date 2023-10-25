@@ -7,16 +7,31 @@ import EditCrop from "../popups/CreatePub/EditCrop";
 import Search from "../search/Search";
 import { MoreSettings } from './MoreSettings';
 
+
 const smallSidebarVerify = {
   '@media (min-width: 800px) and (max-width:1000)': {
     display: 'none',
   },
 };
 
+
+interface ModalPosition {
+  top: number;
+  left: number;
+}
+
+
 export function SideBar() {
   const [smallSidebar, IsSmallSidebar] = useState(false)
 
   let location = useLocation()
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalPosition, setModalPosition] = useState<ModalPosition>({ top: 0, left: 0 });
+  console.log("POSIÇAO MODAL", modalPosition)
+
+  const buttonRef = useRef<HTMLDivElement | null>(null);
+  const modalRef = useRef<HTMLDivElement | null>(null);
 
   const [home, IsHome] = useState(Boolean)
   const [profile, IsProfile] = useState(Boolean)
@@ -32,6 +47,33 @@ export function SideBar() {
   const [moreSetting, ismoreSettings] = useState(false)
 
   const [cropedImage, setCropedImage] = useState('')
+
+  const openModal = () => {
+    if (buttonRef.current) {
+      const buttonRect = buttonRef.current.getBoundingClientRect();
+      setModalPosition({
+        top: buttonRect.bottom + window.scrollY,
+        left: buttonRect.left + window.scrollX,
+      });
+    }
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleOutsideClick = (event: MouseEvent) => {
+    if (
+      isModalOpen &&
+      modalRef.current &&
+      !modalRef.current.contains(event.target as Node) &&
+      buttonRef.current &&
+      !buttonRef.current.contains(event.target as Node)
+    ) {
+      closeModal();
+    }
+  };
 
 
   function ChangeCreatePopup(url: string) {
@@ -61,6 +103,7 @@ export function SideBar() {
     console.log(1)
   }
 
+
   useEffect(() => {
 
     if (location.pathname == '/') {
@@ -75,6 +118,12 @@ export function SideBar() {
     else if (location.pathname.includes('/inbox')) {
       IsInbox(true)
     }
+
+    document.addEventListener('mousedown', handleOutsideClick);
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
   }, [])
 
 
@@ -261,19 +310,24 @@ export function SideBar() {
           <div className="more__sidebar__end">
             {
               moreSetting && (
-                <MoreSettings />
+                <div style={{ top: modalPosition.top, left: modalPosition.left }} className='more__settings'>
+                  <MoreSettings />
+                </div>
               )
             }
 
 
-            <div className='sidebar__more__wrap' onClick={() => {
+            <div className='sidebar__more__wrap' ref={buttonRef} onClick={() => {
+
               if (showNotificarions || showSearch) {
+
                 SetShowNotificarions(false)
                 SetShowSearch(false)
 
               }
               ismoreSettings(!moreSetting)
-              IsSmallSidebar(false)
+              IsSmallSidebar(!smallSidebar)
+              openModal()
             }}>
               <img src="../images/Sidebar/more.png" alt="" />
               {smallSidebar ? '' : <p className='text-sidebar-button'>More</p>}

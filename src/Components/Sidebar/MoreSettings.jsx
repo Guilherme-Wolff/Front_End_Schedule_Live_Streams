@@ -2,9 +2,14 @@
 
 import { Link } from 'react-router-dom'
 
+
+import { StateModal } from "./stateModal"
 export function MoreSettings() {
+  const { modalPosition } = StateModal()
+  console.log("posiçao", modalPosition)
+
   return (
-    <div className='more__settings'>
+    <>
       <ul>
         <li>
           <p>Settings</p>
@@ -38,6 +43,7 @@ export function MoreSettings() {
               fill="currentColor"></path>
           </svg>
         </li>
+        {/*
         <li>
           <p>Your actions</p>
           <svg aria-label="Your actions" color="#fafafa" fill="#fafafa" height="24"
@@ -54,6 +60,8 @@ export function MoreSettings() {
             <circle cx="2.01" cy="15.235" r="1.125"></circle>
           </svg>
         </li>
+        */}
+        {/*
         <li>
           <p>Problem Report</p>
           <svg aria-label="Problem Report" color="#fafafa" fill="#fafafa"
@@ -65,13 +73,14 @@ export function MoreSettings() {
         <li>
           <p>Switching between accounts</p>
         </li>
-        <Link to="/login">
+         */}
+        <Link to="/login" onClick={()=>{console.log("FUNCTION LOG OFF")}}>
           <li>
-            <p>Log off</p>
+            <p>Log Out</p>
           </li>
         </Link>
 
       </ul>
-    </div>
+    </>
   )
 }
