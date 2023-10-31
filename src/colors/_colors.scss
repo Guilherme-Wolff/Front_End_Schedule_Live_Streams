@@ -4,3 +4,18 @@ $principalBackGroundColor:rgba(0,0,0);
 $principalBackGroundColorOpacity:rgba(0,0,0,.5);
 //$principalBackGroundColor:rgba(234, 54, 54, 0.5);
 $azulGradient:rgb(73, 86, 235);
+//==
+
+$cor-inicial: rgb(224, 77, 118);
+$cor-final: rgb(255, 255, 255);
+
+$colorBaseGradient: linear-gradient(to right, $cor-inicial, $cor-final);
+
+
+$cor-inicial: rgb(255, 87, 51);
+$cor-final: rgb(225, 169, 156);
+
+$colorSecundaryGradient: linear-gradient(to right, $cor-inicial, $cor-final);
+
+
+

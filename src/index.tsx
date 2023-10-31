@@ -1,10 +1,7 @@
 //import * as _ from 'lodash';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './css/index.css';
-// Import css files
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 
@@ -18,14 +15,16 @@ import { apiSlice } from "./redux/api/apiSlice"
 
 //COMPONETS//
 import Home from './Pages/Home/Home'
+import Saved from './Pages/Saved/Saved'
 //import Home from './Pages/Home/Home'
 import Profile from './Components/Profile/Profile'
 //import Explore from './Components/Explore/Explore'
 //import Inbox from './Components/Chat/Inbox'
 //import Chat from './Components/Chat/Chat'
-import Login from "./Pages/Registration/Login";
-//import Slick from "./Components/Slick";
+import {Login} from "./Pages/Registration/Login";
 import { Register } from "./Pages/Registration/Register";
+//import Slick from "./Components/Slick";
+
 import { ProtectedRoute } from "./AuthContext/ProtectedRoute"
 //REACT ROUTER 6
 
@@ -52,6 +51,11 @@ export const router = createBrowserRouter([
   {
     path: "/profile",
     element: <ProtectedRoute authNecessary={true} children={<Profile />} />,
+  },
+  {
+    path: "/saved",
+    element: <Saved />,
+    //element: <ProtectedRoute authNecessary={true} children={<Profile />} />,
   },
   /*{
     path:"/explore",

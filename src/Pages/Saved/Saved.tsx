@@ -1,5 +1,5 @@
 //import React, {ReactNode, useEffect, useState } from 'react'
-import './Home.scss'
+import './Saved.scss'
 import Sidebar from '../../Components/Sidebar/Sidebar'
 //import { Link } from 'react-router-dom'
 //import axios from "axios";
@@ -23,29 +23,29 @@ function Home() {
 
   const { name } = useAuth()
   return (
-    <>
-      <div className='home__wrap wrapper'>
-        <div className="sidebar-container">
-          <Sidebar />
-        </div>
-        <main className="home__content">
-          <HeaderMobile />
-          <section className='section-main'>
 
-            <div className='stories_and_posts'>
-              <div className="main-stories">
-                <Story />
-              </div>
-              <Posts />
-            </div>
-            <div className='section-recommendation'>
-              <ADS />
-            </div>
-          </section>
-          <BottomTab />
-        </main>
+    <div className='home__wrap wrapper'>
+      <div className="sidebar-container">
+        <Sidebar />
       </div>
-    </>
+      <main className="home__content">
+        <HeaderMobile />
+        <section className='section-main'>
+
+          <div className='stories_and_posts'>
+            <div className="main-stories">
+              <Story />
+            </div>
+            <Posts />
+          </div>
+          <div className='section-recommendation'>
+            <ADS />
+          </div>
+        </section>
+        <BottomTab />
+      </main>
+    </div>
+
   );
 }
 

@@ -7,12 +7,13 @@ import UserActionTypes from '../../redux/user/action-types';
 import { userReducer, setJwt, setUser } from "../../redux/user/reducer"
 import { RootState, useAppSelector, useAppDispatch } from "../../redux/store"
 import { Logo } from "../../Components/Logo/Logo"
+import { LogoSave } from "../../Components/Logo/LogoSave"
 //import rootReducer from '../../redux/root-reducer';
 
 //let size_input = useAppSelector((state: RootState) => state).input_message_size
 //let MessagesArray = useAppSelector((state: RootState) => state.persistedReducer).chat_messages
 
-function App() {
+export const Login = () => {
   /*const { currentUser } = useSelector(
   (rootReducer: any) => rootReducer.userReducer)
 
@@ -93,7 +94,7 @@ function App() {
         console.log(postData)
         console.log(err)
       })
-    
+
   }
 
   useEffect(() => {
@@ -110,7 +111,7 @@ function App() {
       <div className="registration__system">
         {redirectHome && <Navigate replace to="/" />}
         <div className="registration__system__login">
-          <Logo />
+          <LogoSave />
           <form onSubmit={(e) => LoginUser(e)}>
             <input
               onChange={
@@ -126,6 +127,7 @@ function App() {
               disabled={!formValid}>Login
             </button>
           </form>
+          {/*
           <div className="registration__system__login__otheror">
             <div className="otheror__line"></div>
             <p>or</p>
@@ -134,6 +136,7 @@ function App() {
           <div className="registration__system__login__endpassword">
             <a href="/">Forgot your password?</a>
           </div>
+           */}
         </div>
         <div className="registration__system__orregister">
           <span>
@@ -145,6 +148,3 @@ function App() {
     </div>
   )
 }
-
-
-export default App

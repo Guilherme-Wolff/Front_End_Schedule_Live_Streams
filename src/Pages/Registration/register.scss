@@ -1,8 +1,11 @@
 @import "login";
 
+@import "../../colors/colors";
+
+
 .main-register {
     width: 100%;
-    background-color: rgb(255, 255, 255);
+    background: $colorBaseGradient;
 
     * {
         background-color: rgb(255, 255, 255);

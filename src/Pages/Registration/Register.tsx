@@ -8,6 +8,7 @@ import UserActionTypes from '../../redux/user/action-types';
 import { registerUser } from "../../redux/user/actions"
 import { useSelector, useDispatch } from "react-redux"
 import { Logo } from "../../Components/Logo/Logo"
+import { LogoSave } from "../../Components/Logo/LogoSave"
 //import rootReducer from '../../redux/root-reducer';
 
 
@@ -123,7 +124,7 @@ export const Register = () => {
             <div className="registration__system">
                 {redirectLogin && <Navigate replace to="/login" />}
                 <div className="registration__system__login">
-                    <Logo />
+                    <LogoSave />
                     <p className="signsubtitle">
                         register to save your favorite lives.
                     </p>

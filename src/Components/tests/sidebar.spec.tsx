@@ -15,9 +15,9 @@ import Profile from '../Profile/Profile'
 import Explore from '../Explore/Explore'
 import Inbox from '../Chat/Inbox'
 import Ayub from '../Chat/Chat'
-import Login from "../Registration/Login";
+import {Login} from "../../Pages/Registration/Login";
 //import Slick from "../Slick";
-import Register from "../Registration/Register";
+import {Register} from "../../Pages/Registration/Register";
 
 import { render } from "@testing-library/react"
 import { screen } from '@testing-library/dom'

@@ -1,9 +1,10 @@
 @import "../../Components/settings";
 
+@import "../../colors/colors";
 
 .main-login {
   width: 100%;
-  background-color: rgb(255, 255, 255);
+  background: $colorBaseGradient;
   *{
     background-color: rgb(255, 255, 255);
   }
@@ -12,7 +13,7 @@
   align-items: center;
 }
 .registration__system {
-  background-color: rgb(255, 255, 255);
+  background: $colorBaseGradient;
   width: 350px;
   margin: 0 auto;
   height: 100vh;
