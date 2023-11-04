@@ -1,0 +1,17 @@
+@import '../../colors/colors';
+
+.not_found {
+    height: 100vh;
+    width: 100vw;
+    background: $colorBaseGradient !important;
+    color: aliceblue;
+    justify-content: center;
+
+}
+
+.text {
+    padding-top: 10%;
+    //margin-top: 10%;
+    margin-left: 50%;
+    margin-right: 50%;
+}

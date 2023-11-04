@@ -1,11 +1,13 @@
 
 import { Link } from 'react-router-dom'
-import {ReactComponent as ReactLogo} from './logo_toksave-50.svg';
+import './Logo.scss'
+//import { ReactComponent as ReactLogo } from './logo2.jpeg';
 
-export const LogoSave = (smallSidebar:any) => {
+import logo from './logo2.jpeg';
+
+export const LogoSave = () => {
     return (
-        <div className={`sidebar__instagram__logo__small ${smallSidebar ? 'show_logo' : 'close_logo'}`}>
-        <ReactLogo />
-        </div>
+        <img className="logo" src={logo} alt="Logo" />
+
     )
 }

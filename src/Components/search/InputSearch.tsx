@@ -14,15 +14,19 @@ import { useAppDispatch } from "../../redux/store"
 import { useAppSelector } from "../../redux/store"
 
 let API: string = " http://localhost:8080/"
+const sleep = (ms:number) => new Promise(r => setTimeout(r, ms));
 
 export default function InputSearch() {
   let dispatch = useAppDispatch()
 
-  function IsValidUsername(e: React.FormEvent<HTMLInputElement>) {
+  async function IsValidUsername(e: React.FormEvent<HTMLInputElement>) {
+    console.log("STREAMER",e.currentTarget.value)
     let INPUT_SIZE = e.currentTarget.value.length;
     if (INPUT_SIZE > 0) {
+      await sleep(200)
       dispatch(size_input_increment(e.currentTarget.value.length));
     } else {
+      await sleep(200)
       dispatch(size_input_increment(0));
     }
   }

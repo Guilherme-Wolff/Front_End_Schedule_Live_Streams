@@ -4,6 +4,8 @@ import axios from "axios"
 import { API } from "../../api/api"
 import { SearchedNames, Post } from "../../types/types"
 
+const API_VERSION = 'V1'
+
 let Headers = {
   headers: {
     'content-type': 'application/json',
@@ -43,7 +45,14 @@ export const apiSlice = createApi({
           keepUnusedDataFor: 1,//cache 1 minute
         })
       }),
-
+    seachStreamer: builder.query
+      ({
+        query: () => ({
+          url: `/api/${API_VERSION}/searchstreamer`,
+          method: 'GET',
+          keepUnusedDataFor: 1,//cache 1 minute
+        })
+      }),
   })
 })
 

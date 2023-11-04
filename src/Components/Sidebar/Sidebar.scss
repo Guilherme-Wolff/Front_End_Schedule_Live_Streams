@@ -43,8 +43,9 @@
   
         .sidebar__instagram__logo {
           display: none;
-          height: 29px;
+          height: 35px;
           width: 73px;
+          object-fit: cover;
           //margin: 5px 0px 27px 12px;
         }
   
@@ -398,6 +399,7 @@
           align-items: center;
           display: block;
           margin: 10px 12px;
+          object-fit: cover;
         }
   
   
@@ -742,14 +744,16 @@
         .sidebar__instagram__logo {
 
           display: block;
-          height: 29px;
-          width: 103px;
+          height: 35px;
+          width: 75px;
           margin: 5px 0px 27px 12px;
+          object-fit: cover;
         }
   
         .sidebar__instagram__logo__small {
           display: none;
           margin: 10px auto;
+          object-fit: cover;
         }
   
   

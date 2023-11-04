@@ -12,6 +12,7 @@ import { store, persistor } from './redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { ApiProvider } from "@reduxjs/toolkit/query/react"
 import { apiSlice } from "./redux/api/apiSlice"
+import {NotFoundPage} from "./Components/NotFound/NotFound"
 
 //COMPONETS//
 import Home from './Pages/Home/Home'
@@ -79,6 +80,11 @@ export const router = createBrowserRouter([
     path: "/stories/:user/:id",
     element: <ProtectedRoute children={<p>stories</p>} />,
   },*/
+  {
+    // Rota padrão para Not Found (Erro 404)
+    path: "*",
+    element: <NotFoundPage />,
+  }
 ])
 
 const queryClient = new QueryClient();

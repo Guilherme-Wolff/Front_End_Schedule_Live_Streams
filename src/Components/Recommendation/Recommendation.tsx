@@ -1,5 +1,8 @@
 import "./Recommendation.scss"
 
+//import { Adsense } from 'react-adsense';
+
+
 export default function Recomendation () {
     return (
         <div className="other__accaunt__and__followers">

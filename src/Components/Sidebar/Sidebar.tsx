@@ -132,7 +132,12 @@ export function SideBar() {
           style={smallSidebar ? { width: '73px' } : { width: '15%' }}
         >
           <Link to="/">
-         { < LogoSave smallSidebar={smallSidebar}/>}
+         { 
+         <div className={`sidebar__instagram__logo__small ${smallSidebar ? 'show_logo' : 'close_logo'}`}>
+          < LogoSave/>
+         </div>
+         
+         }
             {
               /**
                <svg
@@ -150,11 +155,13 @@ export function SideBar() {
             </svg>
                */
             }
+            <div className={`sidebar__instagram__logo ${smallSidebar ? 'close_logo' : 'show_logo'}`}>
+              <LogoSave />
+              
+              </div>
             
 
-            <img className={`sidebar__instagram__logo ${smallSidebar ? 'close_logo' : 'show_logo'}`}
-              //style={smallSidebar ? { display: "none" } : { display: "block" }}
-              src="../images/logo.png" alt="" />
+            
           </Link>
           <ul>
             <Link to="/">
@@ -173,16 +180,23 @@ export function SideBar() {
               </li>
             </Link>
             <Link to="#" onClick={() => {
+              
+
               if (moreSetting) {
                 ismoreSettings(false)
 
                 SetShowSearch(!showSearch)
 
               }
+              
               else {
                 SetShowSearch(!showSearch)
                 IsSmallSidebar(!smallSidebar)
                 SetShowNotificarions(false)
+              }
+
+              if (!smallSidebar){
+                IsSmallSidebar(true)
               }
 
             }}>

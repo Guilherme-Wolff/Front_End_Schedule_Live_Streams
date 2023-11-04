@@ -32,15 +32,19 @@ function Home() {
           <HeaderMobile />
           <section className='section-main'>
 
+            {/*
             <div className='stories_and_posts'>
               <div className="main-stories">
                 <Story />
               </div>
               <Posts />
             </div>
+             */}
+            {/*
             <div className='section-recommendation'>
               <ADS />
             </div>
+             */}
           </section>
           <BottomTab />
         </main>
