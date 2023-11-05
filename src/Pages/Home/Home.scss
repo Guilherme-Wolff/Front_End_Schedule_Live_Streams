@@ -220,13 +220,16 @@
     }
     .section-main {
         background:$colorBaseGradient;
-        margin: 0;
-        //background-color: rgb(60, 255, 0);
-        width: 100%;
+        
+        position: relative;
+        width: 100vw;
+        height: 100vh;
         justify-content: center;
-        align-items: center;
+        //align-items: center;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        flex-direction: row;
+        grid-gap:10%;
     }
     
     .stories_and_posts {

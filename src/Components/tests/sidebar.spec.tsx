@@ -23,7 +23,6 @@ import { render } from "@testing-library/react"
 import { screen } from '@testing-library/dom'
 import '@testing-library/jest-dom';
 import Sidebar from '../Sidebar/Sidebar'
-import Home from "../Home/Home"
 import {renderComponentSetup} from "./utils-test/RenderComponent";
 
 const queryClient = new QueryClient();
