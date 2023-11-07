@@ -206,7 +206,7 @@ export function SideBar() {
               } : { border: "none", }}>
                 <img style={smallSidebar ? { margin: "0 auto" } : { margin: "0px" }}
                   src="../images/sidebar/search.png" alt="" />
-                {smallSidebar ? null : <p className='text-sidebar-button'>Search</p>}
+                {smallSidebar ? null : <p className='text-sidebar-button'>Search Streamers</p>}
               </li>
             </Link>
             {/*

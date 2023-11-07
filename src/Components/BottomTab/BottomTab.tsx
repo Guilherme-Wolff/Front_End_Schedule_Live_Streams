@@ -116,6 +116,7 @@ function BottomTab() {
                   {smallSidebar ? '' : <p>Create</p>}
                 </li>
               </Link>
+              {/*
               <Link to="/inbox">
                 <li>
                   {inbox ?
@@ -139,6 +140,7 @@ function BottomTab() {
                   {smallSidebar ? '' : <p>Messages</p>}
                 </li>
               </Link>
+               */}
               <Link to="/profile">
                 <li>
                   {/*  */}

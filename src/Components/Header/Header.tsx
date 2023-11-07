@@ -40,9 +40,11 @@ function HeaderMobile() {
           <div className="input-mobile-div">
             <InputSearchMobile />
           </div>
+          {/*
           <div className='div-mobile-notificatoin'>
             <NotificationsMoblieButton />
           </div>
+           */}
         </div>
       </div>
     </>

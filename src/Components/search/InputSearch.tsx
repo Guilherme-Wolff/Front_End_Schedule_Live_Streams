@@ -37,7 +37,7 @@ export default function InputSearch() {
         <input
           type="text"
           onChange={(e) => IsValidUsername(e)}
-          placeholder="Search"
+          placeholder="example.: tiktok.com/@user/live"
         />
       </div>
     </>

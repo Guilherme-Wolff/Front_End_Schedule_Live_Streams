@@ -12,6 +12,12 @@ $cor-final: rgb(255, 255, 255);
 $colorBaseGradient: linear-gradient(to right, $cor-inicial, $cor-final);
 
 
+$cor-inicialPost: rgb(178, 39, 79);
+
+$cor-finalPost: rgb(255, 255, 255);
+$colorBaseGradientPostBackGround: linear-gradient(to right, $cor-inicialPost, $cor-finalPost);
+
+
 $cor-inicial: rgb(255, 87, 51);
 $cor-final: rgb(225, 169, 156);
 

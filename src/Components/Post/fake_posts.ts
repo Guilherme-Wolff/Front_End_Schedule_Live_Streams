@@ -1,4 +1,7 @@
 import { Post } from "../../types/types"
+
+let video_url = 'https://milkshake.bunkr.ru/06-11-2023-eduardosallesmedeiros-1-Ja5VCVOA.mp4';
+
 export let fake_posts:Post[] = [
     {
         "post_id": 1,

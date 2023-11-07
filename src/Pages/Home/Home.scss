@@ -24,7 +24,7 @@
         
         position: relative;
         width: 100vw;
-        height: 100vh;
+        height: 100%;
         justify-content: center;
         //align-items: center;
         display: flex;
@@ -214,7 +214,7 @@
 }
 
 
-@media (min-width: 320px) and (max-width:900px){
+@media (min-width: 320px) and (max-width:900px) {
     .sidebar-container {
         display: none;
     }
@@ -290,13 +290,13 @@
         display: flex;
         width: 100%;
         display: block;
-        background: rgb(0, 0, 0);
+        background: $colorBaseGradient;
         color: #fff;
         height: 100vh;
     
         .home__content {
             height: 100%;
-            width: 100%;
+            width: 100vw;
             //margin: 0;
             display: block;
             //outline: 1px solid rgb(0, 140, 255);
@@ -306,7 +306,7 @@
             //padding-left: 10%;
            // padding-right: 10%;
             //margin: 0 auto 10%;
-            background: rgb(0, 0, 0);
+            background: $colorBaseGradient;
             max-width: 100%;
             
             //margin-top: 16px;
@@ -314,7 +314,49 @@
     }
 }
 
-@media(min-width:520px) and (max-width:899) {
+/*@media(min-width:520px) and (max-width:899) {
     
-}
+}*/
 
+@media (min-width:320px) and (max-width: 899px) and (orientation: landscape){
+    .home__content {
+        height: 100%;
+        width: 100vw;
+        //margin: 0;
+        display: block;
+        //outline: 1px solid rgb(0, 140, 255);
+        outline: blue;
+        flex-direction: column;
+        justify-content: center;
+        //padding-left: 10%;
+       // padding-right: 10%;
+        //margin: 0 auto 10%;
+        background: $colorBaseGradient;
+        max-width: 100%;
+        
+        //margin-top: 16px;
+    }
+
+    .stories_and_posts {
+        background:$colorBaseGradient;
+        //margin: 0;
+        width: 100vw;
+        height: 100%;
+        
+        justify-content: center;
+        align-items: center;
+    }
+    .section-main {
+        background:$colorBaseGradient;
+        
+        position: relative;
+        width: 100vw;
+        height: 100%;
+        justify-content: center;
+        //align-items: center;
+        display: flex;
+        flex-direction: row;
+        flex-direction: row;
+        grid-gap:10%;
+    }
+}

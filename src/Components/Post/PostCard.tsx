@@ -8,12 +8,13 @@ import {Post} from "../../types/types"
 import { posts_like,posts_unlike } from "../../redux/posts_home/posts_home"
 import { RootState, useAppSelector, useAppDispatch } from "../../redux/store"
 
-export const PostCard = ({
-  
-    post_id,date,userminilogo,
-    createdby,url,likes,comments,bio
-    }:Post) => {
+export const PostCard = (post:any,lastPost?:boolean) => {
     
+      let {
+  
+        post_id,date,userminilogo,
+        createdby,url,likes,comments,bio
+        } = post
 
     let dispatch = useAppDispatch()
     const [saved, setSaved] = useState(false)
@@ -58,7 +59,7 @@ export const PostCard = ({
 
 
     return (
-        <div key={post_id} className="post">
+        <div key={post_id} className={lastPost ? 'last_post' : 'post'}>
                 <div className="user which__user__this__post">
                   <div className='which__user__this__post__info'>
                     <Link to={"/" + createdby}>

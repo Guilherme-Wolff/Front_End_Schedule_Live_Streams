@@ -40,8 +40,12 @@ export default function Posts() {
         <div className="main-post">
           <div className={`${isLoading ? 'posts_is_loading' : 'posts'}`}>
             {
-            posts_home.length ? posts_home?.map((post: Post) => (
-              PostCard(post)
+            posts_home.length ? posts_home?.map((post: Post,index:number) => (
+              //PostCard(post)
+              posts_home.length === index ?
+               <PostCard post={post} lastPost={true}/> : 
+               <PostCard post={post}/>
+              
             ),console.log("posts_home")):
             fake_posts?.map((post: Post) => (
               PostCard(post)

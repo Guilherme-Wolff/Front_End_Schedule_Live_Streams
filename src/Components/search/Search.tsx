@@ -62,7 +62,7 @@ export default function Search() {
   return (
     <>
       <div className="search__input__title">
-        <h1>Search query</h1>
+        <h1>Search Streamers</h1>
         {InputSearch()}
       </div>
       <div className="recent__searched__users__title">
