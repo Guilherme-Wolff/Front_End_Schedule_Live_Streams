@@ -5,14 +5,12 @@ import { API } from "../../api/api"
 import { SearchedNames, Post } from "../../types/types"
 import { RootState } from "../root-reducer";
 
-const API_VERSION = 'V1'
+//Cookies
+import {setCookie} from "./Cookies"
 
-let Headers = {
-  headers: {
-    'content-type': 'application/json',
-    'cache-control': 'public'
-  }
-}
+const API_VERSION = 'V1'
+const user_token = 'f089371aee2849489767f18bf8700769'
+
 type prepareHeaders = (
   headers: Headers,
   api: {
@@ -24,14 +22,25 @@ type prepareHeaders = (
   }
 ) => Headers | void
 
-const SATURN_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc19yZWZyZXNoIjpmYWxzZSwicmVzb3VyY2UiOiJ3LXNhdHVyLWFwcDEtOTkyMDU5NTg2M2QzNGM4YmEwMDRhYjNjZTZkMGVkMzkuY29tbXVuaXR5LnNhdHVybmVudGVycHJpc2UuaW8iLCJhdWQiOiJzYXR1cm4tYXV0aC1wcm94eSIsImV4cCI6MTY5OTQwMjMzNCwiaXNzIjoic2F0dXJuLWF1dGgtcHJveHkiLCJzdWIiOiJjYWNlZTRkN2U5YmU0ZWIyYTUzNjVhOGRhYWU5ZTA0NSJ9.5qTn24zkJDD1dBp5Hc0xDUZBMhZofCS4Ed_OLeualU4';
-const REFRESH_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc19yZWZyZXNoIjp0cnVlLCJyZXNvdXJjZSI6Inctc2F0dXItYXBwMS05OTIwNTk1ODYzZDM0YzhiYTAwNGFiM2NlNmQwZWQzOS5jb21tdW5pdHkuc2F0dXJuZW50ZXJwcmlzZS5pbyIsImF1ZCI6ImF0bGFzIiwiZXhwIjoxNjk5NDgxMjc2LCJpc3MiOiJzYXR1cm4tYXV0aC1wcm94eSIsInN1YiI6ImNhY2VlNGQ3ZTliZTRlYjJhNTM2NWE4ZGFhZTllMDQ1In0.MxKh4ngyyu3Z_SH1l2WFXaaCJ6LeRm-0XrJeUXhF4JY'
+const SATURN_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc19yZWZyZXNoIjpmYWxzZSwicmVzb3VyY2UiOiJ3LXNhdHVyLWFwcDEtOTkyMDU5NTg2M2QzNGM4YmEwMDRhYjNjZTZkMGVkMzkuY29tbXVuaXR5LnNhdHVybmVudGVycHJpc2UuaW8iLCJhdWQiOiJzYXR1cm4tYXV0aC1wcm94eSIsImV4cCI6MTY5OTQwNTk3OCwiaXNzIjoic2F0dXJuLWF1dGgtcHJveHkiLCJzdWIiOiJjYWNlZTRkN2U5YmU0ZWIyYTUzNjVhOGRhYWU5ZTA0NSJ9.ScOelOqXgSqfRiTVNoFOg-MHRsJaQrwxOPjW0HU4ATs';
+const REFRESH_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc19yZWZyZXNoIjp0cnVlLCJyZXNvdXJjZSI6Inctc2F0dXItYXBwMS05OTIwNTk1ODYzZDM0YzhiYTAwNGFiM2NlNmQwZWQzOS5jb21tdW5pdHkuc2F0dXJuZW50ZXJwcmlzZS5pbyIsImF1ZCI6ImF0bGFzIiwiZXhwIjoxNjk5NDg4Nzc4LCJpc3MiOiJzYXR1cm4tYXV0aC1wcm94eSIsInN1YiI6ImNhY2VlNGQ3ZTliZTRlYjJhNTM2NWE4ZGFhZTllMDQ1In0.yWbzkW6draVXsfHvT-hsOleToRoo5ElBqX7M8ZsQ1rQ'
 
 //const SATURN_TOKEN = process.env.SATURN_TOKEN || '';
 //const REFRESH_TOKEN = process.env.REFRESH_TOKEN || '';
 
+let CookiesSaturn = `saturn-token=${SATURN_TOKEN};refresh-token=${REFRESH_TOKEN}`
 
-let Cookies = `saturn-token=${SATURN_TOKEN};refresh-token=${REFRESH_TOKEN}`
+
+let _headers =  {
+  'content-type': 'application/json',
+  'cache-control': 'public',
+  'Cookie': CookiesSaturn,
+  'authorization': `token ${user_token}`,
+  'Origin':'https://w-satur-app1-9920595863d34c8ba004ab3ce6d0ed39.community.saturnenterprise.io:8000'
+}
+
+//setCookie('saturn-token', SATURN_TOKEN, 7);
+//setCookie('refresh-token', REFRESH_TOKEN, 7);
 
 export const apiSlice = createApi({
   reducerPath: 'api',
@@ -39,23 +48,26 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://w-satur-app1-9920595863d34c8ba004ab3ce6d0ed39.community.saturnenterprise.io:8000',
     credentials: "include",
-    prepareHeaders: (headers, { getState }) => {
-      //const token = (getState() as RootState)
-      headers.set('Cookie', Cookies);
-      return headers;
+    //headers:_headers,
+    prepareHeaders: (headers) => {
+        headers.set('Content-Type',  'application/json')
+        headers.set('Authorization',  `token ${user_token}`)
+        
+        headers.set('Origin',  'https://w-satur-app1-9920595863d34c8ba004ab3ce6d0ed39.community.saturnenterprise.io:8000')
+      return headers
     },
-    /*prepareHeaders: (headers) => {
-      headers.set('Cookie', Cookies);
-      return headers;
-    },*/
-    //credentials: "include"
   }),
+  
   endpoints: (builder) => ({
     getHello: builder.query
       ({
         query: () => ({
           url: '/',
           method: 'GET',
+          /*headers:{
+            'Cookie':CookiesSaturn,
+            'Authorization':`token ${user_token}`
+          },*/
           keepUnusedDataFor: 1,//cache 1 minute
 
         })
