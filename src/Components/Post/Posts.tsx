@@ -8,31 +8,33 @@ import { RootState, useAppSelector, useAppDispatch } from "../../redux/store"
 import { posts_home_array } from "../../redux/posts_home/posts_home"
 import { ObjectInArrayOfObject, ObjectIsEmpty } from "../../utils/functions"
 import { Post } from "../../types/types"
-import PostCard from "./PostCard"
+import {PostCard} from "./PostCard"
 
-import {fake_posts} from "./fake_posts"
+import { fake_posts } from "./fake_posts"
 import IsLoading from "../IsLoadin/IsLoading"
 
 export default function Posts() {
   let dispatch = useAppDispatch()
   let posts_home: Post[] = useAppSelector((state: RootState) => state.persistedReducer).posts_home;
-  const home_empty:boolean = ObjectIsEmpty(posts_home);
+  const home_empty: boolean = ObjectIsEmpty(posts_home);
   posts_home = ObjectInArrayOfObject(posts_home)
   const getPostsFeedHome = apiSlice.endpoints.getPostsFeedHome.useQuery
-  const { data, isLoading } = getPostsFeedHome("/postshome")
+  //const { data, isLoading } = getPostsFeedHome("/postshome")
+  let isLoading = false
+  let data: any[] = []
   let posts: Post[] = data
-  console.log("TYTY",posts)
+  console.log("TYTY", posts)
   //const [postload, setPostload] = useState(true);
   console.log("DATAH", data)
-  
+
   console.log("posts", posts_home)
   //let notReload:boolean = true;
-  useEffect(()=>{
-    if(!posts_home.length){
+  useEffect(() => {
+   /* if (!posts_home.length) {
       dispatch(posts_home_array(data));
-    }
-    
-  },[])
+    }*/
+
+  }, [])
 
   return (
     <>
@@ -40,17 +42,17 @@ export default function Posts() {
         <div className="main-post">
           <div className={`${isLoading ? 'posts_is_loading' : 'posts'}`}>
             {
-            posts_home.length ? posts_home?.map((post: Post,index:number) => (
-              //PostCard(post)
-              posts_home.length === index ?
-               <PostCard post={post} lastPost={true}/> : 
-               <PostCard post={post}/>
-              
-            ),console.log("posts_home")):
-            fake_posts?.map((post: Post) => (
-              PostCard(post)
-            ),console.log("fake_posts"))
-            //FALANHADO LOOP
+              /*posts_home.length ? posts_home?.map((post: Post,index:number) => (
+                posts_home.length === index ?
+                 <PostCard post={post} lastPost={true}/> : 
+                 <PostCard post={post}/>
+                
+              ),console.log("posts_home")):*/
+
+              fake_posts?.map((post: Post) => (
+                <PostCard post={post} />
+              ))
+              //FALANHADO LOOP
               /*posts_home?.map((post: Post) => (
                 PostCard(post)
               ))*/

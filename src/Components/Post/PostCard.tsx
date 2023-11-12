@@ -8,6 +8,40 @@ import {Post} from "../../types/types"
 import { posts_like,posts_unlike } from "../../redux/posts_home/posts_home"
 import { RootState, useAppSelector, useAppDispatch } from "../../redux/store"
 
+import React, {  useRef ,Suspense} from 'react';
+
+interface VideoProps {
+  src: string;
+}
+
+export const Video: React.FC<VideoProps> = ({ src }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+
+  const handleTogglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  return (
+    <div >
+      <video className="posts__image" ref={videoRef} src={src} controls />
+      <button onClick={handleTogglePlay}>
+        {isPlaying ? 'Pause' : 'Play'}
+      </button>
+    </div>
+  );
+};
+
+
+
+
 export const PostCard = (post:any,lastPost?:boolean) => {
     
       let {
@@ -89,7 +123,9 @@ export const PostCard = (post:any,lastPost?:boolean) => {
                   //backgroundPosition: "center",
                   //backgroundSize: "cover",
                 }}>
-                  <img className="posts__image" srcSet={url[0]} />
+                 {/* <video className="posts__image" src={url[0]}   /> */}
+                  < Video  src={url[0]}/>
+                  
                 </div>
                 <div className="posts__option">
                   <div className='post__like__coment__send'>
@@ -160,5 +196,3 @@ export const PostCard = (post:any,lastPost?:boolean) => {
               </div>
     )
 }
-
-export default PostCard;

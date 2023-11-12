@@ -15,11 +15,20 @@ import Story from "../../Components/StoriesBar/Story"
 import HeaderMobile from "../../Components/Header/Header"
 import BottomTab from "../../Components/BottomTab/BottomTab"
 
+import {Teste} from "../../server/Teste.server"
+
 import axios from 'axios'
 //API
 import { apiSlice } from "../../redux/api/apiSlice"
 
 import { RootState, useAppSelector, useAppDispatch, } from "../../redux/store"
+
+let vds = [
+  {
+    name:'video teste',
+    video_url:'https://kebab.bunkr.ru/12-22-2023-viajandonosofa-1-5T7HltjU.mp4'
+  },
+]
 
 function Home() {
   //let user = useAppSelector((state: RootState) => state.persistedReducer).user.user
@@ -27,7 +36,7 @@ function Home() {
   //let useGetHelloQuery = apiSlice.useGetHelloQuery
   const useGetHelloQuery = apiSlice.endpoints.getHello.useQuery
 
-  const {data} = useGetHelloQuery('/')
+  const {data} = useGetHelloQuery('')
 
   console.log("hello_res", data)
 
@@ -44,6 +53,8 @@ function Home() {
 
             {
               <div className='stories_and_posts'>
+                < Teste />
+                
                 {/*
               <div className="main-stories">
                 <Story />

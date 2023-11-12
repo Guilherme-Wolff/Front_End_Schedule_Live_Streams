@@ -8,9 +8,11 @@ import { RootState } from "../root-reducer";
 //Cookies
 import {setCookie} from "./Cookies"
 
+
+const URL_API = 'https://pd-satur-nodejs-set-10cb88bf8e994930acc0c928bc718f7b.community.saturnenterprise.io'
 const API_VERSION = 'V1'
 const user_token = 'f089371aee2849489767f18bf8700769'
-
+let api_token = "deployment-10c5c3def1ed4346845cc6d05105b5f2"
 type prepareHeaders = (
   headers: Headers,
   api: {
@@ -42,28 +44,33 @@ let _headers =  {
 //setCookie('saturn-token', SATURN_TOKEN, 7);
 //setCookie('refresh-token', REFRESH_TOKEN, 7);
 
+
 export const apiSlice = createApi({
   reducerPath: 'api',
   //baseQuery: fetchBaseQuery({ baseUrl: API }),
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://w-satur-app1-9920595863d34c8ba004ab3ce6d0ed39.community.saturnenterprise.io:8000',
-    credentials: "include",
+    baseUrl: URL_API,
+    //credentials: "include",
     //headers:_headers,
     prepareHeaders: (headers) => {
+       // headers.set('Access-Control-Allow-Origin', '')
         headers.set('Content-Type',  'application/json')
         headers.set('Authorization',  `token ${user_token}`)
-        
+        //MEU AUTH
+        headers.set('OwnAuthorization',  `token JWT DO MEU USUARIO`)
+        //headers.set('Cookie',  CookiesSaturn)
         headers.set('Origin',  'https://w-satur-app1-9920595863d34c8ba004ab3ce6d0ed39.community.saturnenterprise.io:8000')
       return headers
     },
   }),
   
   endpoints: (builder) => ({
-    getHello: builder.query
+    getHello:  builder.query
       ({
         query: () => ({
           url: '/',
           method: 'GET',
+          //mode:'cors',
           /*headers:{
             'Cookie':CookiesSaturn,
             'Authorization':`token ${user_token}`
