@@ -53,8 +53,6 @@ function Home() {
 
             {
               <div className='stories_and_posts'>
-                < Teste />
-                
                 {/*
               <div className="main-stories">
                 <Story />

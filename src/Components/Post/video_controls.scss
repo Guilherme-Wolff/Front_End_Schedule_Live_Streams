@@ -1,0 +1,30 @@
+video::-webkit-media-controls {
+    //ESTE BACKGORUND COBRE O VIDEO TODO
+    //background-color: #d51616;
+    /* Cor de fundo dos controles no Safari/Chrome */
+    color: #e51111;
+    /* Cor do texto dos controles no Safari/Chrome */
+}
+
+video::-webkit-media-controls-play-button {
+    color: #ef1d1d;
+    /* Cor do botão de play no Safari/Chrome */
+}
+
+video::-webkit-media-controls-volume-slider {
+    color: #e31717;
+    /* Cor da barra de volume no Safari/Chrome */
+}
+
+video::-webkit-media-controls-current-time-display,
+video::-webkit-media-controls-time-remaining-display {
+    color: #da1313;
+    /* Cor do texto do tempo no Safari/Chrome */
+}
+
+video::-webkit-media-controls-mute-button,
+video::-webkit-media-controls-play-button,
+video::-webkit-media-controls-fullscreen-button {
+    background-color: #68da16;
+    /* Cor de fundo dos botões no Safari/Chrome */
+}

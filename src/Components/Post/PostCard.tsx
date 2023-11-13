@@ -1,3 +1,5 @@
+import './video_controls.scss'
+
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -11,7 +13,7 @@ import { RootState, useAppSelector, useAppDispatch } from "../../redux/store"
 import React, {  useRef ,Suspense} from 'react';
 
 interface VideoProps {
-  src: string;
+  src: string[];
 }
 
 export const Video: React.FC<VideoProps> = ({ src }) => {
@@ -31,7 +33,7 @@ export const Video: React.FC<VideoProps> = ({ src }) => {
 
   return (
     <div >
-      <video className="posts__image" ref={videoRef} src={src} controls />
+      <video className="posts__image" ref={videoRef} src={src[0]} controls />
       <button onClick={handleTogglePlay}>
         {isPlaying ? 'Pause' : 'Play'}
       </button>
@@ -42,7 +44,7 @@ export const Video: React.FC<VideoProps> = ({ src }) => {
 
 
 
-export const PostCard = (post:any,lastPost?:boolean) => {
+export const PostCard = ({post}:Post | any) => {
     
       let {
   
@@ -93,7 +95,7 @@ export const PostCard = (post:any,lastPost?:boolean) => {
 
 
     return (
-        <div key={post_id} className={lastPost ? 'last_post' : 'post'}>
+        <div key={post_id} className={/*lastPost ? 'last_post' : */'post'}>
                 <div className="user which__user__this__post">
                   <div className='which__user__this__post__info'>
                     <Link to={"/" + createdby}>
@@ -124,7 +126,7 @@ export const PostCard = (post:any,lastPost?:boolean) => {
                   //backgroundSize: "cover",
                 }}>
                  {/* <video className="posts__image" src={url[0]}   /> */}
-                  < Video  src={url[0]}/>
+                  < Video  src={url}/>
                   
                 </div>
                 <div className="posts__option">

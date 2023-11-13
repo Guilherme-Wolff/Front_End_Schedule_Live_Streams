@@ -21,11 +21,10 @@ export default function Posts() {
   const getPostsFeedHome = apiSlice.endpoints.getPostsFeedHome.useQuery
   //const { data, isLoading } = getPostsFeedHome("/postshome")
   let isLoading = false
-  let data: any[] = []
+  /*let data: any[] = []
   let posts: Post[] = data
   console.log("TYTY", posts)
-  //const [postload, setPostload] = useState(true);
-  console.log("DATAH", data)
+  console.log("DATAH", data)*/
 
   console.log("posts", posts_home)
   //let notReload:boolean = true;
@@ -49,9 +48,9 @@ export default function Posts() {
                 
               ),console.log("posts_home")):*/
 
-              fake_posts?.map((post: Post) => (
+              fake_posts.length ? fake_posts.map((post:Post) => (
                 <PostCard post={post} />
-              ))
+              )) : <div>ERRO</div>
               //FALANHADO LOOP
               /*posts_home?.map((post: Post) => (
                 PostCard(post)
