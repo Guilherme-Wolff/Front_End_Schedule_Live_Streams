@@ -1,30 +1,75 @@
+$cor-inicial: rgba(224, 77, 118,0.1);
+$cor-final: rgba(255, 255, 255,0.1);
+
+$colorBaseGradient: linear-gradient(to right, $cor-inicial, $cor-final);
+
+$ColorControls: rgba(255, 0, 0, 0.3);
+$borderRadiusDefault:50%;
+
 video::-webkit-media-controls {
+   
     //ESTE BACKGORUND COBRE O VIDEO TODO
     //background-color: #d51616;
     /* Cor de fundo dos controles no Safari/Chrome */
-    color: #e51111;
+    color: $ColorControls;
     /* Cor do texto dos controles no Safari/Chrome */
 }
 
 video::-webkit-media-controls-play-button {
-    color: #ef1d1d;
+    color:  $ColorControls;
     /* Cor do botão de play no Safari/Chrome */
 }
 
 video::-webkit-media-controls-volume-slider {
-    color: #e31717;
+    color:  $ColorControls;
     /* Cor da barra de volume no Safari/Chrome */
 }
 
 video::-webkit-media-controls-current-time-display,
 video::-webkit-media-controls-time-remaining-display {
-    color: #da1313;
+    color:  $ColorControls;
     /* Cor do texto do tempo no Safari/Chrome */
 }
 
 video::-webkit-media-controls-mute-button,
 video::-webkit-media-controls-play-button,
 video::-webkit-media-controls-fullscreen-button {
-    background-color: #68da16;
+    border-radius: $borderRadiusDefault;
+    background-color: $ColorControls;
+    //background: $ColorControls;
     /* Cor de fundo dos botões no Safari/Chrome */
 }
+
+/* Adicione isso ao seu arquivo de estilos ou componente React com estilos incorporados */
+
+
+.video_controls {
+    position: relative;
+  }
+  
+  /* Estilos para o controle de volume vertical */
+  .video_controls input[type="range"] {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 80px;
+    appearance: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  
+  .video_controls input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background-color: #007bff; /* Cor do polegar (thumb) do controle de volume */
+    border-radius: 50%;
+  }
+  
+  .video_controls input[type="range"]::-webkit-slider-runnable-track {
+    width: 2px; /* Largura da barra de volume */
+    background-color: #ccc; /* Cor da barra de volume */
+  }
+  

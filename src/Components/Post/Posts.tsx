@@ -1,17 +1,23 @@
 import "./Posts.scss"
 import React, {
   ReactElement, useEffect,
-  useState, useRef
+  useState, useRef, Suspense
 } from 'react'
 import { apiSlice } from '../../redux/api/apiSlice'
 import { RootState, useAppSelector, useAppDispatch } from "../../redux/store"
 import { posts_home_array } from "../../redux/posts_home/posts_home"
 import { ObjectInArrayOfObject, ObjectIsEmpty } from "../../utils/functions"
 import { Post } from "../../types/types"
-import {PostCard} from "./PostCard"
+import { PostCard } from "./PostCard"
 
 import { fake_posts } from "./fake_posts"
 import IsLoading from "../IsLoadin/IsLoading"
+
+import {SuspensePost} from "./SuspensePost"
+
+
+
+
 
 export default function Posts() {
   let dispatch = useAppDispatch()
@@ -29,9 +35,9 @@ export default function Posts() {
   console.log("posts", posts_home)
   //let notReload:boolean = true;
   useEffect(() => {
-   /* if (!posts_home.length) {
-      dispatch(posts_home_array(data));
-    }*/
+    /* if (!posts_home.length) {
+       dispatch(posts_home_array(data));
+     }*/
 
   }, [])
 
@@ -48,8 +54,10 @@ export default function Posts() {
                 
               ),console.log("posts_home")):*/
 
-              fake_posts.length ? fake_posts.map((post:Post) => (
-                <PostCard post={post} />
+              fake_posts.length ? fake_posts.map((post: Post) => (
+                <Suspense key={post.post_id} fallback={<SuspensePost/ >}>
+                  <PostCard post={post} />
+                </Suspense>
               )) : <div>ERRO</div>
               //FALANHADO LOOP
               /*posts_home?.map((post: Post) => (
