@@ -16,10 +16,14 @@ interface VideoProps {
   src: string[];
 }
 
+function delayForDemo(arg0: Promise<any>): Promise<{ default: React.ComponentType<any> }> {
+  throw new Error("Function not implemented.")
+}
+
+
 export const Video: React.FC<VideoProps> = ({ src }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-
 
 
   return (
