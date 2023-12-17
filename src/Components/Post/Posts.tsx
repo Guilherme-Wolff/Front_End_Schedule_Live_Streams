@@ -1,5 +1,6 @@
 import "./Posts.scss"
-import React, { lazy,
+import React, {
+  lazy,
   ReactElement, useEffect,
   useState, useRef, Suspense
 } from 'react'
@@ -10,13 +11,14 @@ import { ObjectInArrayOfObject, ObjectIsEmpty } from "../../utils/functions"
 import { Post } from "../../types/types"
 import { PostCard } from "./PostCard"
 
+
 import { fake_posts } from "./fake_posts"
 import IsLoading from "../IsLoadin/IsLoading"
 
-import {SuspensePost} from "./SuspensePost"
+import { SuspensePost } from "./SuspensePost"
 const PostCardDelay = lazy(() => delayForDemo(import('./PostCard')));
 
-function delayForDemo(promise:any) {
+function delayForDemo(promise: any) {
   return new Promise(resolve => {
     setTimeout(resolve, 2000);
   }).then(() => promise);
@@ -62,10 +64,11 @@ export default function Posts() {
                 
               ),console.log("posts_home")):*/
 
+
               fake_posts.length ? fake_posts.map((post: Post) => (
-                <Suspense fallback={<SuspensePost/ >}>
-                  <PostCardDelay post={post} />
-                </Suspense>
+
+                <PostCard post={post} />
+
               )) : <div>ERRO</div>
               //FALANHADO LOOP
               /*posts_home?.map((post: Post) => (

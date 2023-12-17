@@ -14,8 +14,9 @@ import { useAuth } from "../../AuthContext/AuthContext"
 import Story from "../../Components/StoriesBar/Story"
 import HeaderMobile from "../../Components/Header/Header"
 import BottomTab from "../../Components/BottomTab/BottomTab"
+import {Modal} from "../../Components/Modal/VideoModal"
 
-import {Teste} from "../../server/Teste.server"
+import {TestServerComponent} from "../../server/Teste.server"
 
 import axios from 'axios'
 //API
@@ -58,6 +59,7 @@ function Home() {
                 <Story />
               </div>
                */}
+              {/*<Story / */}
                 <Posts />
               </div>
             }

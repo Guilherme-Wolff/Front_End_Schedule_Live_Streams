@@ -1,5 +1,5 @@
 
-'use server';
+/*'use server';
 import {useEffect, useState} from 'react'
 import axios from "axios";
 
@@ -29,4 +29,25 @@ export const Teste = () => {
             {data}
         </div>
     )
-}
+}*/
+import React from "react";
+import ReactDOMServer from "react-dom/server";
+
+export const TestServerComponent = () => {
+  // Simule uma busca de dados no servidor
+  const data = ["Item 1", "Item 2", "Item 3"];
+
+  // Utilize ReactDOMServer para renderizar o HTML 
+  const html = ReactDOMServer.renderToString(
+    <div>
+      <h1>Server Component Data</h1>
+      <ul>
+        {data.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+    </div>
+  );
+
+  return html;
+};
