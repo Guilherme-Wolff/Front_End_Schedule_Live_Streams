@@ -1,5 +1,8 @@
 import { Post } from "../../types/types"
 
+import thumb from "./thumbnail.png"
+
+
 let video_url = 'https://milkshake.bunkr.ru/06-11-2023-eduardosallesmedeiros-1-Ja5VCVOA.mp4';
 
 export const fake_posts:Post[] = [
@@ -9,7 +12,7 @@ export const fake_posts:Post[] = [
         "userminilogo": "../avatar.jpg",
         "createdby": "user1",
         "url": [
-          "https://kebab.bunkr.ru/12-22-2023-viajandonosofa-1-5T7HltjU.mp4"
+          thumb
         ],
         "likes": 20,
         "comments": [
@@ -38,9 +41,9 @@ export const fake_posts:Post[] = [
         "post_id": 2,
         "date": "09 Aug 2022",
         "userminilogo": "../avatar.jpg",
-        "createdby": "user1",
+        "createdby": "user2",
         "url": [
-          "https://kebab.bunkr.ru/12-22-2023-viajandonosofa-1-5T7HltjU.mp4"
+          thumb
         ],
         "likes": 20,
         "comments": [
@@ -69,9 +72,40 @@ export const fake_posts:Post[] = [
         "post_id": 3,
         "date": "09 Aug 2022",
         "userminilogo": "../avatar.jpg",
-        "createdby": "user1",
+        "createdby": "user3",
         "url": [
-          "https://kebab.bunkr.ru/12-22-2023-viajandonosofa-1-5T7HltjU.mp4"
+          thumb
+        ],
+        "likes": 20,
+        "comments": [
+          {
+            "comment_id": 1,
+            "userminilogo": "avatar",
+            "username": "user1",
+            "comment": "comment1"
+          },
+          {
+            "comment_id": 2,
+            "userminilogo": "avatar",
+            "username": "user2",
+            "comment": "comment2"
+          },
+          {
+            "comment_id": 3,
+            "userminilogo": "avatar",
+            "username": "user3",
+            "comment": "comment3"
+          }
+        ],
+        "bio": "bio1"
+      },
+      {
+        "post_id": 4,
+        "date": "09 Aug 2022",
+        "userminilogo": "../avatar.jpg",
+        "createdby": "user4",
+        "url": [
+          thumb
         ],
         "likes": 20,
         "comments": [

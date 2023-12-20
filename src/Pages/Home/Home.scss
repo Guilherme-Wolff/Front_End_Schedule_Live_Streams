@@ -3,17 +3,21 @@
 
 
 @media (min-width: 900px){
-    .sidebar-container {
-        //display: block;
-        max-width: 35px;
-        height: 100%;
+    .main_home {
+        width: 100%;
+        height: 100vh;
+        //position: absolute;
     }
+    
     .stories_and_posts {
-        width: 90%;
-        height: 100%;
-        padding-top: 1%;
-        //justify-content: center;
+        width: 100%;
+        height: 100vh;
+        //padding-top: 1%;
+        justify-content: center;
         align-items: center;
+        display: flex;
+        flex-direction: column;
+        place-items: center;
     }
     .main-and-recommendation {
         display: flex;
@@ -25,25 +29,16 @@
         //position: relative;
         width: 100%;
         height: 100vh;
-        //justify-content: center;
-        //align-items: center;
-        //display: flex;
-        //flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        //place-items: center;
         //grid-gap:10%;
     }
 
     
-    .main-posts {
-        
-        //outline: 1px solid rgb(9, 255, 0);
-        width: 100%;
-        //padding-left: 20px;
-        //
-        //justify-content: center;
-        //align-items: center;
-       // display: flex;
-        //flex-direction: column;
-    }
+
     
     .main-stories {
         height: 100%;
@@ -209,14 +204,32 @@
         //align-content:end;
     
     }
+
+    .section-ads {
+        padding-top: 0.5%;
+        display: flex;
+        height: 100hv;
+        //grid-gap: 60%;
+        //padding: 0.5%;
+        //display: none;
+        margin-right: 10%;
+        //width: 10%;
+        display: block;
+        flex-direction: row;
+        border-color: aqua;
+        //background-color: #fff;
+        
+        outline: blue;
+        //align-items: center;
+        //align-content:end;
+    
+    }
     
 }
 
 
 @media (min-width: 320px) and (max-width:900px) {
-    .sidebar-container {
-        display: none;
-    }
+
     .section-main {
         background:$colorBaseGradient;
         
@@ -239,26 +252,8 @@
         align-items: center;
     }
 
-    .main-posts {
-        margin: 0 0 0 0;
-        //outline: 1px solid rgb(9, 255, 0);
-        width: 100%;
-        //width: 98.9%;
-        //padding-left: 20px;
-        //
-        justify-content: center;
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-    }
-    .main-post {
-        height: 100%;
-        width:  100%;
-        justify-content: center;
-        align-items: center;
-        display: block;
-    }
-    
+
+
     .main-stories {
         margin: 0;
         width: 100%;
@@ -287,7 +282,7 @@
         //margin: 0;
         display: flex;
         width: 100%;
-        display: block;
+        //display: block;
         background: $colorBaseGradient;
         color: #fff;
         height: 100vh;

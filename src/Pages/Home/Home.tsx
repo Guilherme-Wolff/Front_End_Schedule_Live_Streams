@@ -44,7 +44,8 @@ function Home() {
   const { name } = useAuth()
   return (
     <>
-      <div className='home__wrap wrapper'>
+      {/*<div className='home__wrap wrapper'> */}
+      <div className='main_home home__wrap wrapper'>
         <div className="sidebar-container">
           <Sidebar />
         </div>
@@ -59,7 +60,7 @@ function Home() {
                 <Story />
               </div>
                */}
-              {/*<Story / */}
+              {/*<Story /> */}
                 <Posts />
               </div>
             }
