@@ -107,7 +107,9 @@ export const PostCard = ({ post }: Post | any) => {
 
   return (
 
-    <div key={post_id} className={/*lastPost ? 'last_post' : */'post'}>
+    <div key={post_id} className={/*lastPost ? 'last_post' : */'post'}
+    onClick={()=>{console.log("click post")}}  
+    >
       <div className="user which__user__this__post">
         <div className='which__user__this__post__info'>
           <Link to={"/" + createdby}>
@@ -131,14 +133,15 @@ export const PostCard = ({ post }: Post | any) => {
         </div>
       </div>
       <div className="posts__image" style={{
-        //backgroundImage: `url(${posts.url})`,
-        //width: "90%",
-        //height: "590px",
-        //backgroundPosition: "center",
-        //backgroundSize: "cover",
+        backgroundImage: `url(${url[0]})`,
+        width: "100%",
+        height: "100%",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
       }}>
+        
         {/* <video className="posts__image" src={url[0]}   /> */}
-        < CardVideo src={url} />
+        {/*< CardVideo src={url} /> */}
 
       </div>
       <BottomOptions post={post} />

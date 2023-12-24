@@ -12,7 +12,7 @@ import { store, persistor } from './redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { ApiProvider } from "@reduxjs/toolkit/query/react"
 import { apiSlice } from "./redux/api/apiSlice"
-import {NotFoundPage} from "./Components/NotFound/NotFound"
+import { NotFoundPage } from "./Components/NotFound/NotFound"
 
 //COMPONETS//
 import Home from './Pages/Home/Home'
@@ -22,8 +22,12 @@ import Profile from './Components/Profile/Profile'
 //import Explore from './Components/Explore/Explore'
 //import Inbox from './Components/Chat/Inbox'
 //import Chat from './Components/Chat/Chat'
-import {Login} from "./Pages/Registration/Login";
+import { Login } from "./Pages/Registration/Login";
 import { Register } from "./Pages/Registration/Register";
+
+import { Streamer } from "./Pages/Streamer/Streamer";
+
+
 //import Slick from "./Components/Slick";
 
 import { ProtectedRoute } from "./AuthContext/ProtectedRoute"
@@ -47,11 +51,15 @@ export const router = createBrowserRouter([
   },
   {
     path: "/signup",
-    element: <ProtectedRoute authNecessary={false} children={<Register />}  />,
+    element: <ProtectedRoute authNecessary={false} children={<Register />} />,
   },
   {
     path: "/profile",
     element: <ProtectedRoute authNecessary={true} children={<Profile />} />,
+  },
+  {
+    path: "/streamer",
+    element: <ProtectedRoute authNecessary={true} children={<Streamer />} />,
   },
   {
     path: "/saved",

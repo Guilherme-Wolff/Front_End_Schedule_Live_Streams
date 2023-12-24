@@ -1,5 +1,6 @@
 //MOBILE FIRST
 @import '../../colors/colors';
+@import './variables';
 
 @media (min-width: 320px) and (max-width:900px) {
 
@@ -30,7 +31,7 @@
         //
         justify-content: center;
         align-items: center;
-        display: flex;
+        display: block;
         flex-direction: column;
     }
 
@@ -138,10 +139,10 @@
 
 
     .post {
-        margin-top: 5%;
-        width: 100%;
-        height: 100%;
-        padding-bottom: 2%;
+        //margin-top: 5%;
+        width: $WITDTH_POST_MOBILE;
+        height: $HEIGHT_POST_MOBILE;
+        //padding-bottom: 2%;
         margin: auto;
         //max-height: 100%;
         //margin: calc(4px * 16) 0;
@@ -151,8 +152,8 @@
         align-items: center;
         //background: rgb(0, 0, 0);
         background: $colorBaseGradientPostBackGround;
-        //border: 1px solid rgb(54, 54, 54);
-        border-radius: 8px;
+        border: 1px solid rgb(54, 54, 54);
+        border-radius: 4px;
 
         .point-separate-time-post {
             margin-left: 8px;
@@ -198,13 +199,26 @@
 
 
         .posts__image {
-            
-            width: 100%;
-            height: auto;
+
+            object-fit: cover;
+            margin: auto;
+            justify-content: center;
+            align-items: center;
+            //margin:auto;
+            //position: relative;
+            //padding-bottom: 56.25%; // 16:9 ratio 
+
+            //height: 100%;
+            //overflow: hidden;
+            //
+            max-width: 100%;
+            height: 70vh;
 
             img {
-                width: 100%;
                 object-fit: cover;
+                margin: auto;
+                max-width: 100%;
+                height: 100%;
             }
         }
 
@@ -432,12 +446,17 @@
 
 
     .post {
+        cursor: pointer;
+        transition: border 0.3s ease-in-out;
+        //border: 1px solid rgba($color: #f00d0d, $alpha: 1.0);
+
         justify-content: center;
         align-items: center;
         //position: relative;
-        max-width: 35%;
+        max-width: $WITDTH_POST;
         //margin-top: 5px;
-        height: 90%;
+        height: $HEIGHT_POST;
+        
         //width: 100%;
         //height:auto;
         //max-height: 100%;
@@ -462,13 +481,14 @@
             font-size: 14px;
 
         }
-    //MODIFICAR
+
+        //MODIFICAR
         .which__user__this__post {
             justify-content: center;
             position: relative;
             font-size: 16px;
             width: 100%;
-            margin:auto;
+            margin: auto;
             margin: 8px 4px 8px 12px;
             display: flex;
             align-items: center;
@@ -480,16 +500,17 @@
             justify-content: space-between;
 
             .which__user__this__post__info {
-                
+
                 display: flex;
                 align-items: center;
-                gap:10px;
+                gap: 10px;
 
                 p {
                     margin-left: 10px;
                 }
 
             }
+
             .icon__with__padding {
                 position: relative;
                 margin-right: 1%;
@@ -503,16 +524,28 @@
         }
 
         .posts__image {
+            object-fit: cover;
             margin: auto;
-            width: 90%;
-            height: auto;
+            justify-content: center;
+            align-items: center;
+            //margin:auto;
+            //position: relative;
+            //padding-bottom: 56.25%; // 16:9 ratio 
 
+            //height: 100%;
+            //overflow: hidden;
+            //
+            max-width: 100%;
+            height: 100%;
 
             img {
-                width: 100%;
-
+                object-fit: cover;
+                margin: auto;
+                max-width: 100%;
+                height: 100%;
             }
         }
+
         .thumb {
             object-fit: cover;
         }
@@ -545,6 +578,7 @@
             //
             max-width: 100%;
             height: 100%;
+
             img {
                 object-fit: cover;
                 margin: auto;

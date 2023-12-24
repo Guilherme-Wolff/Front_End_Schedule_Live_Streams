@@ -1,9 +1,16 @@
 import './MoreSettings.scss'
 import { Link } from 'react-router-dom'
+import { userReducer, setJwt, setUser } from "../../redux/user/reducer"
+import { RootState, useAppSelector, useAppDispatch, } from "../../redux/store"
 
 
 import { StateModal } from "./stateModal"
 export function MoreSettings() {
+
+  let user: any = useAppSelector((state: any) => state.persistedReducer).user.user
+
+  const AUTH = user.name ? true : false
+
   const { modalPosition } = StateModal()
   console.log("posiçao", modalPosition)
 
@@ -73,11 +80,19 @@ export function MoreSettings() {
           <p>Switching between accounts</p>
         </li>
          */}
-        <Link to="/login" onClick={()=>{console.log("FUNCTION LOG OFF")}}>
-          <li>
-            <p>Log Out</p>
-          </li>
-        </Link>
+        {
+          AUTH ?
+            <Link to="/login" onClick={() => { console.log("FUNCTION LOG OUT") }}>
+              <li>
+                <p>Log Out</p>
+              </li>
+            </Link> :
+            <Link to="/login" onClick={() => { console.log("FUNCTION LOGIN") }}>
+              <li>
+                <p>Login</p>
+              </li>
+            </Link>
+        }
 
       </ul>
     </>
