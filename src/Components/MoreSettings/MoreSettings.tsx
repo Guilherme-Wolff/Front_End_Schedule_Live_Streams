@@ -1,11 +1,24 @@
 import './MoreSettings.scss'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { userReducer, setJwt, setUser } from "../../redux/user/reducer"
 import { RootState, useAppSelector, useAppDispatch, } from "../../redux/store"
 
 
 import { StateModal } from "./stateModal"
+
+import {
+  logout
+} from "../../redux/user/reducer"
+import { useState } from 'react'
+
+
+
 export function MoreSettings() {
+
+  let dispatch = useAppDispatch()
+
+  /*const [redirectHome,
+    SetRedirectHome] = useState(false)*/
 
   let user: any = useAppSelector((state: any) => state.persistedReducer).user.user
 
@@ -81,8 +94,9 @@ export function MoreSettings() {
         </li>
          */}
         {
+           
           AUTH ?
-            <Link to="/login" onClick={() => { console.log("FUNCTION LOG OUT") }}>
+            <Link to="/login" onClick={() => { dispatch(logout())}}>   
               <li>
                 <p>Log Out</p>
               </li>

@@ -12,6 +12,15 @@ const initialState: IAuth = {
         tokenJWT: ''
     }
 }
+
+const LogOut_State: IAuth = {
+    user: {
+        name: '',
+        tokenJWT: ''
+    }
+}
+
+
 export const userReducerSlice = createSlice({
     name: 'users',
     initialState: initialState,
@@ -39,7 +48,7 @@ export const userReducerSlice = createSlice({
             state.user = action.payload;
         },*/
         logout: (state: IAuth = initialState) => {
-            state.user = null;
+            return initialState;
         }
     }
 })
