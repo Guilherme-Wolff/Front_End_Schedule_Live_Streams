@@ -759,8 +759,11 @@
         }
   
         .sidebar__instagram__logo__small {
+          
+          justify-content: center;
+          align-items: center;
           display: none;
-          margin: 10px auto;
+          margin: 10px 10px;
           object-fit: cover;
         }
   
