@@ -30,6 +30,7 @@ export function MoreSettings() {
   return (
     <>
       <ul>
+        {/*
         <li>
           <p>Settings</p>
           <svg aria-label="Settings" color="#fafafa" fill="#fafafa" height="24"
@@ -43,6 +44,8 @@ export function MoreSettings() {
               strokeWidth="2"></path>
           </svg>
         </li>
+         */}
+       {/*
         <li>
           <p>Saved</p>
           <svg aria-label="Saved" color="#fafafa" fill="#fafafa" height="24"
@@ -52,6 +55,8 @@ export function MoreSettings() {
               strokeWidth="2"></polygon>
           </svg>
         </li>
+        */}
+        {/*
         <li>
           <p>Switch theme</p>
           <svg aria-label="Theme icon" color="#fafafa" fill="#fafafa" height="24"
@@ -62,6 +67,7 @@ export function MoreSettings() {
               fill="currentColor"></path>
           </svg>
         </li>
+         */}
         {/*
         <li>
           <p>Your actions</p>

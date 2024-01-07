@@ -8,6 +8,12 @@ import { userReducer, setJwt, setUser } from "../../redux/user/reducer"
 import { RootState, useAppSelector, useAppDispatch } from "../../redux/store"
 import { Logo } from "../../Components/Logo/Logo"
 import { LogoSave } from "../../Components/Logo/LogoSave"
+
+import { FailRegisterComponent } from "./FailRegisterComponent"
+
+import { INCORRET_LOGIN } from "./auth_ccodes"
+
+import { ResponseAuthLogin } from "./interfaces"
 //import rootReducer from '../../redux/root-reducer';
 
 //let size_input = useAppSelector((state: RootState) => state).input_message_size
@@ -22,7 +28,8 @@ export const Login = () => {
 
   /*let user = useAppSelector((state: RootState) => state.persistedReducer).user.user
   console.log("USER AUTHCONTEXT",user)*/
-
+  const [failRegister, setFailRegister] = useState(false)
+  const [codeRegister, setCodeRegister] = useState<number | undefined>(0)
 
   const [passwordValid,
     SetPasswordValid] = useState(false)
@@ -65,7 +72,14 @@ export const Login = () => {
     }
   }
 
-  const LoginUser = (e: FormEvent) => {
+  const LoginUser = async (): Promise<ResponseAuthLogin> => {
+    let response_auth: ResponseAuthLogin = {
+      code: 0,
+      message: '',
+      register: false,
+      data: null,
+    }
+
     let User = {
       user: {
         name: '',
@@ -73,7 +87,7 @@ export const Login = () => {
       }
 
     }
-    e.preventDefault()
+    // e.preventDefault()
     const postData = {
       payload: {
         email: emailValidValue,
@@ -81,7 +95,20 @@ export const Login = () => {
       }
     };
 
-    axios.post(`${API}/auth/login/`,
+    const { data } = await axios.post(`${API}/auth/login/`, postData.payload)
+    if (data) {
+      console.log("REGISTRO_TEST data login", data)
+      if (data.register === true) {
+        response_auth.register = true
+        response_auth.data = data;
+      }
+      else {
+        response_auth.register = false;
+        response_auth.code = INCORRET_LOGIN;
+        //response_auth.data = null
+      }
+    }
+    /*axios.post(`${API}/auth/login/`,
       postData.payload)
       .then(res => {
         console.log("LOGIN RESPONSE : ", res.data)
@@ -93,9 +120,43 @@ export const Login = () => {
       .catch(err => {
         console.log(postData)
         console.log(err)
-      })
+      })*/
 
+    return await response_auth;
   }
+
+  const LoginUserSubmit = async (e: FormEvent) => {
+    e.preventDefault()
+
+    let User = {
+      user: {
+        name: '',
+        tokenJWT: 'token'
+      }
+
+    }
+
+
+    const { register, code, data } = await LoginUser()
+
+    console.log("REGISTRO_TEST LoginUser", code, register, data)
+
+    if (register) {
+      console.log("REGISTRO_TEST login concluido")
+      User.user.name = data.name
+      User.user.tokenJWT = data.tokenJwt
+      dispatch(setUser(User))
+      SetRedirectHome(true)
+    }
+    else {
+      //console.log("REGISTRO_TEST login error : ","GEGISTER FAIL:",failRegister," CODE:",code)
+      setFailRegister(true)
+      setCodeRegister(code)
+      console.log("REGISTRO_TEST login error : ","GEGISTER FAIL:",failRegister," CODE:",code)
+      
+    }
+  }
+
 
   useEffect(() => {
     if (emailValid && passwordValid) {
@@ -112,7 +173,7 @@ export const Login = () => {
         {redirectHome && <Navigate replace to="/" />}
         <div className="registration__system__login">
           <LogoSave />
-          <form onSubmit={(e) => LoginUser(e)}>
+          <form onSubmit={(e) => LoginUserSubmit(e)}>
             <input
               onChange={
                 (e) => {
@@ -123,6 +184,9 @@ export const Login = () => {
               placeholder="e-mail"
             />
             <input type="password" onChange={(e) => IsValidPassword(e)} placeholder="password" />
+
+            {failRegister && FailRegisterComponent(codeRegister)}
+
             <button style={formValid ? { opacity: "1", cursor: "pointer" } : { opacity: ".7" }}
               disabled={!formValid}>Login
             </button>

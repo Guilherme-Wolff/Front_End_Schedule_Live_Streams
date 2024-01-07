@@ -1,6 +1,7 @@
 import './register.scss'
 import { Link, redirect, Navigate } from 'react-router-dom'
-import React, { useEffect, useState } from "react";
+
+import React, { FormEvent, useEffect, useState } from "react";
 import axios from "axios";
 import { API } from "../../api/api"
 
@@ -10,6 +11,12 @@ import { useSelector, useDispatch } from "react-redux"
 import { Logo } from "../../Components/Logo/Logo"
 import { LogoSave } from "../../Components/Logo/LogoSave"
 //import rootReducer from '../../redux/root-reducer';
+
+import { FailRegisterComponent } from "./FailRegisterComponent"
+
+import { CODE_EMAIL_EXIST, CODE_NAME_EXIST } from "./auth_ccodes"
+import { ResponseAuth } from "./interfaces"
+
 
 
 interface data_user {
@@ -37,6 +44,11 @@ export const Register = () => {
 
     const [formValid, SetFormValid] = useState(false)
 
+    const [failRegister, setFailRegister] = useState(false)
+    const [codeRegister, setCodeRegister] = useState<number | undefined>(0)
+
+
+
     function IsValidEmail(e: React.FormEvent<HTMLInputElement>) {
 
         const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
@@ -61,28 +73,27 @@ export const Register = () => {
     }
 
     function IsValidNickName(e: React.FormEvent<HTMLInputElement>) {
-        if (e.currentTarget.value.length > 1) {
-            SetNameValid(true)
-            SetNameValidValue(e.currentTarget.value)
+        // Lista de caracteres permitidos (ajuste conforme necessário)
+        const allowedCharacters = /^[a-zA-Z0-9_]+$/;
 
-        }
-        else {
-            SetNameValid(false)
-            SetNameValidValue(e.currentTarget.value)
+        const inputValue = e.currentTarget.value;
+
+        if (inputValue.length > 1 && allowedCharacters.test(inputValue)) {
+            SetNameValid(true);
+            SetNameValidValue(inputValue);
+        } else {
+            SetNameValid(false);
+            SetNameValidValue(inputValue);
         }
     }
-    /*function IsValidEmail(evento: React.FormEvent<HTMLInputElement>): boolean {
-        const emailValue = evento.currentTarget.value;
-        // Expressão regular para validar um endereço de e-mail
-        const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
-        return emailRegex.test(emailValue);
-    }*/
-
-
-
-    const RegsiterUser = () => {
-        const postData = {
+    const RegiterUser = async (): Promise<ResponseAuth> => {
+        let response_auth: ResponseAuth = {
+            code: 0,
+            message: '',
+            register: false
+        }
+        const postDataRegister = {
             type: UserActionTypes.REGISTER,
             payload: {
                 username: nameValidValue,
@@ -91,23 +102,67 @@ export const Register = () => {
             }
         };
 
-        axios.post(`${API}/auth/register/`, postData.payload)
+
+
+
+        const { data } = await axios.post(`${API}/auth/register/`, postDataRegister.payload)
+        if (data) {
+            console.log("REGISTRO_TEST REGISTRO data",data)
+            if (data.register === true) {
+                console.log("REGISTRO_TEST REGISTRO TRUE OK")
+                //SetredirectLogin(true)
+                //SetredirectLogin(false)
+                response_auth.register = true;
+            } else {
+                response_auth.code = data.code;
+            }
+        }
+
+        /*const { data } = await axios.post(`${API}/auth/register/`, postDataRegister.payload)
             .then(res => {
-                console.log("RESPOST REGISTRO : ",res.data)
-                SetredirectLogin(true)
+                const resp = res.data;
+                setResponseRegister(resp)
+                console.log("REGISTRO_TEST response", resp)
+                if (resp.register === true) {
+                    console.log("REGISTRO_TEST REGISTRO TRUE OK")
+                    //SetredirectLogin(true)
+                    //SetredirectLogin(false)
+                    response_auth.register = true;
+                }
+
+                if (resp.code === CODE_EMAIL_EXIST ||
+                    resp.code === CODE_NAME_EXIST) {
+                    setFailRegister(true)
+                    setCodeRegister(resp.code)
+                    console.log("REGISTRO_TEST CODE :", resp.code)
+                    //SetredirectLogin(false)
+                }
+                else{
+                    navigate('/login');
+                }
+
             })
             .catch(err => {
-                //console.log("DATA_POST",postData)
+                console.log("REGISTRO_TEST erro")
                 console.log(err)
-                redirect("/login")
-            })
-        //dispatch(postData)
+            })*/
+        console.log(data)
+        return response_auth;
     }
 
-    async function Registeruser(e: React.FormEvent) {
+    async function RegisteruserSubmit(e: FormEvent) {
         e.preventDefault()
-        RegsiterUser()
-        redirect("/login")
+        const { code, register } = await RegiterUser()
+        //console.log("REGISTRO_TEST RegisteruserSubmit", register)
+        if (register) {
+            SetredirectLogin(true)
+        }
+        else {
+        //console.log("REGISTRO_TEST my code",code)
+            setFailRegister(true)
+            setCodeRegister(code)
+        }
+
     }
 
     useEffect(() => {
@@ -116,19 +171,19 @@ export const Register = () => {
         } else {
             SetFormValid(false)
         }
-    }, [nameValid,passwordValid, emailValid,redirectLogin])
+    }, [nameValid, passwordValid, emailValid, redirectLogin])
 
 
     return (
         <div className='main-register'>
             <div className="registration__system">
-                {redirectLogin && <Navigate replace to="/login" />}
+                {redirectLogin && <Navigate replace={true} to="/login" />}
                 <div className="registration__system__login">
                     <LogoSave />
                     <p className="signsubtitle">
                         register to save your favorite lives.
                     </p>
-                    <form onSubmit={(e) => Registeruser(e)}>
+                    <form onSubmit={(e) => RegisteruserSubmit(e)}>
                         <input
                             type="text"
                             className="w258"
@@ -151,6 +206,7 @@ export const Register = () => {
                             <a href="/">Terms</a>,
                             <a href="/" color='000'>Privacy Policy</a>
                         </p>
+                        {failRegister && FailRegisterComponent(codeRegister)}
                         <button
                             className="w258"
                             style={formValid ? { opacity: "1", cursor: "pointer" } : { opacity: ".7" }}

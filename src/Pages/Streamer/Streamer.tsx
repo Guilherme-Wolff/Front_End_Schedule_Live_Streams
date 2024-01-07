@@ -1,5 +1,5 @@
-import './Streamer.scss'
 import React, {ReactNode, useEffect, useState } from 'react'
+import './Streamer.scss'
 import Sidebar from '../../Components/Sidebar/Sidebar'
 //import { Link } from 'react-router-dom'
 //import axios from "axios";
@@ -15,6 +15,7 @@ import Story from "../../Components/StoriesBar/Story"
 import HeaderMobile from "../../Components/Header/Header"
 import BottomTab from "../../Components/BottomTab/BottomTab"
 import {Modal} from "../../Components/Modal/VideoModal"
+import { useParams } from 'react-router-dom';
 
 import {TestServerComponent} from "../../server/Teste.server"
 
@@ -31,7 +32,10 @@ let vds = [
   },
 ]
 
-export const  Streamer = () => {
+export const Streamer = () => {
+  const { streamer_name } = useParams();
+
+  console.log("REGISTRO_TEST streamer",streamer_name)
   //let user = useAppSelector((state: RootState) => state.persistedReducer).user.user
   //console.log("TESTE AUTH", user.name)
   //let useGetHelloQuery = apiSlice.useGetHelloQuery
@@ -45,6 +49,7 @@ export const  Streamer = () => {
   return (
     <>
       {/*<div className='streamer__wrap wrapper'> */}
+      {/*<div className='main_streamer streamer__wrap wrapper'> */}
       <div className='main_streamer streamer__wrap wrapper'>
         <div className="sidebar-container">
           <Sidebar />
