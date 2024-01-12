@@ -1,7 +1,7 @@
 import './video_controls.scss'
 import "./PostCard.scss"
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   format, render, cancel, register
@@ -13,7 +13,13 @@ import { RootState, useAppSelector, useAppDispatch } from "../../redux/store"
 
 import { BottomOptions } from "./BottomOptions/BottomOptions"
 
+import {
+  set_content_modal,
+  close_modal
+} from "../../redux/modal/reducer"
+
 import React, { useRef, Suspense } from 'react';
+import { ModalState } from "./interfaces"
 
 interface VideoProps {
   src: string[];
@@ -56,6 +62,10 @@ export const CardVideo: React.FC<VideoProps> = ({ src }) => {
 
 
 export const PostCard = ({ post }: Post | any) => {
+
+  let modal_post: ModalState = useAppSelector((state: RootState) => state.post_modal);
+
+  console.log("REGISTRO_TEST modal_post", modal_post)
 
   let {
 
@@ -103,12 +113,21 @@ export const PostCard = ({ post }: Post | any) => {
 
 
   }
+  useEffect(() => {
 
+  }, [modal_post])
+  {/*<Link to={`/sreamer/${createdby}/${post_id}`} */ }
 
   return (
 
-    <div key={post_id} className={/*lastPost ? 'last_post' : */'post'}
-    onClick={()=>{console.log("click post")}}  
+    <Link to='' key={post_id} className={/*lastPost ? 'last_post' : */'post'}
+      onClick={
+
+        !modal_post.modal_state ? () => dispatch(set_content_modal({ modal_state: true, post: post }))
+          :
+          () => null /*dispatch(close_modal()) */
+
+      }
     >
       <div className="user which__user__this__post">
         <div className='which__user__this__post__info'>
@@ -139,13 +158,13 @@ export const PostCard = ({ post }: Post | any) => {
         backgroundPosition: "center",
         backgroundSize: "cover",
       }}>
-        
+
         {/* <video className="posts__image" src={url[0]}   /> */}
         {/*< CardVideo src={url} /> */}
 
       </div>
       <BottomOptions post={post} />
 
-    </div>
+    </Link>
   )
 }

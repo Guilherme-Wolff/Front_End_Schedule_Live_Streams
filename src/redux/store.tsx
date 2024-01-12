@@ -3,6 +3,7 @@
 import {configureStore} from "@reduxjs/toolkit"
 import storage from 'redux-persist/lib/storage'
 import {inputMessageSlice} from "./message_input/inputMessageSlice"
+import {postModalReducer} from "./modal/reducer"
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { 
     persistStore,
@@ -30,7 +31,8 @@ export const store = configureStore({
     reducer:{
       persistedReducer,
       [apiSlice.reducerPath]:apiSlice.reducer,
-      input_message_size:inputMessageSlice
+      input_message_size:inputMessageSlice,
+      post_modal:postModalReducer
     },
     
     middleware: (getDefaultMiddleware) =>

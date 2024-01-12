@@ -17,6 +17,8 @@ import BottomTab from "../../Components/BottomTab/BottomTab"
 import {Modal} from "../../Components/Modal/VideoModal"
 import { useParams } from 'react-router-dom';
 
+import {PostModal} from "../../Components/Post/PostModal/PostModal"
+
 import {TestServerComponent} from "../../server/Teste.server"
 
 import axios from 'axios'
@@ -51,6 +53,7 @@ export const Streamer = () => {
       {/*<div className='streamer__wrap wrapper'> */}
       {/*<div className='main_streamer streamer__wrap wrapper'> */}
       <div className='main_streamer streamer__wrap wrapper'>
+        <PostModal />
         <div className="sidebar-container">
           <Sidebar />
         </div>

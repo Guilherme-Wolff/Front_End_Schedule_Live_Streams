@@ -1,0 +1,31 @@
+.modal {
+  display:none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 200px;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  padding: 20px;
+}
+
+.modal_visible {
+  display: block;
+}
+
+.modal_hidde {
+  display: none;
+}
+
+.closeButton{
+  display:none;
+}
+.button_close_visible {
+  display:block;
+}
+
+.button_close_hidde {
+  display:none;
+}

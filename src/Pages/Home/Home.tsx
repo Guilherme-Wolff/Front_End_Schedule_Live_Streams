@@ -1,4 +1,4 @@
-import React, {ReactNode, useEffect, useState } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import './Home.scss'
 import Sidebar from '../../Components/Sidebar/Sidebar'
 //import { Link } from 'react-router-dom'
@@ -14,44 +14,64 @@ import { useAuth } from "../../AuthContext/AuthContext"
 import Story from "../../Components/StoriesBar/Story"
 import HeaderMobile from "../../Components/Header/Header"
 import BottomTab from "../../Components/BottomTab/BottomTab"
-import {Modal} from "../../Components/Modal/VideoModal"
+import { Modal } from "../../Components/Modal/VideoModal"
 
-import {TestServerComponent} from "../../server/Teste.server"
+import { TestServerComponent } from "../../server/Teste.server"
+
+
+import { PostModal, ContentModal } from "../../Components/Post/PostModal/PostModal"
 
 import axios from 'axios'
 //API
+import {
+  set_content_modal,
+  close_modal
+} from "../../redux/modal/reducer"
+
 import { apiSlice } from "../../redux/api/apiSlice"
 
 import { RootState, useAppSelector, useAppDispatch, } from "../../redux/store"
+import { ModalState } from '../../Components/Post/interfaces';
 
 let vds = [
   {
-    name:'video teste',
-    video_url:'https://kebab.bunkr.ru/12-22-2023-viajandonosofa-1-5T7HltjU.mp4'
+    name: 'video teste',
+    video_url: 'https://kebab.bunkr.ru/12-22-2023-viajandonosofa-1-5T7HltjU.mp4'
   },
 ]
 
 function Home() {
+  let dispatch = useAppDispatch()
+  let modal_post: ModalState = useAppSelector((state: RootState) => state.post_modal);
   //let user = useAppSelector((state: RootState) => state.persistedReducer).user.user
   //console.log("TESTE AUTH", user.name)
   //let useGetHelloQuery = apiSlice.useGetHelloQuery
   const useGetHelloQuery = apiSlice.endpoints.getHello.useQuery
 
-  const {data} = useGetHelloQuery('')
+  const { data } = useGetHelloQuery('')
 
   console.log("hello_res", data)
 
+
   const { name } = useAuth()
+  
+  useEffect(()=>{
+
+  },[modal_post])
+  
   return (
     <>
       {/*<div className='home__wrap wrapper'> */}
       <div className='main_home home__wrap wrapper'>
+        {modal_post.modal_state && < PostModal post={modal_post.post} />}
+        { }
         <div className="sidebar-container">
           <Sidebar />
         </div>
         <main className="home__content">
           <HeaderMobile />
           <section className='section-main'>
+
 
             {
               <div className='stories_and_posts'>
@@ -60,7 +80,7 @@ function Home() {
                 <Story />
               </div>
                */}
-              {/*<Story /> */}
+                {/*<Story /> */}
                 <Posts />
               </div>
             }

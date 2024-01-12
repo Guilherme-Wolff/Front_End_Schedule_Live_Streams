@@ -3,8 +3,8 @@ import './profile.scss'
 import SidebarResponsive from '../Sidebar/SidebarResponsive'
 import Sidebar from '../Sidebar/Sidebar'
 import Popup from '../popups/Popup'
-import {ModalPost} from "../Post/ModalPost/ModalPost"
-import useModal from "../Post/ModalPost/useModal";
+//import {ModalPost} from "../Post/PostModal/PostModal"
+//import useModal from "../Post/ModalPost/useModal";
 import axios from "axios";
 import '../Explore/Explore.scss'
 import MiniPopup from "../popups/following";
@@ -37,7 +37,7 @@ const SettingsIcon = () => {
 
 
 function App() {
-    const { isOpen, toggle } = useModal();
+    //const { isOpen, toggle } = useModal();
     //const [show, setShow] = useState(false)
     const [show2, setShow2] = useState(false)
     const [goToR, isgoToR] = useState(false)
@@ -83,7 +83,7 @@ function App() {
         <div className='profile__wrap'>
             {<Sidebar />}
             {/*goToR && <Popup postimage={show2} ChangePopup={ChangePopup} />*/}
-            {isOpen && <ModalPost postimage={show2} ChangePopup={ChangePopup} isOpen={isOpen} toggle={toggle} />}
+            {/* isOpen && <ModalPost postimage={show2} ChangePopup={ChangePopup} isOpen={isOpen} toggle={toggle} />*/}
             <div className="profile__content content">
                 <div className="profile__info">
                     <input style={{ display: 'none' }} type="file" id="uploadprofileimage" />
@@ -132,7 +132,7 @@ function App() {
                         
                         {posts.map((posts: any) => (
                             <a className="gelleryitem_anchor" key={posts.id} accessKey={posts.id} 
-                            onClick={toggle}
+                           // onClick={toggle}
                             //onClick={(e) => { (cuurentpostspecific = GetValuesDivUsersReturn(e)) }}
                             >
                                 <div className='gellery__item'
