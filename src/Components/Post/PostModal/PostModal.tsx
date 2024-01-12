@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './PostModal.scss'; // Import your modal styles
 
 import { RootState, useAppSelector, useAppDispatch } from "../../../redux/store"
@@ -20,27 +20,32 @@ export const ContentModal = () => {
 
 
 export const PostModal = (post: any) => {
-    const [modalVisible, setModalVisible] = useState(false);
 
     let modal_post: ModalState = useAppSelector((state: RootState) => state.post_modal);
 
     let dispatch = useAppDispatch()
-
-    const openModal = () => {
-        setModalVisible(true);
-    };
 
     const closeModal = () => {
         modal_post.modal_state && dispatch(set_content_modal({ modal_state: false, post: null }))
         //setModalVisible(false);
     }
 
+    useEffect(() => {
+
+    }, [modal_post])
+
     return (
-        <div className={`modal ${modalVisible ? 'modal_visible' : ''}`}>
-            <button className="closeButton button_close_visible" onClick={closeModal}>
+        <div className={`modal ${modal_post.modal_state ? 'modal_visible' : 'modal_hidde'}`}>
+            <button className="closeButton button_close_visible" onClick={
+
+                modal_post.modal_state ? () => dispatch(set_content_modal({ modal_state: false, post: null }))
+                    :
+                    () => null /*dispatch(close_modal()) */
+
+            }>
                 Close
             </button>
-            <div><p>teste modal</p></div>
+            <div className='div_modal_content'><p className='div_modal_content'>teste modal</p></div>
         </div>
     );
 };

@@ -131,10 +131,10 @@ export const PostCard = ({ post }: Post | any) => {
     >
       <div className="user which__user__this__post">
         <div className='which__user__this__post__info'>
-          <Link to={"/" + createdby}>
+          <Link to={`/streamer/${createdby}`}>
             <img src={userminilogo} alt="" />
           </Link>
-          <Link to={"/" + createdby}>
+          <Link to={`/streamer/${createdby}`}>
             <p>{createdby}</p>
           </Link>
           <div className="point-separate-time-post">•</div>
