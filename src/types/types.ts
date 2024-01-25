@@ -22,6 +22,7 @@ export interface SearchedNames {
   
   export interface Post {
     post_id?: number;
+    thumbnail?:string;
     date: string;
     userminilogo: string;
     createdby: string;

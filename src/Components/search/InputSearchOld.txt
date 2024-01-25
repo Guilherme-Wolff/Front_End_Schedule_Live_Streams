@@ -1,0 +1,90 @@
+import '../Sidebar/Sidebar.scss'
+import React, { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import { useQuery, UseQueryResult } from "react-query"
+import { SearchedNames } from "../../types/types"
+import {
+  size_input_increment,
+} from "../../redux/input_redux/inputSearchSlice"
+
+import {
+  new_searches_array,
+  //recent_searches_clear_all
+} from "../../redux/new_users_seach/newSearchUsersSlice"
+
+import { store, useAppSelector, useAppDispatch, RootState } from "../../redux/store"
+
+import { apiSlice } from "../../redux/api/apiSlice"
+
+let API: string = " http://localhost:8080/"
+const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
+
+export default function InputSearch() {
+  let dispatch = useAppDispatch()
+
+  const [word, setWord] = useState("")
+
+  const [resultSearch, setResultSearch] = useState<SearchedNames[]>([])
+
+  //const [streamer, setStreamer] = useState("")
+
+
+  const { data, refetch, isLoading } = apiSlice.endpoints.searchStreamer.useQuery(word)
+
+
+
+  async function handleInputValue(e: React.FormEvent<HTMLInputElement>) {
+    e.preventDefault()
+
+    let USERSSearched: SearchedNames[] = []
+
+    await sleep(200)
+    data?.map((user: any) => {
+      let c_user: SearchedNames = {
+        user_image: user?.avatar || 'avatar',
+        username: user?.name || 'name',
+        complete_name: user?.platform || 'plataform'
+      }
+      console.log("REGISTRO_TEST USER TESTE: ", c_user)
+      //dispatch(new_searches_array([c_user]));
+      USERSSearched.push(c_user)
+      dispatch(new_searches_array(USERSSearched));
+
+    })
+    setResultSearch(USERSSearched)
+    console.log("REGISTRO_TEST streamer", USERSSearched)
+    //console.log("STREAMER", e.currentTarget.value)
+    let INPUT_VAL = e.currentTarget.value
+    let INPUT_SIZE = e.currentTarget.value.length;
+    dispatch(size_input_increment(INPUT_SIZE));
+    if (INPUT_SIZE > 0) {
+      //await sleep(400)
+      setWord(INPUT_VAL)
+      dispatch(size_input_increment(INPUT_SIZE));
+      dispatch(new_searches_array(resultSearch));
+      //setWord(INPUT_VAL)
+      //console.log("REGISTRO_TEST search", data)
+    } else {
+      //await sleep(200)
+      dispatch(size_input_increment(0));
+    }
+  }
+
+  useEffect(() => {
+    //evitar o cache
+    refetch()
+  }, [word])
+
+  return (
+    <>
+      <div className="search__input">
+        <input
+          type="text"
+          onChange={(e) => handleInputValue(e)}
+          placeholder="example.: tiktok.com/@user/live"
+        />
+      </div>
+    </>
+  )
+
+}

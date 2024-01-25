@@ -7,14 +7,35 @@ import EditCrop from "../popups/CreatePub/EditCrop";
 import Search from "../search/Search";
 import { MoreSettings } from '../MoreSettings/MoreSettings';
 
-import {LogoSave} from "../Logo/LogoSave"
+import { LogoSave } from "../Logo/LogoSave"
+
+import { useAuth } from "../../AuthContext/AuthContext"
+
+
 
 interface ModalPosition {
   top: number;
   left: number;
 }
 
+
+export const UserImageDefault = ({ small, user_name }: any) => {
+  return (
+    <Link to="/"> {/**<Link to="/user/@{user_name}"> */}
+      <li>
+        {/* homenotactive.png */}
+        {/* ./images/sidebar/home.png */}
+        <img className="logo" src='/images/profile/user_image.jpg' alt="user" style={{ width: '26px', height: '26px',borderRadius:'50%' }} />
+        {small ? '' : <p className='text-sidebar-button'>{user_name}</p>}
+      </li>
+    </Link>
+
+  )
+}
+
 export function SideBar() {
+
+  const { name } = useAuth()
   const [smallSidebar, IsSmallSidebar] = useState(false)
 
   let location = useLocation()
@@ -96,7 +117,7 @@ export function SideBar() {
     console.log(1)
   }
 
- 
+
   useEffect(() => {
 
     if (location.pathname == '/') {
@@ -132,12 +153,12 @@ export function SideBar() {
           style={smallSidebar ? { width: '73px' } : { width: '15%' }}
         >
           <Link to="/">
-         { 
-         <div className={`sidebar__instagram__logo__small ${smallSidebar ? 'show_logo' : 'close_logo'}`}>
-          < LogoSave/>
-         </div>
-         
-         }
+            {
+              <div className={`sidebar__instagram__logo__small ${smallSidebar ? 'show_logo' : 'close_logo'}`}>
+                < LogoSave />
+              </div>
+
+            }
             {
               /**
                <svg
@@ -157,11 +178,11 @@ export function SideBar() {
             }
             <div className={`sidebar__instagram__logo ${smallSidebar ? 'close_logo' : 'show_logo'}`}>
               <LogoSave />
-              
-              </div>
-            
 
-            
+            </div>
+
+
+
           </Link>
           <ul>
             <Link to="/">
@@ -180,7 +201,7 @@ export function SideBar() {
               </li>
             </Link>
             <Link to="#" onClick={() => {
-              
+
 
               if (moreSetting) {
                 ismoreSettings(false)
@@ -188,14 +209,14 @@ export function SideBar() {
                 SetShowSearch(!showSearch)
 
               }
-              
+
               else {
                 SetShowSearch(!showSearch)
                 IsSmallSidebar(!smallSidebar)
                 SetShowNotificarions(false)
               }
 
-              if (!smallSidebar){
+              if (!smallSidebar) {
                 IsSmallSidebar(true)
               }
 
@@ -318,35 +339,37 @@ export function SideBar() {
             </Link>
             
              */}
-             <div className="more__sidebar__end">
-            {
-              moreSetting && (
-                <div style={{ top: modalPosition.top, left: modalPosition.left }} className='more__settings'>
-                  <MoreSettings />
-                </div>
-              )
-            }
-
-
-            <div className='sidebar__more__wrap' ref={buttonRef} onClick={() => {
-
-              if (showNotificarions || showSearch) {
-
-                SetShowNotificarions(false)
-                SetShowSearch(false)
-
+            {name?.length ? <UserImageDefault small={smallSidebar} user_name={name}/> : ''}
+            <div className="more__sidebar__end">
+              {
+                moreSetting && (
+                  <div style={{ top: modalPosition.top, left: modalPosition.left }} className='more__settings'>
+                    <MoreSettings />
+                  </div>
+                )
               }
-              ismoreSettings(!moreSetting)
-              IsSmallSidebar(!smallSidebar)
-              openModal()
-            }}>
-              <img src="../images/Sidebar/more.png" alt="" />
-              {smallSidebar ? '' : <p className='text-sidebar-button'>More</p>}
+
+
+              <div className='sidebar__more__wrap' ref={buttonRef} onClick={() => {
+
+                if (showNotificarions || showSearch) {
+
+                  SetShowNotificarions(false)
+                  SetShowSearch(false)
+
+                }
+                ismoreSettings(!moreSetting)
+                IsSmallSidebar(!smallSidebar)
+                openModal()
+              }}>
+                <img src="../images/Sidebar/more.png" alt="" />
+                {smallSidebar ? '' : <p className='text-sidebar-button'>More</p>}
+              </div>
             </div>
-          </div>
+
 
           </ul>
-          
+
         </div>
       </div>
       {showSearch && <div className="search__wrap">

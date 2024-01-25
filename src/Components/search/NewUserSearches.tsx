@@ -8,7 +8,9 @@ import { useAppDispatch } from "../../redux/store"
 import { useSelector } from "react-redux"
 import { SearchedNames } from "../../types/types"
 
-export default function UserSearches(user: SearchedNames): JSX.Element {
+export default function UserSearches({ user }: any): JSX.Element | null {
+
+  
   let dispatch = useAppDispatch()
 
   function GetValuesDivUsers(e: React.MouseEvent<HTMLAnchorElement>) {

@@ -1,0 +1,286 @@
+@import '../../../colors/colors';
+@import '../variables';
+
+@media (min-width: 320px) and (max-width:900px) {
+
+  .last_post_modal {
+      margin-top: 5%;
+      width: 100%;
+      height: 40%;
+      padding-bottom: 10%;
+      //max-height: 100%;
+      //margin: calc(4px * 16) 0;
+      //margin-right: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      //background: rgb(0, 0, 0);
+      background: $colorBaseGradientPostBackGround;
+      //border: 1px solid rgb(54, 54, 54);
+      border-radius: 8px;
+  }
+
+  .main {
+      margin: 0 0 0 0;
+      //outline: 1px solid rgb(9, 255, 0);
+      //width: 100%;
+      width: 100vw;
+      height: 100vh;
+      //padding-left: 20px;
+      //
+      justify-content: center;
+      align-items: center;
+      display: block;
+      flex-direction: column;
+  }
+
+  .main-post_modal {
+      height: 100%;
+      margin-top: 9%;
+      width: 50%;
+      //margin-left: -8%;
+  }
+
+  .post_modals__and__stories__wrap {
+      width: 100%;
+      background: rgb(0, 0, 0);
+  }
+
+  .post_modals__and__storis {
+      overflow: hidden;
+
+      //margin: calc(4px * 2) 0;
+      /*margin-right: 32px;*/
+      /*display: block;*/
+      /*width: 500px;*/
+      max-height: 100%;
+      height: 80px;
+      cursor: grab;
+      align-items: center;
+      background: rgb(0, 0, 0);
+      /*border: 1px solid rgb(54, 54, 54);*/
+      /*border: 1px solid #121212;*/
+      border-radius: 8px;
+      //padding: 10px 0 34px;
+      width: 100%;
+
+
+
+      .user-box {
+          width: 50px;
+          height: 55px;
+          margin: 0px 0px;
+          padding: 0px 0px;
+      }
+
+      .user {
+          cursor: pointer;
+          //margin: 0px 5px;
+          margin: 0px 0px;
+          // padding: 10px;
+          width: 50px;
+          height: 50px;
+          display: inline-block;
+          border-radius: 50%;
+
+          img {
+              width: 100%;
+              height: 100%;
+              border-radius: 50%;
+              pointer-events: none;
+          }
+
+          p {
+              color: rgb(168, 168, 168);
+          }
+
+          h6 {
+              color: rgb(168, 168, 168);
+          }
+      }
+
+      .user__active__with__stories {
+          // padding: 10px;
+          text-align: center;
+          width: 55px;
+          height: 55px;
+          display: inline-block;
+          // width: 10ch;
+          // height: 10ch;
+          border-radius: 50%;
+          background:
+              radial-gradient(hsla(0, 0%, 0%, 0.15) 60%, transparent 0),
+              linear-gradient(to top right, orange, deeppink);
+
+          img {
+              display: block;
+              width: 76px;
+              height: 76px;
+              margin: 0 auto;
+              -o-object-fit: cover;
+              object-fit: cover;
+              -webkit-clip-path: circle(47%);
+              clip-path: circle(47%);
+          }
+
+          p {
+              color: rgb(250, 250, 250);
+          }
+      }
+  }
+
+  .post_modals_is_loading {
+      margin-top: 20%;
+      margin-left: 50%;
+  }
+
+
+
+
+  .post_modal {
+      //margin-top: 5%;
+      width: $WITDTH_POST_MOBILE;
+      height: $HEIGHT_POST_MOBILE;
+      //padding-bottom: 2%;
+      margin: auto;
+      //max-height: 100%;
+      //margin: calc(4px * 16) 0;
+      //margin-right: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      //background: rgb(0, 0, 0);
+      background: $colorBaseGradientPostBackGround;
+      border: 1px solid rgb(54, 54, 54);
+      border-radius: 4px;
+
+      .point-separate-time-post_modal {
+          margin-left: 8px;
+
+      }
+
+      .time-post_modal {
+          color: rgb(168, 168, 168);
+          margin-right: 15px;
+          font-size: 14px;
+
+      }
+
+      .which__user__this__post_modal {
+          font-size: 16px;
+          width: 100%;
+          margin-top: 8px;
+          display: flex;
+          align-items: center;
+
+          a {
+              color: #fff;
+          }
+
+          justify-content: space-between;
+
+          .which__user__this__post_modal__info {
+              display: flex;
+              align-items: center;
+
+              p {
+                  margin-left: 10px;
+              }
+
+          }
+
+          img {
+              width: 33px;
+              height: 33px;
+              border-radius: 50%;
+          }
+      }
+
+
+      .post_modals__image {
+
+          object-fit: cover;
+          margin: auto;
+          justify-content: center;
+          align-items: center;
+          //margin:auto;
+          //position: relative;
+          //padding-bottom: 56.25%; // 16:9 ratio 
+
+          //height: 100%;
+          //overflow: hidden;
+          //
+          max-width: 100%;
+          height: 70vh;
+
+          img {
+              object-fit: cover;
+              margin: auto;
+              max-width: 100%;
+              height: 100%;
+          }
+      }
+
+      .post_modals__option {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+
+          .post_modal__like__coment__send {
+              display: flex;
+          }
+      }
+
+      .post_modals__info {
+          padding-left: 12px;
+          padding-right: 12px;
+          width: 100%;
+          text-align: start;
+
+          .howmany__licked__this__post_modal {
+              span {
+                  font-weight: 600;
+              }
+
+              margin-bottom: 8px;
+          }
+
+          a {
+              display: block;
+              color: rgb(168, 168, 168);
+              margin-bottom: 8px;
+          }
+
+          .date__of__publicated {
+              letter-spacing: .2px;
+              text-transform: uppercase;
+              color: rgb(168, 168, 168);
+              font-weight: 400;
+              font-size: 8px;
+              margin-bottom: 12px;
+          }
+      }
+
+      .reply__coment {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          padding: 0 2% 0 1%;
+          border-top: 1px solid rgb(38, 38, 38);
+
+          input {
+              background-color: transparent;
+              border: 0;
+              outline: none;
+              width: 100%;
+              color: #fff;
+          }
+
+          button {
+              background-color: transparent;
+              border: 0;
+              color: #b3dbff;
+          }
+      }
+  }
+}

@@ -27,56 +27,42 @@ let otherUsersSearch: SearchedNames = {
 };
 let secondList: Array<SearchedNames> = [otherUsersSearch, otherUsersSearch];
 
-const fake_search = [
-  {
-    username: 'thayto_dev',
-    user_image: 'https://i-kebab.bunkr.ru/user_image-VedoGHuK.jpg',
-    complete_name: 'twitch',
-  },
-  {
-    username: 'teste',
-    user_image: 'https://i-kebab.bunkr.ru/user_image-VedoGHuK.jpg',
-    complete_name: 'twitch',
-  },
-]
+
 
 export default function Search() {
   const useGetUsersQuery = apiSlice.endpoints.getSearchers.useQuery
 
   const useSearchStreamersQuery = apiSlice.endpoints.searchStreamer.useQuery
-  // const { data, isLoading } = useGetUsersQuery("/recentusers")
-  //console.log("RESPOSTA", data)
+  const { data, isLoading } = useGetUsersQuery("/recentusers")
+  console.log("RESPOSTA", data)
   let notSearching: boolean = true;
   let dispatch = useAppDispatch()
   const clear_all_recent_users_seached = () => {
     dispatch(recent_searches_clear_all());
   }
 
-  let size_input = useAppSelector((state: RootState) => state.input_size)
+  let size_input = useAppSelector((state: RootState) => state.persistedReducer).input_size
   console.log(size_input)
   if (size_input > 0) {
-    console.log("REGISTRO_TEST input", size_input)
     notSearching = false
   }
   console.log("SIZE", size_input)
 
   let payload = useAppSelector((state: RootState) => state.persistedReducer.recent)
 
-  let searched = useAppSelector((state: RootState) => state.new_users_search)
-
-  let search_input_size = useAppSelector((state: RootState) => state.input_size)
-  console.log("REGISTRO_TEST busca", searched)
+  let searched = useAppSelector((state: RootState) => state.new_users_seacrh)
+  console.log("PAYLOAD", payload)
   //CONVERT OBJECT IN ARRAY
   payload = ObjectInArrayOfObject(payload)
-  //searched = ObjectInArrayOfObject(searched)
+  searched = ObjectInArrayOfObject(searched)
 
   useEffect(() => {
     if (!searched.length) {
-      //console.log("REQQ", data)
-      //dispatch(recent_searches_array(data));
+      console.log("REQQ", data)
+      dispatch(recent_searches_array(data));
     }
 
-  }, [searched])
+  }, [])
 
   return (
     <>
@@ -96,18 +82,39 @@ export default function Search() {
         {
 
 
-          searched.length ? searched.map((user: any) => {
+          searched && searched?.map((user: any) => {
+            // NewUserSearches(user)
+            <NewUserSearches user={user} />
+          })
 
-            return (
-              <NewUserSearches user={user} />
-            )
-          }) :
-            payload && payload.map((user: any) => {
-              return (
-                //<NewUserSearches user={user} />
-                <p>recent</p>
-              )
-            })
+          /*
+          !notSearching ? secondList?.
+          map((users: SearchedNames
+          ) => (
+            NewUserSearches(users)
+          ) 
+    
+    /*isLoading ? <div className="search_is_loading"><IsLoading /> </div> :
+      payload && payload[0] ? payload?.
+        map((users: SearchedNames
+        ) => (
+          UserSearches(users)
+        ), console.log("primeiro")   //Other Array of Search
+        ) : notSearching && data?.
+          map((users: SearchedNames
+          ) => (
+            UserSearches(users)
+          ), console.log("segundo")
+          ) 
+   
+          /*
+          !notSearching ? secondList?.
+          map((users: SearchedNames
+          ) => (
+            NewUserSearches(users)
+          ) 
+          */
+
         }
       </div>
     </>

@@ -3,7 +3,7 @@ import { Post } from "../../types/types"
 import thumb from "./thumbnail.png"
 
 
-let video_url = 'https://milkshake.bunkr.ru/06-11-2023-eduardosallesmedeiros-1-Ja5VCVOA.mp4';
+let video_url = 'https://burger.bunkr.ru/input-YGwreI1Y.mp4';
 
 export const fake_posts:Post[] = [
     {
@@ -11,8 +11,9 @@ export const fake_posts:Post[] = [
         "date": "09 Aug 2022",
         "userminilogo": "../avatar.jpg",
         "createdby": "user1",
+        "thumbnail":thumb,
         "url": [
-          thumb
+          video_url
         ],
         "likes": 20,
         "comments": [
@@ -42,8 +43,9 @@ export const fake_posts:Post[] = [
         "date": "09 Aug 2022",
         "userminilogo": "../avatar.jpg",
         "createdby": "user2",
+        "thumbnail":thumb,
         "url": [
-          thumb
+          video_url
         ],
         "likes": 20,
         "comments": [
@@ -73,8 +75,9 @@ export const fake_posts:Post[] = [
         "date": "09 Aug 2022",
         "userminilogo": "../avatar.jpg",
         "createdby": "user3",
+        "thumbnail":thumb,
         "url": [
-          thumb
+          video_url
         ],
         "likes": 20,
         "comments": [
@@ -104,8 +107,9 @@ export const fake_posts:Post[] = [
         "date": "09 Aug 2022",
         "userminilogo": "../avatar.jpg",
         "createdby": "user4",
+        "thumbnail":thumb,
         "url": [
-          thumb
+          video_url
         ],
         "likes": 20,
         "comments": [

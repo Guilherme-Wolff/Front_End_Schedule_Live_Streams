@@ -482,6 +482,7 @@
     }
   
     .search__wrap {
+      z-index: 50;
       border-right: 1px solid rgb(38, 38, 38);
       width: 350px;
       height: 100vh;
@@ -844,6 +845,7 @@
     }
   
     .search__wrap {
+      z-index: 50;
       border-right: 1px solid rgb(38, 38, 38);
       width: 350px;
       height: 100vh;

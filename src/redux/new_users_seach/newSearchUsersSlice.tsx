@@ -19,36 +19,21 @@ export const newSearchUsers = createSlice({
     new_searches_array: (state: SearchedNames[],
       action: PayloadAction<SearchedNames[]>) => {
       try {
-        //state.push(action.payload[0])
-        //console.log("STATE", action.payload)
-        if (state.length < 11) {
-          console.log("LIST", state)
-          return {
-            ...action.payload,
-            ...state,
-          }
-          //state = [user, ...current(state)]
-          //return state
-        } else {
-          //state.splice(state.length - 1, 1);
-          //state = [user, ...current(state)]
-          return {
-            ...action.payload,
-            ...state,
-          }
-        }
+        return [
+          ...action.payload
+        ]
       }
       catch (e: any) {
         console.error(e.message)
-        console.log("ERRO : recent_searches_array")
+        //console.log("ERRO : recent_searches_array")
       }
     },
   }
 })
 
-export const {new_searches_array,
-             }
+export const { new_searches_array,
+}
   = newSearchUsers.actions
 
-export const recentUsersSlice = newSearchUsers.reducer;
+export const newUsersSearchSlice = newSearchUsers.reducer;
 //export default recentUsersReducer;

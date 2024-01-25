@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './PostModal.scss'; // Import your modal styles
 
 import { RootState, useAppSelector, useAppDispatch } from "../../../redux/store"
@@ -8,6 +8,12 @@ import {
     close_modal
 } from "../../../redux/modal/reducer"
 import { ModalState } from '../interfaces';
+
+import { Post } from "../../../types/types"
+import { PostCardVideo } from "../Video/CardVideo"
+import { cancel } from 'timeago.js';
+
+//import closeIcon from "/close.png"
 
 export const ContentModal = () => {
     return (
@@ -19,64 +25,69 @@ export const ContentModal = () => {
 }
 
 
-export const PostModal = (post: any) => {
+
+
+
+export const PostModal = ({ post }: Post | any) => {
+
+    const handleBackdropClick = (e:React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        // Impede que o clique chegue ao conteúdo abaixo do modal
+        e.stopPropagation();
+    };
+
+    const { post_id } = post
+
+    const divPostReff = useRef<HTMLDivElement>(null);
 
     let modal_post: ModalState = useAppSelector((state: RootState) => state.post_modal);
 
     let dispatch = useAppDispatch()
 
-    const closeModal = () => {
-        modal_post.modal_state && dispatch(set_content_modal({ modal_state: false, post: null }))
-        //setModalVisible(false);
-    }
-
-    useEffect(() => {
-
-    }, [modal_post])
+    /* useEffect(() => {
+         const handleClickOutside = (event: MouseEvent) => {
+             const modalElement = divPostReff.current;
+ 
+             // Verificar se o clique não ocorreu dentro do modal e o modal está aberto
+             if (modal_post.modal_state && modalElement && !modalElement.contains(event.target as Node)) {
+                 //dispatch(close_modal());
+                 // dispatch(close_modal());
+                 console.log("REGISTRO_TEST if")
+             }
+         };
+ 
+         // Adicionar ouvinte de clique ao documento 
+         modal_post.modal_state && document.addEventListener('click', handleClickOutside)
+ 
+         // Limpar o ouvinte de evento ao desmontar o componente
+         return () => {
+             modal_post.modal_state && document.removeEventListener('click', handleClickOutside)
+         };
+     }, []);*/
 
     return (
-        <div className={`modal ${modal_post.modal_state ? 'modal_visible' : 'modal_hidde'}`}>
-            <button className="closeButton button_close_visible" onClick={
+        <div ref={divPostReff} className={`modal ${modal_post.modal_state ? 'modal_visible' : 'modal_hidde'}`}
+            onClick={
 
-                modal_post.modal_state ? () => dispatch(set_content_modal({ modal_state: false, post: null }))
+                modal_post.modal_state ? (e) => handleBackdropClick(e)
                     :
-                    () => null /*dispatch(close_modal()) */
+                    () => cancel /*dispatch(close_modal()) */
 
-            }>
-                Close
-            </button>
-            <div className='div_modal_content'><p className='div_modal_content'>teste modal</p></div>
-        </div>
-    );
-};
+            }
+        >
+            <img src='/close.png' alt="Fechar" style={{ width: '18px', height: '18px' }}
+                className="closeButton button_close_visible"
+                onClick={
 
-//================
-export const PostModalTest: React.FC = () => {
-    const [modalVisible, setModalVisible] = useState(false);
+                    modal_post.modal_state ? () => dispatch(close_modal())
+                        :
+                        () => cancel /*dispatch(close_modal()) */
+
+                }
 
 
-    const openModal = () => {
-        setModalVisible(true);
-    };
-
-    const closeModal = () => {
-        //modal_post.modal_state ? () => dispatch(set_content_modal({ modal_state: true, post: post }))
-    };
-
-    return (
-        <div>
-            {modalVisible && <ContentModal />}
-            <div className={`modal ${modalVisible ? 'modal_visible' : ''}`}>
-                {/* Modal content goes here */}
-                <button className="closeButton button_close_visible" onClick={closeModal}>
-                    Close
-                </button>
-            </div>
-
-            {/* Button to open the modal */}
-            <button className={`openButton ${modalVisible ? 'button_close_hidden' : ''}`} onClick={openModal}>
-                Open Modal
-            </button>
+            />
+            {/*<div className='div_modal_content'><p className='div_modal_content'>post id: {post_id}</p></div> */}
+            < PostCardVideo post={post} />
         </div>
     );
 };

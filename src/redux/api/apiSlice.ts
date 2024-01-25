@@ -6,7 +6,7 @@ import { SearchedNames, Post } from "../../types/types"
 import { RootState } from "../root-reducer";
 
 //Cookies
-import {setCookie} from "./Cookies"
+import { setCookie } from "./Cookies"
 
 
 const URL_API = 'https://pd-satur-nodejs-set-10cb88bf8e994930acc0c928bc718f7b.community.saturnenterprise.io'
@@ -33,12 +33,12 @@ const REFRESH_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc19yZWZyZXNoIjp0
 let CookiesSaturn = `saturn-token=${SATURN_TOKEN};refresh-token=${REFRESH_TOKEN}`
 
 
-let _headers =  {
+let _headers = {
   'content-type': 'application/json',
   'cache-control': 'public',
   'Cookie': CookiesSaturn,
   'authorization': `token ${user_token}`,
-  'Origin':'https://w-satur-app1-9920595863d34c8ba004ab3ce6d0ed39.community.saturnenterprise.io:8000'
+  'Origin': 'https://w-satur-app1-9920595863d34c8ba004ab3ce6d0ed39.community.saturnenterprise.io:8000'
 }
 
 //setCookie('saturn-token', SATURN_TOKEN, 7);
@@ -49,23 +49,23 @@ export const apiSlice = createApi({
   reducerPath: 'api',
   //baseQuery: fetchBaseQuery({ baseUrl: API }),
   baseQuery: fetchBaseQuery({
-    baseUrl: URL_API,
+    baseUrl: process.env.REACT_APP_BACKAND_URL || URL_API,
     //credentials: "include",
     //headers:_headers,
     prepareHeaders: (headers) => {
-       // headers.set('Access-Control-Allow-Origin', '')
-        headers.set('Content-Type',  'application/json')
-        headers.set('Authorization',  `token ${user_token}`)
-        //MEU AUTH
-        headers.set('OwnAuthorization',  `token JWT DO MEU USUARIO`)
-        //headers.set('Cookie',  CookiesSaturn)
-        headers.set('Origin',  'https://w-satur-app1-9920595863d34c8ba004ab3ce6d0ed39.community.saturnenterprise.io:8000')
+      // headers.set('Access-Control-Allow-Origin', '')
+      headers.set('Content-Type', 'application/json')
+      headers.set('Authorization', `token ${user_token}`)
+      //MEU AUTH
+      headers.set('OwnAuthorization', `token JWT DO MEU USUARIO`)
+      //headers.set('Cookie',  CookiesSaturn)
+      headers.set('Origin', 'https://w-satur-app1-9920595863d34c8ba004ab3ce6d0ed39.community.saturnenterprise.io:8000')
       return headers
     },
   }),
-  
+
   endpoints: (builder) => ({
-    getHello:  builder.query
+    getHello: builder.query
       ({
         query: () => ({
           url: '/',
@@ -81,14 +81,18 @@ export const apiSlice = createApi({
       }),
     searchStreamer: builder.query
       ({
-        query: (streamer) => ({
-          url: '/streamers/search',
-          method: 'GET',
+        query: (streamer: string) => ({
+          url: '/streamers/searchstreamer',
+          method: 'POST',
           body: {
-            streamer: streamer
+            word: streamer
           },
-          keepUnusedDataFor: 1,//cache 1 minute
+          keepUnusedDataFor: 0,//cache 1 minute
+          refetchOnMountOrArgChange: false,
+          refetchOnReconnect: false,
+          refetchOnFocus: false,
         }),
+
         /*onQueryStarted: (request:any, arg:any) => {
           // Adicione o cookie aos cabeçalhos da solicitação
           //const token = Cookies.get('nomeDoCookie');
@@ -100,12 +104,12 @@ export const apiSlice = createApi({
         query: () => ({
           url: '/recentusers',
           method: 'GET',
-          keepUnusedDataFor: 1,//cache 1 minute
-        })
+          //keepUnusedDataFor: 1,//cache 1 minute
+        }),
       }),
     saveSearchers: builder.query
       ({
-        query: (streamer: any) => ({
+        query: (streamer: string) => ({
           url: '/streamers/save',
           method: 'POST',
           body:
@@ -131,14 +135,6 @@ export const apiSlice = createApi({
       ({
         query: () => ({
           url: '/gettoken',
-          method: 'GET',
-          keepUnusedDataFor: 1,//cache 1 minute
-        })
-      }),
-    seachStreamer: builder.query
-      ({
-        query: () => ({
-          url: `/api/${API_VERSION}/searchstreamer`,
           method: 'GET',
           keepUnusedDataFor: 1,//cache 1 minute
         })

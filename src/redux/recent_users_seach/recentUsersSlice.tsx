@@ -37,89 +37,28 @@ export const recentUsers = createSlice({
             ...state,
           }
         }
-
-
-        /*action.payload.map((user: SearchedNames) => {
-          
-
-        })*/
-
-        /*for (let i in action.payload) {
-          //console.log(action.payload[i])
-          if (state.length < 11) {
-             state.push(...action.payload,...state)
-          } else {
-
-            //state.splice(state.length - 1, 1);
-            delete state[i]
-
-            return state
-
-          }
-
-
-        }*/
       }
       catch (e: any) {
         //return state// <-- note `e` has explicit `unknown` type
         console.error(e.message)
         console.log("ERRO : recent_searches_array")
-        /*if (typeof e === "string") {
-          console.error(e.toUpperCase()) // works, `e` narrowed to string
-        } else if (e instanceof Error) {
-          console.error(e.message) // works, `e` narrowed to Error
-        }*/
+
       }
 
     },
     recent_searches_remove_user(state: SearchedNames[],
       action: PayloadAction<string>) {
-        state =
+      state =
         Object.keys(state).map(function (personNamedIndex: any) {
           let user = state[personNamedIndex];
           // do something with person
           return user;
         });
-        state = state.filter(item => item.username !== action.payload);
-        return {...state}
-      /*var ArrayState: SearchedNames[] =
-        Object.keys(state).map(function (personNamedIndex: any) {
-          let user = state[personNamedIndex];
-          // do something with person
-          return user;
-        });
-      try {
-        ArrayState.map((user: SearchedNames, index: number) => {
-          if (user.username === action.payload) {
-            console.log(user.username)
-            ArrayState.splice(index, 1)
-            return {
-              ...ArrayState
-            }
-
-            //FUNCTION_REMOVE_USERS_IN_DATA_BASE
-          }
-          else {
-            return {
-              ...ArrayState
-            }
-          }
-        })
-
-
-      }
-      catch (e: any) { // <-- note `e` has explicit `unknown` type
-        console.error(e.message)
-        console.log("ERRO")
-        if (typeof e === "string") {
-          console.error(e.toUpperCase()) // works, `e` narrowed to string
-        } else if (e instanceof Error) {
-          console.error(e.message) // works, `e` narrowed to Error
-        }
-      }*/
+      state = state.filter(item => item.username !== action.payload);
+      return { ...state }
 
     },
-    recent_searches_clear_all: (state: SearchedNames[]) =>{
+    recent_searches_clear_all: (state: SearchedNames[]) => {
       try {
         return []
       }
@@ -129,22 +68,6 @@ export const recentUsers = createSlice({
       }
 
     },
-    /*recent_searches_clear_total(state: Array<SearchedNames>) {
-      console.log("LIMPANDO RECENTES")
-      return state = []
-    },
-    recent_searches_recriate_defaault(state: Array<SearchedNames>) {
-      //const LENGTH_TOTAL :number = state.length + action.payload.length;
-      console.log("ATIVANDO RECENTES")
-      return state = [...listUsersSearchedSecundary]
-    },*/
-
-
-
-    /*extraReducers: (builder) => {
-      
-    },*/
-
   }
 })
 
