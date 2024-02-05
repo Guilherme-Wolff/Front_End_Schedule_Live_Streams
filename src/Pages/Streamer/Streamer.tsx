@@ -1,4 +1,5 @@
-import React, {ReactNode, useEffect, useState } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
+import { redirect } from 'react-router-dom';
 import './Streamer.scss'
 import Sidebar from '../../Components/Sidebar/Sidebar'
 //import { Link } from 'react-router-dom'
@@ -14,12 +15,13 @@ import { useAuth } from "../../AuthContext/AuthContext"
 import Story from "../../Components/StoriesBar/Story"
 import HeaderMobile from "../../Components/Header/Header"
 import BottomTab from "../../Components/BottomTab/BottomTab"
-import {Modal} from "../../Components/Modal/VideoModal"
+import { Modal } from "../../Components/Modal/VideoModal"
 import { useParams } from 'react-router-dom';
 
-import {PostModal} from "../../Components/Post/PostModal/PostModal"
+import { PostModal } from "../../Components/Post/PostModal/PostModal"
 
-import {TestServerComponent} from "../../server/Teste.server"
+import { TestServerComponent } from "../../server/Teste.server"
+import { ModalState } from '../../Components/Post/interfaces';
 
 import axios from 'axios'
 //API
@@ -27,39 +29,51 @@ import { apiSlice } from "../../redux/api/apiSlice"
 
 import { RootState, useAppSelector, useAppDispatch, } from "../../redux/store"
 
+
+const supportedPlatforms = ['tiktok', 'twitch'];
+
 let vds = [
   {
-    name:'video teste',
-    video_url:'https://kebab.bunkr.ru/12-22-2023-viajandonosofa-1-5T7HltjU.mp4'
+    name: 'video teste',
+    video_url: 'https://kebab.bunkr.ru/12-22-2023-viajandonosofa-1-5T7HltjU.mp4'
   },
 ]
 
 export const Streamer = () => {
-  const { streamer_name } = useParams();
+  const { platform, streamer_name } = useParams();
 
-  console.log("REGISTRO_TEST streamer",streamer_name)
+  /*if (!platform || !supportedPlatforms.includes(platform)) {
+    // Redirecionar ou mostrar uma mensagem de erro, conforme necessário
+    return (
+      <></>
+    )
+  }*/
+
+  console.log("REGISTRO_TEST streamer", streamer_name)
   //let user = useAppSelector((state: RootState) => state.persistedReducer).user.user
   //console.log("TESTE AUTH", user.name)
   //let useGetHelloQuery = apiSlice.useGetHelloQuery
   const useGetHelloQuery = apiSlice.endpoints.getHello.useQuery
+  let modal_post: ModalState = useAppSelector((state: RootState) => state.post_modal);
 
-  const {data} = useGetHelloQuery('')
+  const { data } = useGetHelloQuery('')
 
   console.log("hello_res", data)
 
   const { name } = useAuth()
   return (
     <>
-      {/*<div className='streamer__wrap wrapper'> */}
-      {/*<div className='main_streamer streamer__wrap wrapper'> */}
-      <div className='main_streamer streamer__wrap wrapper'>
-        <PostModal />
+      {/*<div className='home__wrap wrapper'> */}
+      <div className='main_home home__wrap wrapper'>
+        {modal_post.modal_state && < PostModal post={modal_post.post} />}
+        { }
         <div className="sidebar-container">
           <Sidebar />
         </div>
-        <main className="streamer__content">
+        <main className="home__content">
           <HeaderMobile />
           <section className='section-main'>
+
 
             {
               <div className='stories_and_posts'>
@@ -68,7 +82,7 @@ export const Streamer = () => {
                 <Story />
               </div>
                */}
-              {/*<Story /> */}
+                {/*<Story /> */}
                 <Posts />
               </div>
             }

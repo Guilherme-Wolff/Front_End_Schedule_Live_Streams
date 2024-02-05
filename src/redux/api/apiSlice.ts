@@ -92,6 +92,10 @@ export const apiSlice = createApi({
           refetchOnReconnect: false,
           refetchOnFocus: false,
         }),
+       
+        
+        //enabled: (streamer):boolean => streamer.length > 0
+
 
         /*onQueryStarted: (request:any, arg:any) => {
           // Adicione o cookie aos cabeçalhos da solicitação
@@ -99,6 +103,7 @@ export const apiSlice = createApi({
           request.headers.set('Cookie', Cookies);
         },*/
       }),
+
     getSearchers: builder.query
       ({
         query: () => ({

@@ -41,12 +41,16 @@ export const router = createBrowserRouter([
     //element: <Home />,      
     element: <ProtectedRoute authNecessary={true} children={<Home />} />,
 
-    children: [
+    /*children: [
       {
         path: "/streamer/:streamer_name",
         element: <ProtectedRoute authNecessary={true} children={<Streamer />} />,
       },
-    ],
+    ],*/
+  },
+  {
+    path: "/:platform/:streamer_name",
+    element: <ProtectedRoute authNecessary={false} children={<Streamer />} />,
   },
   {
     path: "/login",
