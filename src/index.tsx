@@ -49,7 +49,7 @@ export const router = createBrowserRouter([
     ],*/
   },
   {
-    path: "/:platform/:streamer_name",
+    path: "/streamer/:platform/:streamer_name",
     element: <ProtectedRoute authNecessary={false} children={<Streamer />} />,
   },
   {
@@ -98,7 +98,7 @@ export const router = createBrowserRouter([
   {
     // Rota padrão para Not Found (Erro 404)
     path: "*",
-    element: <NotFoundPage />,
+    element: <NotFoundPage  />,
   }
 ])
 

@@ -33,13 +33,6 @@ import { apiSlice } from "../../redux/api/apiSlice"
 import { RootState, useAppSelector, useAppDispatch, } from "../../redux/store"
 import { ModalState } from '../../Components/Post/interfaces';
 
-let vds = [
-  {
-    name: 'video teste',
-    video_url: 'https://kebab.bunkr.ru/12-22-2023-viajandonosofa-1-5T7HltjU.mp4'
-  },
-]
-
 function Home() {
   let dispatch = useAppDispatch()
   let modal_post: ModalState = useAppSelector((state: RootState) => state.post_modal);

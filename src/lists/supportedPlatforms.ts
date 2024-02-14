@@ -1,0 +1,1 @@
+export const supportedPlatforms:string[] = ['tiktok', 'twitch'];

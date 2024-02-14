@@ -23,31 +23,67 @@ import { PostModal } from "../../Components/Post/PostModal/PostModal"
 import { TestServerComponent } from "../../server/Teste.server"
 import { ModalState } from '../../Components/Post/interfaces';
 
+import { NotFoundPage } from "../../Components/NotFound/NotFound"
+
+import { supportedPlatforms } from "../../lists/supportedPlatforms"
+
 import axios from 'axios'
 //API
 import { apiSlice } from "../../redux/api/apiSlice"
 
 import { RootState, useAppSelector, useAppDispatch, } from "../../redux/store"
+import { BiCurrentLocation } from 'react-icons/bi';
+import path from 'path';
+import { getLocale } from 'timeago.js/lib/register';
 
 
-const supportedPlatforms = ['tiktok', 'twitch'];
+/*export const VerifyPlatform = () => {
+  const { platform, streamer_name } = useParams();
+  if (!platform || !supportedPlatforms.includes(platform)) {
+    // Redirecionar ou mostrar uma mensagem de erro, conforme necessário
+    return (
+      <div>
+        plataforma nao aceita
+      </div>
+    )
 
-let vds = [
-  {
-    name: 'video teste',
-    video_url: 'https://kebab.bunkr.ru/12-22-2023-viajandonosofa-1-5T7HltjU.mp4'
-  },
-]
+  }
+  else {
+    return (
+      <div>
+        plataforma aceita
+      </div>
+    )
+  }
+}*/
+
+export const VerifyPlatform = () => {
+  const { platform } = useParams();
+  if (!platform || !supportedPlatforms.includes(platform)) {
+    // Redirecionar ou mostrar uma mensagem de erro, conforme necessário
+    return false
+
+  }
+  else {
+    return true
+  }
+}
 
 export const Streamer = () => {
   const { platform, streamer_name } = useParams();
 
-  /*if (!platform || !supportedPlatforms.includes(platform)) {
-    // Redirecionar ou mostrar uma mensagem de erro, conforme necessário
-    return (
-      <></>
-    )
-  }*/
+  console.log("local",getLocale)
+
+  const plat = VerifyPlatform()
+
+  if (platform) {
+    if (!supportedPlatforms.includes(platform)) {
+      // Redirecionar ou mostrar uma mensagem de erro, conforme necessário
+      redirect("/notfoud")
+    }
+  }
+
+
 
   console.log("REGISTRO_TEST streamer", streamer_name)
   //let user = useAppSelector((state: RootState) => state.persistedReducer).user.user
@@ -64,7 +100,7 @@ export const Streamer = () => {
   return (
     <>
       {/*<div className='home__wrap wrapper'> */}
-      <div className='main_home home__wrap wrapper'>
+      {plat ? <div className='main_home home__wrap wrapper'>
         {modal_post.modal_state && < PostModal post={modal_post.post} />}
         { }
         <div className="sidebar-container">
@@ -77,6 +113,8 @@ export const Streamer = () => {
 
             {
               <div className='stories_and_posts'>
+                {/* <VerifyPlatform /> */}
+
                 {/*
               <div className="main-stories">
                 <Story />
@@ -94,7 +132,7 @@ export const Streamer = () => {
           </section>
           <BottomTab />
         </main>
-      </div>
+      </div> : <NotFoundPage path={''} />}
     </>
   );
 }
