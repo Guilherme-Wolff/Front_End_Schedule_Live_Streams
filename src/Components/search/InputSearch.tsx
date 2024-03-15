@@ -1,5 +1,5 @@
 import '../Sidebar/Sidebar.scss'
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useQuery, UseQueryResult, UseQueryOptions } from "react-query"
 import { SearchedNames } from "../../types/types"
@@ -15,6 +15,7 @@ import {
 import { store, useAppSelector, useAppDispatch, RootState } from "../../redux/store"
 
 import { apiSlice } from "../../redux/api/apiSlice"
+import { throttle, debounce } from 'lodash';
 
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
 
@@ -23,19 +24,13 @@ interface MyQueryOptions extends UseQueryOptions {
   // Outras opções específicas, se necessário
 }
 
-
-
 export default function InputSearch() {
   const dispatch = useAppDispatch();
   const [word, setWord] = useState("");
 
-  const [inputSize, setInputSize] = useState(0);
+  const [wordAwait, setWordAwait] = useState("");
 
-  /*const queryOptions: MyQueryOptions = {
-    enabled: word.length > 0,
-    // Outras opções, se necessário
-  };*/
-
+  const inputValueRef = useRef<string>('');
 
   let queryOptions = {};
 
@@ -52,53 +47,36 @@ export default function InputSearch() {
 
   const { data, /*refetch */ } = apiSlice.endpoints.searchStreamer.useQuery(word, queryOptions);
 
+  console.log("search response",data)
 
-  //const { data, /*refetch */ } = apiSlice.endpoints.searchStreamer.useQuery(word,queryOptions);
-
-  //const { useSearchStreamerQuery } = apiSlice
-
-  //const { data, /*refetch */ } = apiSlice.useSearchStreamerQuery()
-
-  /*const { data } = useQuery(
-    ['searchStreamer', word],   // Chave da query
-    async () => {
-      if (word.length > 0) {
-        // Se a palavra tiver um comprimento maior que 0, chama a query diretamente
-        const result = apiSlice.endpoints.searchStreamer.useQuery(word)
-        return await result.data;
-      }
-      // Se o comprimento da palavra for 0, retorne undefined ou algo apropriado
-      return await undefined;
-    },
-    {
-      enabled: word.length > 0,  // Habilita a query apenas se o comprimento da palavra for maior que 0
-    }
-  );*/
-
-  const handleInputValue = (e: React.FormEvent<HTMLInputElement>) => {
-
-
-
-
-    const inputValue = e.currentTarget.value;
-    const inputSize = inputValue.length;
-
-
+  //=================================================================================================
+  const handleInputValueSearch = debounce((value: string) => {
+    const inputSize = value.length;
 
     dispatch(size_input_increment(inputSize));
 
     if (inputSize > 0) {
-      setWord(inputValue);
+      setWord(inputValueRef.current);
       //refetch(); // Mova a chamada da API aqui, pois inputSize é maior que 0
-
       // Mantenha ou ajuste conforme necessário a lógica para atualizar o estado ou dispatch
     } else {
       dispatch(size_input_increment(0));
     }
+  }, 200);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
+    inputValueRef.current = value; // Armazenar o valor do input no ref
+
+    // Chamar a função debounce com o valor do input
+    //setWord(value)
+    handleInputValueSearch(value);
   };
 
+  //=================================================================================================
+
   useEffect(() => {
-    // Lógica para tratar os dados da API se data não for undefined
+
     if (data) {
       const searchedNames = data.map((user: any) => ({
         user_image: user?.avatar || 'undefined',
@@ -108,14 +86,15 @@ export default function InputSearch() {
 
       dispatch(new_searches_array(searchedNames));
     }
-  }, [data, dispatch]);
+  }, [data]);
 
   return (
     <>
       <div className="search__input">
         <input
-          type="text"
-          onChange={handleInputValue}
+          type="search"
+          onChange={handleChange}
+          //value={word}
           placeholder="example.: tiktok.com/@user/live"
         />
       </div>

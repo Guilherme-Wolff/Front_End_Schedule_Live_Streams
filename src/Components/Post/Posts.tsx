@@ -17,7 +17,7 @@ import {
 import { posts_home_array } from "../../redux/posts_home/posts_home"
 import { ObjectInArrayOfObject, ObjectIsEmpty } from "../../utils/functions"
 import { Post } from "../../types/types"
-import { PostCard } from "./PostCard"
+import { PostCard } from "./Video/PostCardHls"
 
 
 import { fake_posts } from "./fake_posts"

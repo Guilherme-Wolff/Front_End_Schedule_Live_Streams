@@ -3,17 +3,17 @@ import { Post } from "../../types/types"
 import thumb from "./thumbnail.png"
 
 
-let video_url = 'https://burger.bunkr.ru/input-YGwreI1Y.mp4';
+let video_url = 'https://i-taquito.bunkr.ru/input-MhSY0Wu7.mp4';
 
 export const fake_posts:Post[] = [
     {
         "post_id": 1,
-        "date": "09 Aug 2022",
+        "date": "05 Mar 2024",
         "userminilogo": "../avatar.jpg",
         "createdby": "user1",
         "thumbnail":thumb,
         "url": [
-          video_url
+          'C:/Users/gabri/Documents/projects/savelive/Schedules_Executor/src/api/infrastructure/streams/35a3a30e-e9c5-4031-bb12-dc73f431a59d/playlist.m3u8'
         ],
         "likes": 20,
         "comments": [

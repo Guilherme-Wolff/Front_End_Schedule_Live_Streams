@@ -27,6 +27,7 @@ export default function InputSearch() {
 
 
   function IsValidUsername(e: React.FormEvent<HTMLInputElement>) {
+    e.preventDefault()
     let INPUT_SIZE = e.currentTarget.value.length;
     if (INPUT_SIZE > 0) {
       dispatch(size_input_increment(e.currentTarget.value.length));
