@@ -39,11 +39,12 @@ function Home() {
   //let user = useAppSelector((state: RootState) => state.persistedReducer).user.user
   //console.log("TESTE AUTH", user.name)
   //let useGetHelloQuery = apiSlice.useGetHelloQuery
-  const useGetHelloQuery = apiSlice.endpoints.getHello.useQuery
+  
+  //const useGetHelloQuery = apiSlice.endpoints.getHello.useQuery
 
-  const { data } = useGetHelloQuery('')
+  //const { data } = useGetHelloQuery('')
 
-  console.log("hello_res", data)
+  //console.log("hello_res", data)
 
 
   const { name } = useAuth()

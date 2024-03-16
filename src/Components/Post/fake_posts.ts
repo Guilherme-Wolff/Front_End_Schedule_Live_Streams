@@ -13,7 +13,8 @@ export const fake_posts:Post[] = [
         "createdby": "user1",
         "thumbnail":thumb,
         "url": [
-          'C:/Users/gabri/Documents/projects/savelive/Schedules_Executor/src/api/infrastructure/streams/35a3a30e-e9c5-4031-bb12-dc73f431a59d/playlist.m3u8'
+          'http://192.168.100.4:8080/playlist2.m3u8'
+          //'https://i-kebab.bunkr.ru/playlist-LvOgECYO.m3u8'
         ],
         "likes": 20,
         "comments": [

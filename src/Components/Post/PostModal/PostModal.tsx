@@ -10,7 +10,7 @@ import {
 import { ModalState } from '../interfaces';
 
 import { Post } from "../../../types/types"
-import { PostCardVideo } from "../Video/CardVideo"
+import { PostCard } from "../Video/PostCardHls"
 import { cancel } from 'timeago.js';
 
 //import closeIcon from "/close.png"
@@ -30,17 +30,21 @@ export const ContentModal = () => {
 
 export const PostModal = ({ post }: Post | any) => {
 
-    const handleBackdropClick = (e:React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         // Impede que o clique chegue ao conteúdo abaixo do modal
-        e.stopPropagation();
+        //e.stopPropagation();
     };
 
     const { post_id } = post
 
-    const divPostReff = useRef<HTMLDivElement>(null);
+   const divPostReff = useRef<HTMLDivElement>(null);
 
     let modal_post: ModalState = useAppSelector((state: RootState) => state.post_modal);
 
+    /*let modal_post: ModalState = {
+        modal_state:true
+    }
+    */
     let dispatch = useAppDispatch()
 
     /* useEffect(() => {
@@ -64,8 +68,13 @@ export const PostModal = ({ post }: Post | any) => {
          };
      }, []);*/
 
+    useEffect(() => {
+
+    }, []);
+
     return (
         <div ref={divPostReff} className={`modal ${modal_post.modal_state ? 'modal_visible' : 'modal_hidde'}`}
+
             onClick={
 
                 modal_post.modal_state ? (e) => handleBackdropClick(e)
@@ -74,6 +83,7 @@ export const PostModal = ({ post }: Post | any) => {
 
             }
         >
+
             <img src='/close.png' alt="Fechar" style={{ width: '18px', height: '18px' }}
                 className="closeButton button_close_visible"
                 onClick={
@@ -86,8 +96,7 @@ export const PostModal = ({ post }: Post | any) => {
 
 
             />
-            {/*<div className='div_modal_content'><p className='div_modal_content'>post id: {post_id}</p></div> */}
-            < PostCardVideo post={post} />
+            {<div className='div_modal_content'>{< PostCard post={post} />}</div>}
         </div>
     );
 };

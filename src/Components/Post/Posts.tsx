@@ -13,22 +13,18 @@ import {
   close_modal
 } from "../../redux/modal/reducer"
 
-
 import { posts_home_array } from "../../redux/posts_home/posts_home"
 import { ObjectInArrayOfObject, ObjectIsEmpty } from "../../utils/functions"
 import { Post } from "../../types/types"
-import { PostCard } from "./Video/PostCardHls"
+import { PostCard } from "./Video/PostCard"
 
 
 import { fake_posts } from "./fake_posts"
 import IsLoading from "../IsLoadin/IsLoading"
 
 
-
-
-
 import { SuspensePost } from "./SuspensePost"
-const PostCardDelay = lazy(() => delayForDemo(import('./PostCard')));
+//const PostCardDelay = lazy(() => delayForDemo(import('./PostCard')));
 
 function delayForDemo(promise: any) {
   return new Promise(resolve => {
