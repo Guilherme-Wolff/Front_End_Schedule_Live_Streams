@@ -13,7 +13,8 @@ export const fake_posts:Post[] = [
         "createdby": "user1",
         "thumbnail":thumb,
         "url": [
-          'http://192.168.100.4:8080/playlist2.m3u8'
+          'https://pixeldrain.com/api/file/is9vB8fd'
+          //'./playlist-LvOgECYO.m3u8'
           //'https://i-kebab.bunkr.ru/playlist-LvOgECYO.m3u8'
         ],
         "likes": 20,
@@ -46,7 +47,9 @@ export const fake_posts:Post[] = [
         "createdby": "user2",
         "thumbnail":thumb,
         "url": [
-          video_url
+          'https://pixeldrain.com/api/file/mgAf391x'
+          //'./playlist-LvOgECYO.m3u8'
+          //'https://i-kebab.bunkr.ru/playlist-LvOgECYO.m3u8'
         ],
         "likes": 20,
         "comments": [

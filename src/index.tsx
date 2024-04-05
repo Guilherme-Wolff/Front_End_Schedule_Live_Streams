@@ -34,6 +34,62 @@ import { ProtectedRoute } from "./AuthContext/ProtectedRoute"
 //REACT ROUTER 6
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import axios, { AxiosRequestConfig } from 'axios';
+
+
+
+/*(function () {
+  var cors_api_host = 'cors-anywhere.herokuapp.com';
+  var cors_api_url = 'https://' + cors_api_host + '/';
+  var slice = [].slice;
+  var origin = window.location.protocol + '//' + window.location.host;
+  var open = XMLHttpRequest.prototype.open;
+  XMLHttpRequest.prototype.open = function () {
+    this.setRequestHeader('referrerPolicy', 'origin-when-cross-origin'); // Substitua 'seu-host.com' pelo host desejado
+    //this.setRequestHeader('Referer', 'bunkrr.su');
+    var args: any = slice.call(arguments);
+    var targetOrigin = /^https?:\/\/([^\/]+)/i.exec(args[1]);
+    if (targetOrigin && targetOrigin[0].toLowerCase() !== origin &&
+      targetOrigin[1] !== cors_api_host) {
+      args[1] = cors_api_url + args[1];
+    }
+    return open.apply(this, args);
+  };
+})();*/
+
+
+interface CustomHeaders {
+  Host: string;
+  [key: string]: string;
+}
+function configureGlobalXhrInterceptor() {
+  // Salvar a referência original para XMLHttpRequest
+  const originalXhrOpen = XMLHttpRequest.prototype.open;
+
+  // Substituir XMLHttpRequest.prototype.open com uma função personalizada
+  XMLHttpRequest.prototype.open = function (
+    method: string,
+    url: string | URL,
+    async?: boolean | null,
+    username?: string | null,
+    password?: string | null
+  ) {
+    // Adicionar o cabeçalho Host ao objeto XMLHttpRequest antes de enviar a solicitação
+   // this.setRequestHeader('Host', 'bunkrr.su'); // Substitua 'seu-host.com' pelo host desejado
+    //this.setRequestHeader('Referer', 'bunkrr.su');
+    this.setRequestHeader('Origin', 'bunkrr.su');
+    this.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+    // Converter o objeto IArguments em um array
+    const args: [string, string, any] = [method, String(url), async || true];
+
+    // Chamar a implementação original de XMLHttpRequest.prototype.open com os argumentos corretos
+    return originalXhrOpen.apply(this, args);
+  };
+}
+
+// Configurar interceptadores globais assim que o aplicativo for carregado
+//configureGlobalXhrInterceptor();
 
 export const router = createBrowserRouter([
   {
@@ -98,7 +154,7 @@ export const router = createBrowserRouter([
   {
     // Rota padrão para Not Found (Erro 404)
     path: "*",
-    element: <NotFoundPage  />,
+    element: <NotFoundPage />,
   }
 ])
 
