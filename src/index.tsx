@@ -27,7 +27,13 @@ import { Register } from "./Pages/Registration/Register";
 
 import { Streamer } from "./Pages/Streamer/Streamer";
 
+//===
+//import { WebExtensionBlocker } from '@cliqz/adblocker-webextension';
 
+//import { browser } from 'webextension-polyfill-ts';
+
+//===
+import RequestBlocker from './Components/adBlock/RequestBlocker';
 //import Slick from "./Components/Slick";
 
 import { ProtectedRoute } from "./AuthContext/ProtectedRoute"
@@ -75,7 +81,7 @@ function configureGlobalXhrInterceptor() {
     password?: string | null
   ) {
     // Adicionar o cabeçalho Host ao objeto XMLHttpRequest antes de enviar a solicitação
-   // this.setRequestHeader('Host', 'bunkrr.su'); // Substitua 'seu-host.com' pelo host desejado
+    // this.setRequestHeader('Host', 'bunkrr.su'); // Substitua 'seu-host.com' pelo host desejado
     //this.setRequestHeader('Referer', 'bunkrr.su');
     this.setRequestHeader('Origin', 'bunkrr.su');
     this.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
@@ -90,6 +96,18 @@ function configureGlobalXhrInterceptor() {
 
 // Configurar interceptadores globais assim que o aplicativo for carregado
 //configureGlobalXhrInterceptor();
+
+
+
+
+/*WebExtensionBlocker.fromPrebuiltAdsAndTracking().then((blocker) => {
+  blocker.enableBlockingInBrowser(browser);
+});
+
+const blocker =  WebExtensionBlocker.fromLists(fetch, [
+  'https://easylist.to/easylist/easylist.txt'
+]);*/
+
 
 export const router = createBrowserRouter([
   {
@@ -170,11 +188,14 @@ root.render(
     <ApiProvider api={apiSlice} >
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
+
           <RouterProvider router={router} />
+
         </PersistGate >
       </Provider>
     </ApiProvider>
   </QueryClientProvider>
+
 );
 
 // If you want to start measuring performance in your app, pass a function

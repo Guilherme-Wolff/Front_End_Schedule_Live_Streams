@@ -13,7 +13,7 @@ export const fake_posts:Post[] = [
         "createdby": "user1",
         "thumbnail":thumb,
         "url": [
-          'https://pixeldrain.com/api/file/is9vB8fd'
+          'https://pixeldrain.com/api/file/aCwH5Ypa'
           //'./playlist-LvOgECYO.m3u8'
           //'https://i-kebab.bunkr.ru/playlist-LvOgECYO.m3u8'
         ],
