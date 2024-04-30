@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './PostModal.scss'; // Import your modal styles
+import "./PostCard.scss"
+import "../PostModal/PostCardModal.scss"
 
 import { RootState, useAppSelector, useAppDispatch } from "../../../redux/store"
 
@@ -12,6 +14,8 @@ import { ModalState } from '../interfaces';
 import { Post } from "../../../types/types"
 import { PostCard } from "../Video/PostCardHls"
 import { cancel } from 'timeago.js';
+
+import { BottomOptions } from "../BottomOptions/BottomOptions"
 
 //import closeIcon from "/close.png"
 
@@ -37,7 +41,7 @@ export const PostModal = ({ post }: Post | any) => {
 
     const { post_id } = post
 
-   const divPostReff = useRef<HTMLDivElement>(null);
+    const divPostReff = useRef<HTMLDivElement>(null);
 
     let modal_post: ModalState = useAppSelector((state: RootState) => state.post_modal);
 
@@ -96,7 +100,18 @@ export const PostModal = ({ post }: Post | any) => {
 
 
             />
-            {<div className='div_modal_content'>{< PostCard post={post} />}</div>}
+            {<div className='div_modal_content'>{
+                < PostCard post={post} />}
+               {/* <BottomOptions post={post} /> */}
+
+
+                {//ANUNCIOS
+                /*<div style={{
+                    position: 'absolute',
+                    bottom: '0'
+                }}>AD</div> */}
+            </div>}
+
         </div>
     );
 };

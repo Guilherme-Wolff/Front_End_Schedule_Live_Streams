@@ -3,7 +3,7 @@ import { Post } from "../../types/types"
 import thumb from "./thumbnail.png"
 
 
-let video_url = 'https://i-taquito.bunkr.ru/input-MhSY0Wu7.mp4';
+let video_url = 'https://pixeldrain.com/api/file/aCwH5Ypa';
 
 export const fake_posts:Post[] = [
     {
@@ -47,7 +47,7 @@ export const fake_posts:Post[] = [
         "createdby": "user2",
         "thumbnail":thumb,
         "url": [
-          'https://pixeldrain.com/api/file/mgAf391x'
+          video_url
           //'./playlist-LvOgECYO.m3u8'
           //'https://i-kebab.bunkr.ru/playlist-LvOgECYO.m3u8'
         ],
@@ -108,6 +108,38 @@ export const fake_posts:Post[] = [
       },
       {
         "post_id": 4,
+        "date": "09 Aug 2022",
+        "userminilogo": "../avatar.jpg",
+        "createdby": "user4",
+        "thumbnail":thumb,
+        "url": [
+          video_url
+        ],
+        "likes": 20,
+        "comments": [
+          {
+            "comment_id": 1,
+            "userminilogo": "avatar",
+            "username": "user1",
+            "comment": "comment1"
+          },
+          {
+            "comment_id": 2,
+            "userminilogo": "avatar",
+            "username": "user2",
+            "comment": "comment2"
+          },
+          {
+            "comment_id": 3,
+            "userminilogo": "avatar",
+            "username": "user3",
+            "comment": "comment3"
+          }
+        ],
+        "bio": "bio1"
+      },
+      {
+        "post_id": 5,
         "date": "09 Aug 2022",
         "userminilogo": "../avatar.jpg",
         "createdby": "user4",

@@ -1,6 +1,6 @@
 //MOBILE FIRST
-@import '../../colors/colors';
-@import './variables';
+@import '../../../colors/colors';
+@import '../variables';
 
 @media (min-width: 320px) and (max-width:900px) {
 
@@ -223,8 +223,6 @@
         }
 
         .posts__option {
-           // position: absolute;
-            //bottom: 0;
             display: flex;
             justify-content: space-between;
             width: 100%;
@@ -458,7 +456,7 @@
         max-width: $WITDTH_POST;
         //margin-top: 5px;
         height: $HEIGHT_POST;
-
+        
         //width: 100%;
         //height:auto;
         //max-height: 100%;

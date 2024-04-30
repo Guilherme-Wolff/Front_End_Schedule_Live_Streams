@@ -105,8 +105,6 @@ const HlsPlayer: React.FC<VideoProps> = ({ src }) => {
 
 export const PostCard = ({ post }: Post | any) => {
 
-  const [iframeLoaded, setIframeLoaded] = useState(false);
-
   let modal_post: ModalState = useAppSelector((state: RootState) => state.post_modal);
   console.log("REGISTRO_TEST modal_post", modal_post)
 
@@ -260,20 +258,14 @@ export const PostCard = ({ post }: Post | any) => {
         <div >
 
           {/* <video className="posts__image" src={url[0]}   /> */}
-          {<Suspense fallback={<div>Carregando...</div>}>
-            {iframeLoaded ? (
-              <Iframe src={url} onLoad={() => setIframeLoaded(true)} />
-            ) : (
-              <div>Carregando iframe...</div>
-            )}
-          </Suspense>}
+          { <Iframe src={url} />}
           {/*supported ? <HlsPlayer src="http://127.0.0.1:8080/playlistbunkrr.m3u8" /> : "HLS is not supported in your browser"*/}
           {/*< App /> */}
 
 
         </div>
       </Link>
-      <BottomOptions post={post} />
+      {<BottomOptions post={post} /> }
 
     </Link >
   )
