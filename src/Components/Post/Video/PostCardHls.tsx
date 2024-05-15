@@ -63,6 +63,20 @@ const HlsPlayer: React.FC<VideoProps> = ({ src }) => {
         }
       };
 
+      // CONFIG HLS WITH PROXY , TESTAR
+      /*
+      const config = {
+  xhrSetup: function (xhr, url) {
+    // Adicione aqui os cookies necessários à solicitação
+    xhr.setRequestHeader('Cookie', 'pd_auth_key=fd07e276-f93c-4980-961d-0b8a125a5f95');
+
+    // Manipule a URL para redirecionar pelo proxy
+    const proxiedUrl = `${proxyUrl}${new URL(url).pathname}`;
+    xhr.open('GET', proxiedUrl, true);
+  }
+};
+      */
+
 
       if (src.includes('m3u8')) {
         const hls = new Hls();
