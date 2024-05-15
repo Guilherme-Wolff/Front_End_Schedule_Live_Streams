@@ -81,6 +81,7 @@ const HlsPlayer: React.FC<VideoProps> = ({ src }) => {
 
       if (src.includes('m3u8')) {
         const hls = new Hls();
+        //const hls = new Hls(config);
         hls.loadSource(src);
         hls.attachMedia(video);
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
