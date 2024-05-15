@@ -65,6 +65,7 @@ const HlsPlayer: React.FC<VideoProps> = ({ src }) => {
 
       // CONFIG HLS WITH PROXY , TESTAR
       /*
+      const proxyUrl = 'http://seu_nginx_server';
       const config = {
   xhrSetup: function (xhr, url) {
     // Adicione aqui os cookies necessários à solicitação
