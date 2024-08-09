@@ -1,7 +1,6 @@
 import '../video_controls.scss'
 import "./PostCard.scss"
 import "../PostModal/PostCardModal.scss"
-import './OverlayIframe.scss';
 import React, { useEffect, useState, useRef, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 //import { useHistory } from 'react-router-dom';
@@ -17,7 +16,6 @@ import { RootState, useAppSelector, useAppDispatch } from "../../../redux/store"
 import { BottomOptions } from "../BottomOptions/BottomOptions"
 
 import { Iframe } from "./Iframe"
-import { OverLayIframe } from "./OverLayIframe"
 
 //import ReactHlsPlayer, { HlsPlayerProps } from 'react-hls-player';
 
@@ -43,14 +41,30 @@ interface VideoProps {
   src: string;
 }
 
-
-/* /////////     API PIXELDDRAIN https://pd.cybar.xyz/${fileId_teste}?download           ///////////  */
-
-
+const crieateURLWithPProxy = (url: string) => {
+  return 'https://corsproxy.io/?' + encodeURIComponent(url);
+}
 
 const HlsPlayer: React.FC<VideoProps> = ({ src }) => {
-  const BASE_PIXELDRAIN_API = "https://pd.cybar.xyz"
-  const fileId_teste = "g9HvQHuT"
+
+  /* const cors_api_host = 'corsproxy.io';
+   const cors_api_url = `https://${cors_api_host}/`;
+   const slice = Array.prototype.slice;
+   const origin = `${window.location.protocol}//${window.location.host}`;
+   const open = XMLHttpRequest.prototype.open;
+ 
+   XMLHttpRequest.prototype.open = function () {
+     const args = slice.call(arguments) as any[];
+     const targetOrigin = /^https?:\/\/([^\/]+)/i.exec(args[1]);
+     if (
+       targetOrigin &&
+       targetOrigin[0].toLowerCase() !== origin &&
+       targetOrigin[1] !== cors_api_host
+     ) {
+       args[1] = cors_api_url + encodeURIComponent(args[1]);
+     }
+     return open.apply(this, args as any);
+   };*/
 
 
   console.log("URL M3U8", src)
@@ -61,9 +75,45 @@ const HlsPlayer: React.FC<VideoProps> = ({ src }) => {
       const video = document.getElementById("plyr") as HTMLVideoElement;
 
 
+      //video.crossOrigin = 'use-credentials'
+      /*const config = {
+        xhrSetup: function (xhr: any, url: any) {
+          // Adicione aqui os cookies necessários à solicitação
+          //xhr.withCredentials = true; // Isso permite que o navegador envie cookies
+          xhr.setRequestHeader('Cookie', 'pd_auth_key=fd07e276-f93c-4980-961d-0b8a125a5f95');
+          x
 
-      /*if (src.includes('m3u8')) {
-        const hls = new Hls();
+          //xhr.setRequestHeader('Token', '8smWG8uhfjFhEVrwn7bZ3Oa6TFenghAO7vtv7VsU3V2CSwTr1FckqvRbLAH7aDjd');
+        }
+      };*/
+      const proxyUrl = 'https://corsproxy.io/?';
+      const config = {
+        xhrSetup: function (xhr: XMLHttpRequest, url: string) {
+          // Adicione aqui os cookies necessários à solicitação
+
+
+
+          // Manipule a URL para redirecionar pelo proxy
+          xhr.setRequestHeader('token', '8smWG8uhfjFhEVrwn7bZ3Oa6TFenghAO7vtv7VsU3V2CSwTr1FckqvRbLAH7aDjd');
+          xhr.setRequestHeader('Cookie', 'token=8smWG8uhfjFhEVrwn7bZ3Oa6TFenghAO7vtv7VsU3V2CSwTr1FckqvRbLAH7aDjd;__ddg1_=zy3X3b2MXw1i0qPtopaI');
+          xhr.setRequestHeader('User-Agent', navigator.userAgent);
+          xhr.setRequestHeader('Referer', window.location.origin);
+          //xhr.setRequestHeader('Authorization', `Bearer 8smWG8uhfjFhEVrwn7bZ3Oa6TFenghAO7vtv7VsU3V2CSwTr1FckqvRbLAH7aDjd`);
+          xhr.setRequestHeader('Accept', '*/*');
+          xhr.setRequestHeader('Accept-Encoding', 'gzip, deflate, br');
+          xhr.setRequestHeader('Accept-Language', 'pt-BR,pt;q=0.9');
+
+          const proxiedUrl = `${proxyUrl}${encodeURIComponent(url)}`;
+          xhr.open('GET', proxiedUrl);
+
+          // xhr.setRequestHeader('Token', '8smWG8uhfjFhEVrwn7bZ3Oa6TFenghAO7vtv7VsU3V2CSwTr1FckqvRbLAH7aDjd');
+
+        }
+      };
+
+
+      if (src.includes('m3u8')) {
+        const hls = new Hls(config);
 
 
         hls.loadSource(src);
@@ -71,14 +121,7 @@ const HlsPlayer: React.FC<VideoProps> = ({ src }) => {
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
           (ref.current!.plyr as PlyrInstance).play();
         });
-      }*/
-      if (src.includes(BASE_PIXELDRAIN_API)) { // Caso contrário, carrega um arquivo MP4
-        video.src = src;
-        video.addEventListener('loadedmetadata', () => {
-          video.play();
-        });
-      }
-      else if (src.includes('mp4')) { // Caso contrário, carrega um arquivo MP4
+      } else if (src.includes('mp4')) { // Caso contrário, carrega um arquivo MP4
         video.src = src;
         video.addEventListener('loadedmetadata', () => {
           video.play();
@@ -111,16 +154,15 @@ const HlsPlayer: React.FC<VideoProps> = ({ src }) => {
 
 
 export const PostCard = ({ post }: Post | any) => {
-  const fileId_teste = "g9HvQHuT"
 
   let modal_post: ModalState = useAppSelector((state: RootState) => state.post_modal);
   console.log("REGISTRO_TEST modal_post", modal_post)
 
-  let
-    {
-      post_id, date, userminilogo,
-      createdby, thumbnail, url, likes, comments, bio
-    } = post
+  let {
+
+    post_id, date, userminilogo,
+    createdby, thumbnail, url, likes, comments, bio
+  } = post
 
   const supported = Hls.isSupported();
 
@@ -132,8 +174,34 @@ export const PostCard = ({ post }: Post | any) => {
   }
 
 
+  const _headers = new Headers({
+    'Cookie': 'accountToken=fYvmAjtGzKyXnYlZj30gJSpf7zHvofig',
+    'Referer': 'https://gofile.io/d/080d7e47-4630-4a5e-9f47-79cbaf04ea84',
+    //'Referrer-Policy': 'strict-origin-when-cross-origin',
+    //'method': 'GET',
+    //"Authorization": "Basic " + safeBase64Encode(":" + '0ba10ff8-485b-447f-a77e-955a14d42a22'),
+    Accept: '*/*',
+    //'Accept-Encoding': 'identity;q=1, *;q=0',
+    //Accept-Language: 'en-US',
+    Origin: 'https://gofile.io',
+    //Cookie: 'pd_auth_key=25f321d9-8dc2-4dc8-8568-cab33b7d7fa5',
+    //'If-Range': 'Mon, 01 Apr 2024 16:50:31 GMT',
+    //'Range': 'bytes=720896-54099967',
+
+    //'Host': 'https://pixeldrain.com/',
+    //'Sec-Ch-Ua': '"Not A(Brand";v="99", "Opera GX";v="107", "Chromium";v="121"',
+    //'Sec-Ch-Ua-Mobile': '?0',
+    //'Sec-Ch-Ua-Platform': '"Android"',
+    //'Sec-Fetch-Dest': 'video',
+    //'Sec-Fetch-Mode': 'cors',
+    //'Sec-Fetch-Site':'cross-site',
+    //'Sec-Fetch-Site': 'same-origin',
+
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.5359.95 Safari/537.36'
+  })
+
   const data: any = ''
-  //const { data, error, isLoading } = useSWR('https://pixeldrain.com/api/file/g9HvQHuT', fetcher)
+  //const { data, error, isLoading } = useSWR('https://pixeldrain.com/api/file/tSktFd3X', fetcher)
   console.log("texto data", data)
 
   function getIdPost() {
@@ -237,24 +305,18 @@ export const PostCard = ({ post }: Post | any) => {
 
         }
       >
-        <div id='videoContainer' >
+        <div >
 
           {/* <video className="posts__image" src={url[0]}   /> */}
 
-          {/*<Iframe src={"https://pixeldrain.com/api/file/g9HvQHuT"} /> */}
-
-
-
-          {supported ? <HlsPlayer src={url} /> : "HLS is not supported in your browser"}
+          { /*<Iframe src={url} />*/}
+          {supported ? <HlsPlayer src="https://i-kebab.bunkr.ru/playlist-LvOgECYO.m3u8" /> : "HLS is not supported in your browser"}
           {/*< App /> */}
 
-          {/*< OverLayIframe /> */}
+
         </div>
       </Link>
-
-      {//adicionar depois
-        /*<BottomOptions post={post} />*/
-      }
+      {<BottomOptions post={post} />}
 
     </Link >
   )

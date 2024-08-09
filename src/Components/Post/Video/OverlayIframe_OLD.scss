@@ -1,0 +1,68 @@
+:root {
+    --video-container-width: 100%; /* Valor inicial, pode ser ajustado */
+    --video-container-height:100vh;
+    --margin-bottom: calc(var(--video-container-width) * -0.001);
+
+    --bottom: calc(var(--video-container-width) - 1%);
+  }
+
+
+#videoContainer {
+    border: 2px solid blue;
+    position: relative;
+    width: 100%;
+    max-width: '100%';
+    height: '100vh';
+    pointer-events: auto;
+    /* Desativa eventos de ponteiro */
+}
+
+#videoIframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: auto;
+}
+
+#overlayBar {
+    position: absolute;
+    border-radius: 5px;
+    //top:calc(var(--video-container-height) - var(--video-container-width));
+    //top: calc(100vh / var(--video-container-width));
+    bottom: calc(var(--video-container-width) - 53vh);
+    //margin-top: calc(var(--video-container-width) * 1%);
+    /* Ajuste o fator de escala conforme necessário */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
+    height: 6px;
+    background: rgba(255, 0, 0, 0.5);
+    z-index: 10000;
+    cursor: pointer;
+    pointer-events: auto;
+    //margin-bottom: calc(var(--video-container-width) * -0.14);
+    //margin-bottom: calc(var(--video-container-width) * -0.10);
+    /*position: absolute;
+    border-radius: 5px;
+    bottom: 6%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
+    height: 6px;
+    background: rgba(255, 0, 0, 0.5);
+    z-index: 10000;
+    cursor: pointer;*/
+    //margin-bottom: 10.5%;
+
+    pointer-events: auto;
+    /* Ativa eventos de ponteiro apenas para esta div */
+}
+
+#chat {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 300px;
+    height: 400px;
+    overflow-y: scroll;
+    margin-top: 20px;
+}

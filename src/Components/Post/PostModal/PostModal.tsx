@@ -100,7 +100,7 @@ export const PostModal = ({ post }: Post | any) => {
 
 
             />
-            {<div className='div_modal_content'>{
+            {<div className='' /*className='div_modal_content'*/>{
                 < PostCard post={post} />}
                {/* <BottomOptions post={post} /> */}
 
