@@ -1,0 +1,25 @@
+@import "~fluid-player/src/css/fluidplayer.css";
+
+.video_player {
+    width: 100vw;
+    height: 100%;           
+    position: absolute;
+    pointer-events: all;
+    //object-fit: cover;
+    /* Garantir que o player seja dimensionado corretamente */
+}
+
+@media (min-width: 320px) and (max-width: 900px) {
+    .video_player {
+        width: 100vw;     /* Largura total da viewport */
+        height: auto;     /* Altura ajustada automaticamente */
+    }
+}
+
+@media (min-width: 900px) {
+    .video_player {
+        position: absolute;
+        width: 100%;      /* Largura total do container pai */
+        height: 80vh;    /* Altura de 80% da altura da viewport */
+    }
+}

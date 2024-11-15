@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './PostModal.scss'; // Import your modal styles
-import "./PostCard.scss"
-import "../PostModal/PostCardModal.scss"
+//import "./PostCard.scss"
+import "./PostCardModal.scss"
 
 import { RootState, useAppSelector, useAppDispatch } from "../../../redux/store"
 
@@ -16,17 +16,19 @@ import { PostCard } from "../Video/PostCardHls"
 import { cancel } from 'timeago.js';
 
 import { BottomOptions } from "../BottomOptions/BottomOptions"
+import { Iframe } from '../Video/Iframe';
+import { ChatPlayer } from '../../LiveChat/LiveChat';
 
 //import closeIcon from "/close.png"
 
-export const ContentModal = () => {
+/*export const ContentModal = () => {
     return (
         <div className="modal-content">
             <h1>Este é um modal</h1>
             <p>Este modal permanecerá no centro da tela mesmo quando você rolar para baixo.</p>
         </div>
     )
-}
+}*/
 
 
 
@@ -39,7 +41,7 @@ export const PostModal = ({ post }: Post | any) => {
         //e.stopPropagation();
     };
 
-    const { post_id } = post
+    const { post_id ,chat } = post
 
     const divPostReff = useRef<HTMLDivElement>(null);
 
@@ -81,7 +83,7 @@ export const PostModal = ({ post }: Post | any) => {
 
             onClick={
 
-                modal_post.modal_state ? (e) => handleBackdropClick(e)
+                modal_post.modal_state ? (e) => null// handleBackdropClick(e)
                     :
                     () => cancel /*dispatch(close_modal()) */
 
@@ -100,9 +102,14 @@ export const PostModal = ({ post }: Post | any) => {
 
 
             />
-            {<div className='' /*className='div_modal_content'*/>{
-                < PostCard post={post} />}
-               {/* <BottomOptions post={post} /> */}
+            {<div className='div_modal_content'>
+                < PostCard  
+                post={post} 
+                />
+                <ChatPlayer urlChat={chat} />
+                {/*  <CHAT chat={json_file_url}/>  */}
+                { /*<BottomOptions post={post} />*/}
+                
 
 
                 {//ANUNCIOS

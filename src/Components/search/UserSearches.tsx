@@ -6,9 +6,9 @@ import {
 
 import { useAppDispatch } from "../../redux/store"
 import { useSelector } from "react-redux"
-import { SearchedNames } from "../../types/types"
+import { SearchedNames,InputSearchedNames } from "../../types/types"
 
-export default function UserSearches(user: SearchedNames): JSX.Element {
+export default function UserSearches(user: InputSearchedNames): JSX.Element {
   let dispatch = useAppDispatch()
 
   function GetValuesDivUsers(e: React.MouseEvent<HTMLAnchorElement>) {
@@ -35,7 +35,7 @@ export default function UserSearches(user: SearchedNames): JSX.Element {
             <img src={user.user_image} alt="" />
             <div>
               <h4>{user.username}</h4>
-              <p>{user.complete_name}</p>
+              <p>{user.platform}</p>
             </div>
           </div>
           <a accessKey={user.username} onClick={(e) => { DeleteUsers(GetValuesDivUsersReturn(e)) }} >

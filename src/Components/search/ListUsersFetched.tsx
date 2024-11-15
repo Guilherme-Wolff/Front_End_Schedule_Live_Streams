@@ -42,7 +42,7 @@ export default function ListUsersFetched(usersFetched: any) {
                 </div>
             </div>
             <div className="recent__searched__users__title">
-                <h3>Recent</h3>
+                <h3>Searches</h3>
                 <button>clear all</button>
             </div>
             <div className="recent__users__wrap">

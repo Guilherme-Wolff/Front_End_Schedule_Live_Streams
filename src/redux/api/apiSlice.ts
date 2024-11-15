@@ -9,7 +9,7 @@ import { RootState } from "../root-reducer";
 import { setCookie } from "./Cookies"
 
 
-const URL_API = 'https://pd-satur-nodejs-set-10cb88bf8e994930acc0c928bc718f7b.community.saturnenterprise.io'
+const URL_API = API;
 const API_VERSION = 'V1'
 const user_token = 'f089371aee2849489767f18bf8700769'
 let api_token = "deployment-10c5c3def1ed4346845cc6d05105b5f2"
@@ -36,9 +36,9 @@ let CookiesSaturn = `saturn-token=${SATURN_TOKEN};refresh-token=${REFRESH_TOKEN}
 let _headers = {
   'content-type': 'application/json',
   'cache-control': 'public',
-  'Cookie': CookiesSaturn,
+  //'Cookie': CookiesSaturn,
   'authorization': `token ${user_token}`,
-  'Origin': 'https://w-satur-app1-9920595863d34c8ba004ab3ce6d0ed39.community.saturnenterprise.io:8000'
+  //'Origin': 'https://w-satur-app1-9920595863d34c8ba004ab3ce6d0ed39.community.saturnenterprise.io:8000'
 }
 
 //setCookie('saturn-token', SATURN_TOKEN, 7);
@@ -57,9 +57,9 @@ export const apiSlice = createApi({
       headers.set('Content-Type', 'application/json')
       headers.set('Authorization', `token ${user_token}`)
       //MEU AUTH
-      headers.set('OwnAuthorization', `token JWT DO MEU USUARIO`)
+      //headers.set('OwnAuthorization', `token JWT DO MEU USUARIO`)
       //headers.set('Cookie',  CookiesSaturn)
-      headers.set('Origin', 'https://w-satur-app1-9920595863d34c8ba004ab3ce6d0ed39.community.saturnenterprise.io:8000')
+      //headers.set('Origin', 'https://w-satur-app1-9920595863d34c8ba004ab3ce6d0ed39.community.saturnenterprise.io:8000')
       return headers
     },
   }),
@@ -92,8 +92,8 @@ export const apiSlice = createApi({
           refetchOnReconnect: false,
           refetchOnFocus: false,
         }),
-       
-        
+
+
         //enabled: (streamer):boolean => streamer.length > 0
 
 
@@ -103,6 +103,21 @@ export const apiSlice = createApi({
           request.headers.set('Cookie', Cookies);
         },*/
       }),
+    getStreamerLives: builder.query
+      ({
+        query: ({ streamer_name, platform }: any) => ({
+          url: '/lives/getstreamerslives',
+          method: 'POST',
+          body: {
+            streamer_name: streamer_name,
+            platform: platform,
+          },
+          keepUnusedDataFor: 1,//cache 1 minute
+          refetchOnMountOrArgChange: false,
+          refetchOnReconnect: false,
+          refetchOnFocus: false,
+        }),
+      }),
 
     getSearchers: builder.query
       ({
@@ -110,6 +125,15 @@ export const apiSlice = createApi({
           url: '/recentusers',
           method: 'GET',
           //keepUnusedDataFor: 1,//cache 1 minute
+        }),
+      }),
+
+    getRecentLives: builder.query
+      ({
+        query: () => ({
+          url: '/lives/getrecentlives',
+          method: 'GET',
+          keepUnusedDataFor: 0,//cache 1 minute
         }),
       }),
     saveSearchers: builder.query
@@ -145,6 +169,7 @@ export const apiSlice = createApi({
         })
       }),
   })
+
 })
 
 /*

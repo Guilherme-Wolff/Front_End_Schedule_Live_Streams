@@ -1,0 +1,21 @@
+{
+    "hosting": {
+      "public": "../build",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "function": "ssrServer"
+        }
+      ]
+    },
+    "functions": {
+      "source": "functions",  
+      "runtime": "nodejs20"   
+    }
+  }
+  

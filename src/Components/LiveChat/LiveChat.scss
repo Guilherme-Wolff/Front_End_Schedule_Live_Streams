@@ -1,0 +1,172 @@
+@import '../../colors/_colors.scss';
+
+@media (min-width: 900px) {
+
+    .message {
+        
+        top: 0;
+        color: #000;
+        display: flex;
+        margin-bottom: 10px;
+       
+        //espaço entre as mensagens
+        margin-bottom: 1px;
+        padding-bottom: 5px;
+        z-index: 1000;
+        border-bottom: 1px solid #000 transparent;
+        
+
+      
+      
+        .message-content {
+           
+          display: flex;
+          //justify-content: space-between;
+          //align-items: center;
+          flex-wrap: wrap;
+          align-items: flex-start;
+          width: 100%;
+      
+          .message-header {
+            height: max-content;
+            flex-shrink: 0;
+            margin-right: 10px;
+      
+            .username {
+              margin: 0;
+              font-weight: bold;
+              
+            }
+          }
+      
+          .message-text {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            //flex-grow: 1;
+            text-align: left;
+          }
+        }
+      }
+      
+    
+    
+    
+    #videoContainer {
+        border: 2px solid blue;
+        position: relative;
+        width: 560px;
+        height: 315px;
+        pointer-events: auto;
+        z-index: 5000;
+        /* Desativa eventos de ponteiro */
+    }
+
+   
+    
+    .chat_hide {
+        display: none;
+    }
+
+    #chat {
+        background: $beck_ground_chat;
+        /*DEFAULT NONE*/
+        //display: none;
+        z-index: 1000;
+        border: 1px solid #ccc;
+    
+       
+        width: 100%;
+        max-width: 400px;
+        height: 90%;
+        
+        overflow-y: auto;
+        
+        //margin-top: 20px;
+        border: $border_chat;
+        border-radius: 10px;
+    }
+}
+
+
+@media (min-width:320px) and (max-width: 899px) {
+    .message {
+        
+        top: 0;
+        color: #000;
+        display: flex;
+        margin-bottom: 10px;
+
+        margin-bottom: 1px;
+        padding-bottom: 5px;
+        border-bottom: 2px solid #0fd719;
+
+        &:last-child {
+            border-bottom: none; // Remove a borda do último item
+          }
+      
+        .message-content {
+          display: flex;
+          //justify-content: space-between;
+          //align-items: center;
+          flex-wrap: wrap;
+          align-items: flex-start;
+          width: 100%;
+      
+          .message-header {
+            height: max-content;
+            flex-shrink: 0;
+            margin-right: 10px;
+      
+            .username {
+              margin: 0;
+              font-weight: bold;
+              
+            }
+          }
+      
+          .message-text {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            //flex-grow: 1;
+            text-align: left;
+          }
+        }
+      }
+      
+    
+    
+    
+    #videoContainer {
+        border: 2px solid blue;
+        position: relative;
+        width: 560px;
+        height: 315px;
+        pointer-events: auto;
+        z-index: 5000;
+        /* Desativa eventos de ponteiro */
+    }
+
+   
+    
+    .chat_hide {
+        display: none;
+    }
+
+    #chat {
+        /*DEFAULT NONE*/
+        //display: none;
+        z-index: 1000;
+        border: 1px solid #ccc;
+    
+       
+        width: 100%;
+        max-width: 400px;
+        height: 90%;
+        
+        overflow-y: auto;
+        
+        //margin-top: 20px;
+        border: 2px solid rgba(213, 148, 148, 0.65);
+        border-radius: 10px;
+    }
+}

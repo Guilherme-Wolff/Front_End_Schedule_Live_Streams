@@ -20,7 +20,7 @@ import { NotFoundPage } from "./Components/NotFound/NotFound"
 import Home from './Pages/Home/Home'
 import Saved from './Pages/Saved/Saved'
 //import Home from './Pages/Home/Home'
-import Profile from './Components/Profile/Profile'
+import { Profile } from './Pages/Profile/Profile'
 //import Explore from './Components/Explore/Explore'
 //import Inbox from './Components/Chat/Inbox'
 //import Chat from './Components/Chat/Chat'
@@ -43,6 +43,7 @@ import { ProtectedRoute } from "./AuthContext/ProtectedRoute"
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import axios, { AxiosRequestConfig } from 'axios';
+import { platform } from 'os';
 
 
 
@@ -110,6 +111,18 @@ const blocker =  WebExtensionBlocker.fromLists(fetch, [
   'https://easylist.to/easylist/easylist.txt'
 ]);*/
 
+export const routes = {
+  streamer: {
+    path: '/streamer',
+    platform: ':platform',
+    streamer_name: ':streamer_name'
+  },
+  login: {
+    path: '/login'
+  }
+}
+
+
 
 export const router = createBrowserRouter([
   {
@@ -125,7 +138,7 @@ export const router = createBrowserRouter([
     ],*/
   },
   {
-    path: "/streamer/:platform/:streamer_name",
+    path: `/${routes.streamer.path}/${routes.streamer.platform}/${routes.streamer.streamer_name}`,
     element: <ProtectedRoute authNecessary={false} children={<Streamer />} />,
   },
   {
@@ -147,6 +160,11 @@ export const router = createBrowserRouter([
   {
     path: "/saved",
     element: <Saved />,
+    //element: <ProtectedRoute authNecessary={true} children={<Profile />} />,
+  },
+  {
+    path: "/explore",
+    element: <ProtectedRoute authNecessary={true} children={<Profile />} />,
     //element: <ProtectedRoute authNecessary={true} children={<Profile />} />,
   },
   /*{
@@ -178,30 +196,31 @@ export const router = createBrowserRouter([
   }
 ])
 
-const queryClient = new QueryClient();
 
-export const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
+  const queryClient = new QueryClient();
+  
+  export const root = ReactDOM.createRoot(
+    document.getElementById('root') as HTMLElement
+  );
+  root.render(
+  
+  
+    <QueryClientProvider client={queryClient}>
+      <ApiProvider api={apiSlice} >
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+  
+            <RouterProvider router={router} />
+  
+          </PersistGate >
+        </Provider>
+      </ApiProvider>
+    </QueryClientProvider>
+  
+  );
 
-
-  <QueryClientProvider client={queryClient}>
-    <ApiProvider api={apiSlice} >
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-
-          <RouterProvider router={router} />
-
-        </PersistGate >
-      </Provider>
-    </ApiProvider>
-  </QueryClientProvider>
-
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  // If you want to start measuring performance in your app, pass a function
+  // to log results (for example: reportWebVitals(console.log))
+  // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+  reportWebVitals();
 //serviceWorkerRegistration.register()

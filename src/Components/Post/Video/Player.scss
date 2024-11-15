@@ -1,0 +1,71 @@
+@import '../../../colors/_colors.scss';
+
+.video_player {
+    width: 50%;
+    height: 100%;           
+    
+   
+    
+    object-fit: cover;
+
+    /* Garantir que o player seja dimensionado corretamente */
+}
+
+.video_player_fullscreen {
+    width: 50%;
+    height: 100%;           
+    position: absolute;
+    pointer-events: all;
+    object-fit: contain;
+    /* Garantir que o player seja dimensionado corretamente */
+}
+
+
+@media (min-width: 320px) and (max-width: 900px) {
+    .play_icon {
+        width: 64px;
+        height: 64px;  
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .video_player {
+        
+        width: 50%;
+        height: 100%;           
+        
+        pointer-events: all;
+        
+        object-fit: cover;
+      /* Altura de 80% da altura da viewport */
+    }
+    .video_player_fullscreen {
+        width: 50%;
+        height: 100%;           
+       
+        object-fit: contain;
+        /* Garantir que o player seja dimensionado corretamente */
+    }
+}
+
+@media (min-width: 900px) {
+    .video_player {
+        
+        width: 50%;
+        height: 100%;           
+        
+        pointer-events: all;
+        
+        object-fit: cover;
+      /* Altura de 80% da altura da viewport */
+    }
+    .video_player_fullscreen {
+        width: 50%;
+        height: 100%;           
+       
+        object-fit: contain;
+        /* Garantir que o player seja dimensionado corretamente */
+    }
+    
+}

@@ -16,10 +16,10 @@ import HeaderMobile from "../../Components/Header/Header"
 import BottomTab from "../../Components/BottomTab/BottomTab"
 import { Modal } from "../../Components/Modal/VideoModal"
 
-import { TestServerComponent } from "../../server/Teste.server"
+//import { TestServerComponent2 } from "../../server/Teste.server"
 
 
-import { PostModal, ContentModal } from "../../Components/Post/PostModal/PostModal"
+import { PostModal } from "../../Components/Post/PostModal/PostModal"
 
 import axios from 'axios'
 //API
@@ -32,14 +32,21 @@ import { apiSlice } from "../../redux/api/apiSlice"
 
 import { RootState, useAppSelector, useAppDispatch, } from "../../redux/store"
 import { ModalState } from '../../Components/Post/interfaces';
+//import ServerComponentTest from '../../ServerComponents/ServerComponent.server';
+import PostsHome from '../../Components/Post/PostsHome';
+
+import {useSEO} from '../../SEO/useSEO'
+import { SearchModal } from '../../Components/search/SearchModal';
 
 function Home() {
+  useSEO()
+
   let dispatch = useAppDispatch()
   let modal_post: ModalState = useAppSelector((state: RootState) => state.post_modal);
   //let user = useAppSelector((state: RootState) => state.persistedReducer).user.user
   //console.log("TESTE AUTH", user.name)
   //let useGetHelloQuery = apiSlice.useGetHelloQuery
-  
+
   //const useGetHelloQuery = apiSlice.endpoints.getHello.useQuery
 
   //const { data } = useGetHelloQuery('')
@@ -47,18 +54,21 @@ function Home() {
   //console.log("hello_res", data)
 
 
-  const { name } = useAuth()
-  
-  useEffect(()=>{
 
-  },[modal_post])
-  
+
+  //const { name } = useAuth()
+
+  useEffect(() => {
+
+  }, [modal_post])
+
   return (
     <>
       {/*<div className='home__wrap wrapper'> */}
       <div className='main_home home__wrap wrapper'>
         {modal_post.modal_state && < PostModal post={modal_post.post} />}
-        { }
+        {<SearchModal />}
+        
         <div className="sidebar-container">
           <Sidebar />
         </div>
@@ -68,14 +78,16 @@ function Home() {
 
 
             {
-              <div className='stories_and_posts'>
+              <div /*onClick={() => modal_post.modal_state ? dispatch(set_content_modal({modal_state: false})) : null}*/ className='stories_and_posts'>
                 {/*
               <div className="main-stories">
                 <Story />
               </div>
                */}
                 {/*<Story /> */}
-                <Posts />
+                <PostsHome />
+                {/*<ServerComponentTest />*/}
+               
               </div>
             }
             {/*

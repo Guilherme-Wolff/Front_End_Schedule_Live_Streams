@@ -10,6 +10,9 @@ import { MoreSettings } from '../MoreSettings/MoreSettings';
 import { LogoSave } from "../Logo/LogoSave"
 
 import { useAuth } from "../../AuthContext/AuthContext"
+import { RootState, useAppDispatch, useAppSelector } from '../../redux/store';
+import { ModalState } from '../Post/interfaces';
+import { close_modal } from '../../redux/modal/reducer';
 
 
 
@@ -21,7 +24,7 @@ interface ModalPosition {
 
 export const UserImageDefault = ({ small, user_name }: any) => {
   return (
-    <Link to="/"> {/**<Link to="/user/@{user_name}"> */}
+    <Link to="/profile"> {/**<Link to="/user/@{user_name}"> */}
       <li>
         {/* homenotactive.png */}
         {/* ./images/sidebar/home.png */}
@@ -34,6 +37,9 @@ export const UserImageDefault = ({ small, user_name }: any) => {
 }
 
 export function SideBar() {
+
+  let dispatch = useAppDispatch()
+  let modal_post: ModalState = useAppSelector((state: RootState) => state.post_modal);
 
   const { name } = useAuth()
   const [smallSidebar, IsSmallSidebar] = useState(false)
@@ -149,7 +155,7 @@ export function SideBar() {
       </div>}
 
       <div className='sidebar__wrap'>
-        <div className={`sidebar__content ${smallSidebar ? 'sidebar_width_small' : 'sidebar_width_default'}`}
+        <div onClick={() => modal_post.modal_state ? dispatch(close_modal()) : null} className={`sidebar__content ${smallSidebar ? 'sidebar_width_small' : 'sidebar_width_default'}`}
           style={smallSidebar ? { width: '73px' } : { width: '15%' }}
         >
           <Link to="/">
@@ -226,15 +232,16 @@ export function SideBar() {
                 borderRadius: "100px"
               } : { border: "none", }}>
                 <img style={smallSidebar ? { margin: "0 auto" } : { margin: "0px" }}
-                  src="../images/sidebar/search.png" alt="" />
+                  src="/images/sidebar/search.png" alt="" />
                 {smallSidebar ? null : <p className='text-sidebar-button'>Search Streamers</p>}
               </li>
             </Link>
+            
             {/*
             <Link to="/explore">
               <li>
                 <img style={smallSidebar ? { margin: "0 auto" } : { margin: "0px" }}
-                  src={explore ? "../images/sidebar/interestActive.png" : "../images/sidebar/interest.png"}
+                  src={explore ? "/images/sidebar/interestActive.png" : "/images/sidebar/interest.png"}
                   alt="" />
                 {smallSidebar ? '' : <p className='text-sidebar-button'>Interesting</p>}
               </li>
@@ -245,7 +252,7 @@ export function SideBar() {
                <Link to="/reels/videos/">
                 <li>
                   <img style={smallSidebar ? { margin: "0 auto" } : { margin: "0px" }}
-                    src={reels ? "../images/sidebar/reels.png" : "../images/sidebar/reels.png"}
+                    src={reels ? "/images/sidebar/reels.png" : "/images/sidebar/reels.png"}
                     alt="" />
                   {smallSidebar ? '' : <p className='text-sidebar-button'>Reels</p>}
                 </li>
@@ -311,7 +318,7 @@ export function SideBar() {
                   <path
                     d="M34.6 3.1c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5s1.1-.2 1.6-.5c1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"></path>
                 </svg> : <img style={smallSidebar ? { margin: "0 auto" } : { margin: "0px" }}
-                  src="../images/sidebar/notification.png" alt="" />
+                  src="/images/sidebar/notification.png" alt="" />
                 }
 
                 {smallSidebar ? '' : <p className='text-sidebar-button'>Notifications</p>}
@@ -322,7 +329,7 @@ export function SideBar() {
             <Link to="#" onClick={() => iscreatePubs(true)}>
               <li>
                 <img style={smallSidebar ? { margin: "0 auto" } : { margin: "0px" }}
-                  src="../images/sidebar/newpub.png" alt="" />
+                  src="/images/sidebar/newpub.png" alt="" />
                 {smallSidebar ? '' : <p className='text-sidebar-button'>Create</p>}
               </li>
             </Link>
@@ -333,7 +340,7 @@ export function SideBar() {
               <li>
                 <img
                   style={smallSidebar ? { margin: "0 auto" } : { margin: "0px" } && profile ? { border: "2px solid rgb(250, 250, 250)" } : { border: 0 }}
-                  className='sidebar__profile__image' src="../images/profileImage.jpg" alt="" />
+                  className='sidebar__profile__image' src="/images/profileImage.jpg" alt="" />
                 {smallSidebar ? '' : <p className='text-sidebar-button' >Profile</p>}
               </li>
             </Link>
@@ -362,7 +369,7 @@ export function SideBar() {
                 IsSmallSidebar(!smallSidebar)
                 openModal()
               }}>
-                <img src="../images/Sidebar/more.png" alt="" />
+                <img src="/images/sidebar/more.png" alt="" />
                 {smallSidebar ? '' : <p className='text-sidebar-button'>More</p>}
               </div>
             </div>
@@ -382,7 +389,7 @@ export function SideBar() {
         <div className="ontime">
           <p className="ontime__time">this week</p>
           <div className="ontime__notification">
-            <img src="../images/users/1.jpg" alt="" />
+            <img src="/images/users/1.jpg" alt="" />
             <div>
               <p><span className="bold700">name1 </span> subscribed to your updates. </p>
             </div>
@@ -391,7 +398,7 @@ export function SideBar() {
             </button>
           </div>
           <div className="ontime__notification">
-            <img src="../images/users/1.jpg" alt="" />
+            <img src="/images/users/1.jpg" alt="" />
             <div>
               <p><span className="bold700">name2 </span> subscribed to your updates. </p>
             </div>

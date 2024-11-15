@@ -316,7 +316,7 @@ function SmallSidebar() {
               ismoreSettings(!moreSetting)
               IsSmallSidebar(false)
             }}>
-              <img src="../images/Sidebar/more.png" alt="" />
+              <img src="../images/sidebar/more.png" alt="" />
               {smallSidebar ? '' : <p>More</p>}
             </div>
           </div>

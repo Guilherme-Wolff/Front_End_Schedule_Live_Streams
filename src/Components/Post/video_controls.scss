@@ -1,9 +1,11 @@
+@import '../../colors/colors';
+
+
 $cor-inicial: rgba(224, 77, 118,0.1);
 $cor-final: rgba(255, 255, 255,0.1);
 
 $colorBaseGradient: linear-gradient(to right, $cor-inicial, $cor-final);
 
-$ColorControls: rgba(255, 0, 0, 0.3);
 $borderRadiusDefault:50%;
 
 video::-webkit-media-controls {
@@ -12,11 +14,14 @@ video::-webkit-media-controls {
     //background-color: #d51616;
     /* Cor de fundo dos controles no Safari/Chrome */
     color: $ColorControls;
+    
     /* Cor do texto dos controles no Safari/Chrome */
 }
 
 video::-webkit-media-controls-play-button {
     color:  $ColorControls;
+    background-color: $ColorControls;
+    border-radius: $borderRadiusDefault;
     /* Cor do botão de play no Safari/Chrome */
 }
 
@@ -43,33 +48,107 @@ video::-webkit-media-controls-fullscreen-button {
 /* Adicione isso ao seu arquivo de estilos ou componente React com estilos incorporados */
 
 
-.video_controls {
-    position: relative;
+.video-player-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px; // Ajuste conforme necessário
+ // margin: 0 auto;
+  //box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  //overflow: hidden;
+
+  .react-player {
+    width: 100% !important;
+    height: 100% !important;
   }
-  
-  /* Estilos para o controle de volume vertical */
-  .video_controls input[type="range"] {
+
+  .video_controls {
     position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    width: 8px;
-    height: 80px;
-    appearance: none;
-    background-color: transparent;
-    cursor: pointer;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0));
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .control-button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      transition: opacity 0.3s;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+    .progress-bar {
+      flex-grow: 1;
+      height: 4px;
+      background-color: rgba(255, 255, 255, 0.3);
+      margin: 0 15px;
+      position: relative;
+      cursor: pointer;
+
+      .progress {
+        height: 100%;
+        background-color: #007bff;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+
+    .time-display {
+      color: white;
+      font-size: 14px;
+      margin-right: 15px;
+    }
+
+    input[type="range"] {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%) rotate(-90deg);
+      transform-origin: right center;
+      width: 80px;
+      height: 8px;
+      appearance: none;
+      background-color: transparent;
+      cursor: pointer;
+
+      &::-webkit-slider-thumb {
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        background-color: #007bff;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      &::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 2px;
+        background-color: rgba(255, 255, 255, 0.5);
+      }
+
+      &::-moz-range-thumb {
+        width: 16px;
+        height: 16px;
+        background-color: #007bff;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      &::-moz-range-track {
+        width: 100%;
+        height: 2px;
+        background-color: rgba(255, 255, 255, 0.5);
+      }
+    }
   }
-  
-  .video_controls input[type="range"]::-webkit-slider-thumb {
-    appearance: none;
-    width: 16px;
-    height: 16px;
-    background-color: #007bff; /* Cor do polegar (thumb) do controle de volume */
-    border-radius: 50%;
-  }
-  
-  .video_controls input[type="range"]::-webkit-slider-runnable-track {
-    width: 2px; /* Largura da barra de volume */
-    background-color: #ccc; /* Cor da barra de volume */
-  }
-  
+}

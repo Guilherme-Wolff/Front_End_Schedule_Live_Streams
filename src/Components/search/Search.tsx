@@ -2,7 +2,7 @@ import './Search.scss'
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useQuery, UseQueryResult } from "react-query"
-import { SearchedNames } from "../../types/types"
+import { SearchedNames,InputSearchedNames } from "../../types/types"
 import { apiSlice } from '../../redux/api/apiSlice'
 import UserActionTypes from '../../redux/recent_users_seach/action-types';
 import {
@@ -19,27 +19,6 @@ import NewUserSearches from "./NewUserSearches"
 import InputSearch from "./InputSearch"
 import IsLoading from "../IsLoadin/IsLoading"
 
-
-let otherUsersSearch: SearchedNames = {
-  user_image: "image1",
-  username: "name1",
-  complete_name: "complete_name1"
-};
-let secondList: Array<SearchedNames> = [otherUsersSearch, otherUsersSearch];
-
-const fake_search = [
-  {
-    username: 'thayto_dev',
-    user_image: 'https://i-kebab.bunkr.ru/user_image-VedoGHuK.jpg',
-    complete_name: 'twitch',
-  },
-  {
-    username: 'teste',
-    user_image: 'https://i-kebab.bunkr.ru/user_image-VedoGHuK.jpg',
-    complete_name: 'twitch',
-  },
-]
-
 export default function Search() {
   const useGetUsersQuery = apiSlice.endpoints.getSearchers.useQuery
 
@@ -53,6 +32,7 @@ export default function Search() {
   }
 
   let size_input = useAppSelector((state: RootState) => state.input_size)
+  
   console.log(size_input)
   if (size_input > 0) {
     console.log("REGISTRO_TEST input", size_input)
@@ -82,10 +62,10 @@ export default function Search() {
     <>
       <div className="search__input__title">
         <h1>Search Streamers</h1>
-        {InputSearch()}
+        {<InputSearch />}
       </div>
       <div className="recent__searched__users__title">
-        <h3>Recent</h3>
+        <h3>Searches</h3>
         <button onClick={(e) =>
           clear_all_recent_users_seached()
         }>
@@ -96,7 +76,7 @@ export default function Search() {
         {
 
 
-          searched.length ? searched.map((user: any) => {
+          searched.length ? searched.map((user: InputSearchedNames) => {
 
             return (
               <NewUserSearches user={user} />
@@ -104,8 +84,8 @@ export default function Search() {
           }) :
             payload && payload.map((user: any) => {
               return (
-                //<NewUserSearches user={user} />
-                <p>recent</p>
+                <NewUserSearches user={user} />
+                
               )
             })
         }

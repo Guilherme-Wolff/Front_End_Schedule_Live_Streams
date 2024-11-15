@@ -1,6 +1,6 @@
 import '../Sidebar/Sidebar.scss'
 import React, { useContext, useEffect, useRef, useState } from "react";
-import axios from "axios";
+//import axios from "axios";
 import { useQuery, UseQueryResult, UseQueryOptions } from "react-query"
 import { SearchedNames } from "../../types/types"
 import {
@@ -17,6 +17,8 @@ import { store, useAppSelector, useAppDispatch, RootState } from "../../redux/st
 import { apiSlice } from "../../redux/api/apiSlice"
 import { throttle, debounce } from 'lodash';
 
+import { useFetchInput } from "./CustomHooks/useFetchInput"
+
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
 
 interface MyQueryOptions extends UseQueryOptions {
@@ -26,9 +28,11 @@ interface MyQueryOptions extends UseQueryOptions {
 
 export default function InputSearch() {
   const dispatch = useAppDispatch();
-  const [word, setWord] = useState("");
+  //const [word, setWord] = useState("");
 
-  const [wordAwait, setWordAwait] = useState("");
+  const { word, setWord,data,isLoading } = useFetchInput()
+
+
 
   const inputValueRef = useRef<string>('');
 
@@ -45,9 +49,9 @@ export default function InputSearch() {
     };
   }
 
-  const { data, /*refetch */ } = apiSlice.endpoints.searchStreamer.useQuery(word, queryOptions);
+  //const { data, isLoading } = apiSlice.endpoints.searchStreamer.useQuery(word, queryOptions);
 
-  console.log("search response",data)
+  console.log("search response", data)
 
   //=================================================================================================
   const handleInputValueSearch = debounce((value: string) => {
@@ -79,9 +83,9 @@ export default function InputSearch() {
 
     if (data) {
       const searchedNames = data.map((user: any) => ({
-        user_image: user?.avatar || 'undefined',
+        user_image: user?.avatar || 'image_undefined',
         username: user?.name || 'username',
-        complete_name: user?.platform || 'platform'
+        platform: user?.platform || 'platform'
       }));
 
       dispatch(new_searches_array(searchedNames));

@@ -33,7 +33,7 @@ export const Teste = () => {
 import React from "react";
 import ReactDOMServer from "react-dom/server";
 
-export const TestServerComponent = () => {
+export default function TestServerComponent() {
   // Simule uma busca de dados no servidor
   const data = ["Item 1", "Item 2", "Item 3"];
 

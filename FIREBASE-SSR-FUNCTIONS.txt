@@ -1,0 +1,11 @@
+Agora, você pode fazer o deploy do Firebase Hosting e das funções:
+
+
+PRECISA PAGAR PARA USAR FUNCTION
+firebase deploy --only hosting,functions
+=
+
+
+LOCALMENTE: 
+firebase serve --only functions,hosting --port 5000
+

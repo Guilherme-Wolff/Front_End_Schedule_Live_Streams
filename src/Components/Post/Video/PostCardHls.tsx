@@ -1,8 +1,8 @@
 import '../video_controls.scss'
-import "./PostCard.scss"
+import "./PostCardHls.scss"
 import "../PostModal/PostCardModal.scss"
 import './OverlayIframe.scss';
-import React, { useEffect, useState, useRef, Suspense } from 'react';
+import React, { useEffect, useState, useRef, Suspense, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 //import { useHistory } from 'react-router-dom';
 import {
@@ -19,13 +19,19 @@ import { BottomOptions } from "../BottomOptions/BottomOptions"
 import { Iframe } from "./Iframe"
 import { OverLayIframe } from "./OverLayIframe"
 
-//import ReactHlsPlayer, { HlsPlayerProps } from 'react-hls-player';
+import { FluidPlayer } from './fluidplayer/FluidPlayer';
 
-import Hls from "hls.js";
+//import ReactHlsPlayer, { HlsPlayerProps } from 'react-hls-player';,
+
+import { streamers_path } from "../../../paths"
+
+//import Hls from "hls.js";
 import Plyr, { usePlyr, APITypes, PlyrProps, PlyrInstance } from "plyr-react";
 import 'plyr/dist/plyr.css';
 
 //import { PlyrPlus } from 'plyrplus'; bliblioteca de terceiros
+
+import { Player } from "./Player"
 
 
 import {
@@ -37,103 +43,45 @@ import {
 import { ModalState } from "../interfaces"
 import { Options } from 'plyr';
 import axios from 'axios';
+import Hls from 'hls.js';
+import { TimeState } from '../../../redux/live_chat/LiveTimeSlice';
+import { ChatPlayer } from '../../LiveChat/LiveChat';
+//import Hls from 'hls.js';
 //import client from './axios';
 
 interface VideoProps {
-  src: string;
+  urls: string;
 }
 
-
-/* /////////     API PIXELDDRAIN https://pd.cybar.xyz/${fileId_teste}?download           ///////////  */
-
-
-
-const HlsPlayer: React.FC<VideoProps> = ({ src }) => {
-  const BASE_PIXELDRAIN_API = "https://pd.cybar.xyz"
-  const fileId_teste = "g9HvQHuT"
-
-
-  console.log("URL M3U8", src)
-  const ref = useRef<APITypes>(null);
-
-  useEffect(() => {
-    const loadVideo = async () => {
-      const video = document.getElementById("plyr") as HTMLVideoElement;
-
-
-
-      /*if (src.includes('m3u8')) {
-        const hls = new Hls();
-
-
-        hls.loadSource(src);
-        hls.attachMedia(video);
-        hls.on(Hls.Events.MANIFEST_PARSED, () => {
-          (ref.current!.plyr as PlyrInstance).play();
-        });
-      }*/
-      if (src.includes(BASE_PIXELDRAIN_API)) { // Caso contrário, carrega um arquivo MP4
-        video.src = src;
-        video.addEventListener('loadedmetadata', () => {
-          video.play();
-        });
-      }
-      else if (src.includes('mp4')) { // Caso contrário, carrega um arquivo MP4
-        video.src = src;
-        video.addEventListener('loadedmetadata', () => {
-          video.play();
-        });
-      }
-
-    };
-    loadVideo();
-  }, []);
-
-
-  return (
-    <Plyr
-      //className=''
-
-      //crossOrigin="use-credentials"
-      id="plyr"
-      options={{ volume: 0.5 }}
-      source={{} as PlyrProps["source"]}
-      ref={ref}
-
-    //crossOrigin={'use-credentials'}
-
-
-    />
-  );
-};
-
-//////////////////////////
-
-
 export const PostCard = ({ post }: Post | any) => {
-  const fileId_teste = "g9HvQHuT"
+  const [currentTime, setCurrentTime] = useState(0);
+
+  const handleTimeUpdate = (time: number) => {
+    setCurrentTime(time);
+    // Aqui você pode sincronizar com o chat ou fazer outras operações
+  };
+
+
+
 
   let modal_post: ModalState = useAppSelector((state: RootState) => state.post_modal);
+  let time: TimeState = useAppSelector((state: RootState) => state.live_time)
   console.log("REGISTRO_TEST modal_post", modal_post)
 
   let
     {
-      post_id, date, userminilogo,
-      createdby, thumbnail, url, likes, comments, bio
+      id, created_at, avatar,
+      streamer, thumbnail, urls, likes,
+      /* comments, bio*/
     } = post
 
-  const supported = Hls.isSupported();
+  console.log("URL ATUAL", post)
+
+  //const supported = Hls.isSupported();
 
   let dispatch = useAppDispatch()
 
-  function safeBase64Encode(str: string): string {
-    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
-      (match, p1) => String.fromCharCode(parseInt(p1, 16))));
-  }
-
-
   const data: any = ''
-  //const { data, error, isLoading } = useSWR('https://pixeldrain.com/api/file/g9HvQHuT', fetcher)
   console.log("texto data", data)
 
   function getIdPost() {
@@ -161,36 +109,27 @@ export const PostCard = ({ post }: Post | any) => {
       querySelector('.like')
 
     if (currentLike.className == 'unlike') {
-      dispatch(posts_like(post_id));
+      dispatch(posts_like(id));
       like.classList.add('display-none')
       unlicked.classList.remove('display-none')
     } else if (currentLike.className == 'like') {
-      dispatch(posts_unlike(post_id));
+      dispatch(posts_unlike(id));
       like.classList.remove('display-none')
       unlicked.classList.add('display-none')
     }
-
-
-
-
-
-
-
-
-
   }
 
   useEffect(() => {
 
 
-  }, [modal_post]);
+  }, []);
 
 
   {/*<Link to={`/sreamer/${createdby}/${post_id}`} */ }
 
   return (
 
-    <Link to='' key={post_id} className={/*lastPost ? 'last_post' : */'post'}
+    <div key={id} className={modal_post.modal_state ? 'post-modal' : 'post'}
     /*onClick={
  
       !modal_post.modal_state ? () => dispatch(set_content_modal({ modal_state: true, post: post }))
@@ -200,16 +139,17 @@ export const PostCard = ({ post }: Post | any) => {
     }*/
     >
       <div className="user which__user__this__post">
+        <meta name="referrer" content={"pixeldrain.com/u/" + urls} />
 
         <div className='which__user__this__post__info'>
-          <Link to={`/streamer/${createdby}`}>
-            <img src={userminilogo} alt="" />
+          <Link to={`${streamers_path}${streamer}`}>
+            <img src={avatar} alt="" />
           </Link>
-          <Link to={`/streamer/${createdby}`}>
-            <p>{createdby}</p>
+          <Link to={`${streamers_path}${streamer}`}>
+            <p>{streamer}</p>
           </Link>
           <div className="point-separate-time-post">•</div>
-          <div className="time-post"><p>{format(Date.parse(date), 'en_US')}</p></div>
+          <div className="time-post"><p>{format(Date.parse(created_at), 'en_US')}</p></div>
         </div>
 
 
@@ -222,12 +162,12 @@ export const PostCard = ({ post }: Post | any) => {
           </svg>
         </div>
       </div>
-      <Link to='' key={post_id} className="posts__image" style={{
+      <div key={id} className="posts__image" style={{
         backgroundImage: `url(${thumbnail})`,
         width: "100%",
         height: "100%",
         backgroundPosition: "center",
-        backgroundSize: "cover",
+        backgroundSize: "fit",
       }}
         onClick={
 
@@ -237,25 +177,20 @@ export const PostCard = ({ post }: Post | any) => {
 
         }
       >
-        <div id='videoContainer' >
+        {/*supported ? <HlsPlayer urls={urls} /> : "HLS is not supported in your browser"*/}
+        <Player urls={urls} />
 
-          {/* <video className="posts__image" src={url[0]}   /> */}
-
-          {/*<Iframe src={"https://pixeldrain.com/api/file/g9HvQHuT"} /> */}
-
+        {/*<Chat currentVideoTime={time.time} /> */}
 
 
-          {supported ? <HlsPlayer src={url} /> : "HLS is not supported in your browser"}
-          {/*< App /> */}
+        {/*<FluidPlayer urls={urls} />*/}
+      </div>
 
-          {/*< OverLayIframe /> */}
-        </div>
-      </Link>
 
       {//adicionar depois
         /*<BottomOptions post={post} />*/
       }
 
-    </Link >
+    </div >
   )
 }

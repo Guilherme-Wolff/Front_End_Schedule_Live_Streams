@@ -20,7 +20,7 @@ import { useParams } from 'react-router-dom';
 
 import { PostModal } from "../../Components/Post/PostModal/PostModal"
 
-import { TestServerComponent } from "../../server/Teste.server"
+//import TestServerComponent  from "../../server/Teste.server"
 import { ModalState } from '../../Components/Post/interfaces';
 
 import { NotFoundPage } from "../../Components/NotFound/NotFound"
@@ -35,6 +35,8 @@ import { RootState, useAppSelector, useAppDispatch, } from "../../redux/store"
 import { BiCurrentLocation } from 'react-icons/bi';
 import path from 'path';
 import { getLocale } from 'timeago.js/lib/register';
+
+import { useSEO } from '../../SEO/useSEO'
 
 
 /*export const VerifyPlatform = () => {
@@ -70,33 +72,40 @@ export const VerifyPlatform = () => {
 }
 
 export const Streamer = () => {
+  useSEO()
   const { platform, streamer_name } = useParams();
 
-  console.log("local",getLocale)
+
+  console.log("local", getLocale)
 
   const plat = VerifyPlatform()
 
-  if (platform) {
+  /*if (platform) {
     if (!supportedPlatforms.includes(platform)) {
       // Redirecionar ou mostrar uma mensagem de erro, conforme necessário
       redirect("/notfoud")
     }
-  }
+  }*/
 
 
 
-  console.log("REGISTRO_TEST streamer", streamer_name)
+  //console.log("REGISTRO_TEST streamer", streamer_name)
   //let user = useAppSelector((state: RootState) => state.persistedReducer).user.user
   //console.log("TESTE AUTH", user.name)
-  //let useGetHelloQuery = apiSlice.useGetHelloQuery
-  const useGetHelloQuery = apiSlice.endpoints.getHello.useQuery
+  //let useParams = apiSlice.useParams
+  //const useGetStreamerLivesQuery = apiSlice.endpoints.getStreamerLives.useQuery
   let modal_post: ModalState = useAppSelector((state: RootState) => state.post_modal);
 
-  const { data } = useGetHelloQuery('')
+  //const { data } = useGetStreamerLivesQuery('')
 
-  console.log("hello_res", data)
+ //console.log("STREAMER LIVES", data)
 
   const { name } = useAuth()
+
+  useEffect(()=>{
+
+  },[modal_post,platform,streamer_name])
+  
   return (
     <>
       {/*<div className='home__wrap wrapper'> */}

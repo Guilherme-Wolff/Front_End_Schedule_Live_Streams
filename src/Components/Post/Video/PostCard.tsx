@@ -21,17 +21,13 @@ import {
 
 import React, { useRef, Suspense } from 'react';
 import { ModalState } from "../interfaces"
+import { streamers_path } from '../../../paths';
 
 interface VideoProps {
   src: string[];
 }
 
-/*function delayForDemo(arg0: Promise<any>): Promise<{ default: React.ComponentType<any> }> {
-  throw new Error("Function not implemented.")
-}
-
-
-export const Video: React.FC<VideoProps> = ({ src }) => {
+export const CardVideo: React.FC<VideoProps> = ({ src: pixeldrain_id }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
@@ -42,54 +38,50 @@ export const Video: React.FC<VideoProps> = ({ src }) => {
         onContextMenu={(e) => e.preventDefault()}
         className="video_controls post_video"
         controlsList="nodownload"
-        ref={videoRef} src={src[0]} controls >
-      </video>
-    </div>
-  );
-};*/
-
-
-/*export const CardVideo: React.FC<VideoProps> = ({ src }) => {
-  //const videoRef = useRef<HTMLImageElement>(null);
-
-
-  return (
-    <div className='main_video'>
-      <video className="thumb" src={src[0]} />
-    </div>
-  );
-};*/
-
-export const CardVideo: React.FC<VideoProps> = ({ src }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
-
-
-  return (
-    <div className='main_video'>
-      <video
-        onContextMenu={(e) => e.preventDefault()}
-        className="video_controls post_video"
-        controlsList="nodownload"
-        ref={videoRef} src={src[0]} controls >
+        ref={videoRef} src={`https://pd.cybar.xyz/${pixeldrain_id}?download`} controls >
       </video>
     </div>
   );
 };
 
+// ================================================================================================
+
+// ================================================================================================
+
+/* // POST STRUCTURE
+    id: 'ee19d0cb-ff97-4425-8b58-e2835dc8c541',
+    streamer_id: '164cc8e3-38a6-4990-9a15-404caa7b596a',
+    streamer: 'geovanadopark',
+    thumbnail: null,
+    platform: 'tiktok',
+    tags: null,
+    urls: 'rAdnR1s8',
+    views: 0,
+    chat: null,
+    likedUserIds: null,
+    created_at: 2024-08-17T22:02:08.903Z,
+    likes: 0
+*/
+
+
+
 export const PostCard = ({ post }: Post | any) => {
+  const BASE_PIXELDRAIN_URL = "https://pixeldrain.com/api/file/"
 
   let modal_post: ModalState = useAppSelector((state: RootState) => state.post_modal);
 
-  console.log("REGISTRO_TEST modal_post", modal_post)
+  console.log("INFO-TEST", post)
 
   let {
-
-    post_id, date, userminilogo,
-    createdby, thumbnail,url, likes, comments, bio
-  } = post
+    //pregar avatar separado que é o userminilogo
+    id, created_at, avatar,
+    streamer, thumbnail,
+    urls, likes,
+    /*comments,*/ /*bio*/
+  } = post;
 
   let dispatch = useAppDispatch()
+
   const [saved, setSaved] = useState(false)
 
   function getIdPost() {
@@ -98,9 +90,9 @@ export const PostCard = ({ post }: Post | any) => {
   }
 
   function likePost(e: any) {
-    const lickedSvg = "<img className=\"icon__with__padding licked\" src=\"../images/like.png\" alt=\"\"/>"
+    const lickedSvg = "<img className=\"icon__with__padding licked\" src=\"/images/like.png\" alt=\"\"/>"
 
-    const unlickedSvg = "<img className=\"icon__with__padding unlike\" onClick={(e)=> {likePost(e)}} src=\"../images/unlike.png\" alt=\"\"/>"
+    const unlickedSvg = "<img className=\"icon__with__padding unlike\" onClick={(e)=> {likePost(e)}} src=\"/images/unlike.png\" alt=\"\"/>"
 
     let currentLike = e.target
     console.log(typeof e.target)
@@ -117,11 +109,11 @@ export const PostCard = ({ post }: Post | any) => {
       querySelector('.like')
 
     if (currentLike.className == 'unlike') {
-      dispatch(posts_like(post_id));
+      dispatch(posts_like(id));
       like.classList.add('display-none')
       unlicked.classList.remove('display-none')
     } else if (currentLike.className == 'like') {
-      dispatch(posts_unlike(post_id));
+      dispatch(posts_unlike(id));
       like.classList.remove('display-none')
       unlicked.classList.add('display-none')
     }
@@ -135,7 +127,7 @@ export const PostCard = ({ post }: Post | any) => {
 
   return (
 
-    <Link to='' key={post_id} className={/*lastPost ? 'last_post' : */'post'}
+    <Link to='' key={id} className={/*lastPost ? 'last_post' : */'post'}
     /*onClick={
 
       !modal_post.modal_state ? () => dispatch(set_content_modal({ modal_state: true, post: post }))
@@ -146,14 +138,14 @@ export const PostCard = ({ post }: Post | any) => {
     >
       <div className="user which__user__this__post">
         <div className='which__user__this__post__info'>
-          <Link to={`/streamer/${createdby}`}>
-            <img src={userminilogo} alt="" />
+          <Link to={`${streamers_path}tiktok/${streamer}`}>
+            <img src={avatar} alt="" />
           </Link>
-          <Link to={`/streamer/${createdby}`}>
-            <p>{createdby}</p>
+          <Link to={`${streamers_path}tiktok/${streamer}`}>
+            <p>{streamer}</p>
           </Link>
           <div className="point-separate-time-post">•</div>
-          <div className="time-post"><p>{format(Date.parse(date), 'en_US')}</p></div>
+          <div className="time-post"><p>{format(Date.parse(created_at), 'en_US')}</p></div>
         </div>
 
 
@@ -166,12 +158,14 @@ export const PostCard = ({ post }: Post | any) => {
           </svg>
         </div>
       </div>
-      <Link to='' key={post_id} className="posts__image" style={{
+      <Link to='' key={id} className="posts__image" style={{
         backgroundImage: `url(${thumbnail})`,
         width: "100%",
         height: "100%",
         backgroundPosition: "center",
-        backgroundSize: "cover",
+        backgroundSize: "contain",
+        //backgroundSize: "ccover",
+        //backgroundRepeat: "no-repeat",
       }}
         onClick={
 
@@ -193,7 +187,7 @@ export const PostCard = ({ post }: Post | any) => {
     </Link>
   )
 }
-
+//
 export const PostCardVideo = ({ post }: Post | any) => {
 
   let modal_post: ModalState = useAppSelector((state: RootState) => state.post_modal);
@@ -202,8 +196,8 @@ export const PostCardVideo = ({ post }: Post | any) => {
 
   let {
 
-    post_id, date, userminilogo,
-    createdby, thumbnail,url, likes, comments, bio
+    post_id, created_at, userminilogo,
+    streamer, thumbnail, urls, likes, comments, bio
   } = post
 
   let dispatch = useAppDispatch()
@@ -215,9 +209,9 @@ export const PostCardVideo = ({ post }: Post | any) => {
   }
 
   function likePost(e: any) {
-    const lickedSvg = "<img className=\"icon__with__padding licked\" src=\"../images/like.png\" alt=\"\"/>"
+    const lickedSvg = "<img className=\"icon__with__padding licked\" src=\"/images/like.png\" alt=\"\"/>"
 
-    const unlickedSvg = "<img className=\"icon__with__padding unlike\" onClick={(e)=> {likePost(e)}} src=\"../images/unlike.png\" alt=\"\"/>"
+    const unlickedSvg = "<img className=\"icon__with__padding unlike\" onClick={(e)=> {likePost(e)}} src=\"/images/unlike.png\" alt=\"\"/>"
 
     let currentLike = e.target
     console.log(typeof e.target)
@@ -264,14 +258,14 @@ export const PostCardVideo = ({ post }: Post | any) => {
     >
       <div className="user which__user__this__post">
         <div className='which__user__this__post__info'>
-          <Link to={`/streamer/${createdby}`}>
+          <Link to={`/streamer/${streamer}`}>
             <img src={userminilogo} alt="" />
           </Link>
-          <Link to={`/streamer/${createdby}`}>
-            <p>{createdby}</p>
+          <Link to={`/streamer/${streamer}`}>
+            <p>{streamer}</p>
           </Link>
           <div className="point-separate-time-post">•</div>
-          <div className="time-post"><p>{format(Date.parse(date), 'en_US')}</p></div>
+          <div className="time-post"><p>{format(Date.parse(created_at), 'en_US')}</p></div>
         </div>
 
 
@@ -288,7 +282,7 @@ export const PostCardVideo = ({ post }: Post | any) => {
 
 
         {/* <video className="posts__image" src={url[0]}   /> */}
-        < CardVideo src={url} />
+        < CardVideo src={urls} />
 
 
       </div>

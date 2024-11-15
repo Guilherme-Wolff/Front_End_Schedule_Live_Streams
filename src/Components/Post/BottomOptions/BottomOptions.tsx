@@ -1,3 +1,4 @@
+import "../PostModal/PostCard.scss"
 import { useState } from "react"
 import { Post } from "../../../types/types"
 import { RootState, useAppSelector, useAppDispatch } from "../../../redux/store"
@@ -7,10 +8,19 @@ import { PostComments } from "../PostComments/PostComments"
 
 export const BottomOptions = ({ post }: Post | any) => {
 
+    /*let {
+        //pregar avatar separado que é o userminilogo
+        id, created_at, avatar,
+        streamer, thumbnail, 
+        urls, likes, 
+        
+      } = post;*/
+
     let {
 
-        post_id, date, userminilogo,
-        createdby, url, likes, comments, bio
+        id,
+        likes ,
+        /*comments,*/ /*bio*/
     } = post
 
     let dispatch = useAppDispatch()
@@ -19,9 +29,9 @@ export const BottomOptions = ({ post }: Post | any) => {
 
 
     function likePost(e: any) {
-        const lickedSvg = "<img className=\"icon__with__padding licked\" src=\"../images/like.png\" alt=\"\"/>"
+        const lickedSvg = "<img className=\"icon__with__padding licked\" src=\"/images/like.png\" alt=\"\"/>"
 
-        const unlickedSvg = "<img className=\"icon__with__padding unlike\" onClick={(e)=> {likePost(e)}} src=\"../images/unlike.png\" alt=\"\"/>"
+        const unlickedSvg = "<img className=\"icon__with__padding unlike\" onClick={(e)=> {likePost(e)}} src=\"/images/unlike.png\" alt=\"\"/>"
 
         let currentLike = e.target
         console.log(typeof e.target)
@@ -39,11 +49,11 @@ export const BottomOptions = ({ post }: Post | any) => {
             querySelector('.like')
 
         if (currentLike.className == 'unlike') {
-            dispatch(posts_like(post_id));
+            dispatch(posts_like(id));
             like.classList.add('display-none')
             unlicked.classList.remove('display-none')
         } else if (currentLike.className == 'like') {
-            dispatch(posts_unlike(post_id));
+            dispatch(posts_unlike(id));
             like.classList.remove('display-none')
             unlicked.classList.add('display-none')
         }
@@ -56,10 +66,10 @@ export const BottomOptions = ({ post }: Post | any) => {
             <div className="posts__option">
                 <div className='post__like__coment__send'>
                     <div className="svgButton icon__with__padding">
-                        <img className="unlike" src="../images/unlike.png" alt="" onClick={(e) => {
+                        <img className="unlike" src="/images/unlike.png" alt="" onClick={(e) => {
                             likePost(e)
                         }} />
-                        <img key={post_id} className="display-none like" src="../images/like.png" alt=""
+                        <img key={id} className="display-none like" src="/images/like.png" alt=""
                             onClick={(e) => {
                                 likePost(e)
                             }} />

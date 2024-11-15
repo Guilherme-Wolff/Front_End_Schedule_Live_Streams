@@ -8,6 +8,9 @@
   display:none;
 }
 
+:root {
+  --NUMBER_OF_BUTTONS_IN_BOTOM: 4;
+}
 
 @media (min-width: 320px) and (max-width: 899px) {
   .div-bottom-tab {
@@ -38,7 +41,7 @@
    align-items: center;
     
 
-   grid-template-columns:repeat(5,1fr) ;
+   grid-template-columns:repeat(var(--NUMBER_OF_BUTTONS_IN_BOTOM),1fr) ;
    grid-template-columns:repeat(auto-fit,minmax(1fr,1fr));
    justify-content: space-between;
    grid-gap: 10%;

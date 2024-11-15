@@ -1,4 +1,7 @@
 @media (min-width: 900px) {
+  .plyr {
+    height: 70vh;;
+  }
   .modal {
     border-radius: 8px;
     display: none;
@@ -7,7 +10,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 80vw;
-    height: 90vh;
+    height: 95vh;
     background-color: #ffffff;
     //border: 1px solid #000000;
     padding: 20px;
@@ -21,12 +24,39 @@
   }
 
   .div_modal_content {
-    margin-top: 2.5vh;
+    position: absolute;
     width: 100%;
     height: 100%;
-    display: block;
+    display: grid;
+    grid-template-columns: 70% 30%; // Alterado para 70% e 30%
+    gap: 10px;
+   /* position: relative;
+    width: 100%;
+    height: 80vh; // Alterado para ocupar toda a altura
+    display: grid;
+    grid-template-columns: 1fr 1fr; // Duas colunas de tamanho igual
+    gap: 20px; // Espaço entre as colunas*/
+    //z-index: 0;
 
-    color: red;
+    //color: red;
+  }
+
+  .div_modal_content_with_chat {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 70% 30%; // Alterado para 70% e 30%
+    gap: 10px;
+   /* position: relative;
+    width: 100%;
+    height: 80vh; // Alterado para ocupar toda a altura
+    display: grid;
+    grid-template-columns: 1fr 1fr; // Duas colunas de tamanho igual
+    gap: 20px; // Espaço entre as colunas*/
+    //z-index: 0;
+
+    //color: red;
   }
 
   .modal_visible {
@@ -56,6 +86,10 @@
 }
 
 @media (min-width: 800px) and (max-width: 900px) {
+  .plyr {
+    height: 70vh;;
+  }
+
   .modal {
     border-radius: 8px;
     display: none;
@@ -77,6 +111,7 @@
   }
 
   .div_modal_content {
+    position: relative;
     width: 100%;
     height: 100%;
     display: block;
@@ -109,26 +144,32 @@
     display: none;
   }
 }
-
+//mobile
 @media (min-width: 320px) and (max-width:900px) {
+  .plyr {
+    height: 80vh;
+  }
+
   .modal {
     display: none;
     position: fixed;
+    
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100vw;
     height: 90vh;
     background-color: #ffffff;
-    border: 1px solid #000000;
-    padding: 20px;
+    //border: 1px solid #000000;
+    //padding: 20px;
     z-index: 10;
   }
 
   .div_modal_content {
-    width: 100%;
+  position: relative;
+    width: 100vw;
     height: 100%;
-    display: block;
+    //display: block;
 
     color: red;
   }

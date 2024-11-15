@@ -63,6 +63,7 @@
     }
     
     .recent__users__wrap {
+        z-index: 100000;
         overflow: auto;
     
         .recent__user {
